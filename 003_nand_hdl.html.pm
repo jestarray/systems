@@ -59,7 +59,7 @@ The ◊strong{NAND} is also known as the ◊em{"universal gate"}, meaning it can
 }
 }
 
-So, you are tasked to start off with a NAND gate, and work your way up to build other gates, and when you have built those other gates, you can use those gates you built to build other gates. It's recommended you do it in the order above because the difficulty increases as you go down the list.
+So, you are tasked to start off with a NAND gate, and work your way up to build other gates, and when you have built those other gates, ◊strong{you can use those gates} you built ◊strong{to build other gates}. It's recommended you do it in the order above because the difficulty increases as you go down the list.
 
 ◊slide{
 ◊h2{Resources}
