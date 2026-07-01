@@ -321,4 +321,5 @@ Given the truth table, write the boolean function ◊code{f(x,y) = ...} and ◊a
 ◊q{Problem B Answer: ◊code{f(x, y) = (!x * !y) + (!x * y) + (x * !y)}}
 
 It's really important that you get used to being given a ◊strong{truth table} and converting it into a ◊strong{boolean function}, because this underlies so much of the of the upcoming problems.
+◊a[#:href "https://circuitverse.org/users/14630/projects/problem-b-f-x-y-x-y-x-y-x-y"]{Circuitverse implementation}
 }
