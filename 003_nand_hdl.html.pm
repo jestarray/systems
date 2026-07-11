@@ -50,6 +50,7 @@ The ◊strong{NAND} is also known as the ◊em{"universal gate"}, meaning it can
 }
 
 ◊h3{Multiway Variants}
+◊strong{NOTE: } ◊em{nandgame does not have these}
 ◊ol{
     ◊li{Or8Way}
     ◊li{Mux4Way16}
@@ -59,7 +60,15 @@ The ◊strong{NAND} is also known as the ◊em{"universal gate"}, meaning it can
 }
 }
 
-So, you are tasked to start off with a NAND gate, and work your way up to build other gates, and when you have built those other gates, ◊strong{you can use those gates} you built ◊strong{to build other gates}. It's recommended you do it in the order above because the difficulty increases as you go down the list.
+Your task is to build all of these gates ◊strong{starting only from a} ◊em{NAND gate}. Once you've successfully built a gate, you may use it as a building block for the gates that follow.
+
+For example:
+
+First, build the ◊em{Not} gate using only NAND gates.
+After that, you may use both ◊em{NAND} and ◊em{Not} gates to build the ◊em{And} gate.
+Continue this process for the remaining gates.
+
+It is highly recommended to follow the order listed above, since the gates become progressively more challenging as you move down the list.
 
 ◊slide{
 ◊h2{Resources}

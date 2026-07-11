@@ -2,7 +2,7 @@
 
 ◊000_intro.html{
     001_boolean_logic.html
-    002_optimization.html
+    002_simplifying.html
     003_nand_hdl.html
     004_multibit_buses.html
 }

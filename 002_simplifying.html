@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <title>Simplifying logic gates</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <nav>
+            <div id="prev">← <a href="/001_boolean_logic.html"> Boolean Logic</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/003_nand_hdl.html">NAND theorem</a> →</div>
+            <div id="home"><a href="javascript:void(0)" onclick="slide_mode()">Slide Mode</a></div>
+            </nav>
+            <article>
+                <p><details><summary style="color:red;">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/XYm5CQQeQPI?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/XYm5CQQeQPI/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details></p><section class="slide"><h1>Simplifying logic gates</h1><p>Simplifying boolean expressions will help you build more efficient logic gates. In the real world this can save power, money, and make your chips smaller and faster. You will need to use some of these techniques in the upcoming projects.</p></section><section class="slide"><h2 id="factoring"><a class="anchor" href="#factoring">#</a>Factoring</h2><p>Quick! what is</p><pre>8 * 27</pre><p>We can use the distributive property to break this down into something simpler:</p><pre>8 * (20 + 7)</pre><pre>160 + 56 = 216</pre></section><p>You could have did long multiplication, but the point is that, as long as we <strong>retain equality</strong>, we can re-arrange pieces of the problem and tease out certain parts, which allows us to more easily reason about a solution, and this is the essence of algebra.</p><section class="slide"><h2 id="boolean_algebra"><a class="anchor" href="#boolean_algebra">#</a>Boolean Algebra</h2><p>Boolean algebra has some, but not all, similar properties to regular algebra on numbers, and they are:</p><h3>Communative Laws</h3><pre>(<span style="color:red;">x</span> * <span style="color:blue;">y</span>) = (<span style="color:blue;">y</span> * <span style="color:red;">x</span>)</pre><pre>(<span style="color:red;">x</span> + <span style="color:blue;">y</span>) = (<span style="color:blue;">y</span> + <span style="color:red;">x</span>)</pre><p>that is to say, it doesn’t matter how you <strong>order</strong> the inputs <span style="color:red;">x</span> or <span style="color:blue;">y</span> for * (AND) and + (OR)</p><h3>Associative Laws</h3><pre>(<span style="color:red;">x</span> * (<span style="color:blue;">y</span> * <span style="color:green;">z</span>)) = ((<span style="color:red;">x</span> * <span style="color:blue;">y</span>) * <span style="color:green;">z</span>)</pre><pre>(<span style="color:red;">x</span> + (<span style="color:blue;">y</span> + <span style="color:green;">z</span>)) = ((<span style="color:red;">x</span> + <span style="color:blue;">y</span>) + <span style="color:green;">z</span>)</pre><p>that is to say the order in which you <strong>group</strong> operations doesn’t matter for <strong>ALL</strong> * (AND) and + (OR) operation groupings.</p><h3>Distributive Laws</h3><pre>(<span style="color:red;">x</span> * (<span style="color:blue;">y</span> + <span style="color:green;">z</span>)) = (<span style="color:red;">x</span> * <span style="color:blue;">y</span>) + (<span style="color:red;">x</span> * <span style="color:green;">z</span>)</pre><p>The <strong>major difference</strong> in boolean algebra is that there’s a <strong>2nd distributive law</strong>, which says that we can distribute <strong>+(or)</strong> over <strong>*(and)</strong>, unlike regular algebra.</p><pre>(<span style="color:red;">x</span> + (<span style="color:blue;">y</span> * <span style="color:green;">z</span>)) = (<span style="color:red;">x</span> + <span style="color:blue;">y</span>) * (<span style="color:red;">x</span> + <span style="color:green;">z</span>)</pre><p><details><summary class="question">Example of why addition distributive law doesn’t work for regular numbers</summary><pre>2 + (3 * 4) = <span style="color:red;">14</span></pre><p>If we apply the <strong>distributive law in boolean algebra law</strong> to <strong>real numbers</strong>, it won’t work ❌</p><pre>(2 + 3) * (2 + 4) = <span style="color:blue;">30</span></pre><pre> <span style="color:red;">14</span> != <span style="color:blue;">30</span></pre></details></p><h3>DeMorgan Laws</h3><pre>!(<span style="color:red;">x</span> * <span style="color:blue;">y</span>) = !(<span style="color:red;">x</span>) + !(<span style="color:blue;">y</span>)</pre><pre>!(<span style="color:red;">x</span> + <span style="color:blue;">y</span>) = !(<span style="color:red;">x</span>) * !(<span style="color:blue;">y</span>)</pre><p>that is to say we can distribute nots(!). Notice how <strong>+(OR)</strong> turns into <strong>*(AND)</strong> and vice versa when a not(!) is distributed.</p><h3>Idempotence Law:</h3><pre><span style="color:red;">x</span> + <span style="color:red;">x</span> = x</pre><pre><span style="color:red;">x</span> * <span style="color:red;">x</span> = x</pre><pre><span style="color:red;">!x</span> * <span style="color:red;">!x</span> = !x</pre><pre><span style="color:red;">xy + xy</span> + z = <span style="color:red;">xy</span> + z</pre><p>In other words, if an expression is just repeating operations on itself, you can simplify it to itself.</p><h3>Compliment Law:</h3><pre><span style="color:red;">!x</span> * <span style="color:red;">x</span> = 0</pre><pre><span style="color:red;">!x</span> + <span style="color:red;">x</span> = 1</pre><h3>Identity Law</h3><pre><span style="color:red;">x</span> + 0 = x</pre><pre><span style="color:red;">x</span> * 1 = x</pre><p>The identity law says that there are values that leave a Boolean expression unchanged—just like multiplying by 1 or adding 0 in ordinary arithmetic.</p></section><section class="slide"><h2 id="boolean_laws_cheatsheet"><a class="anchor" href="#boolean_laws_cheatsheet">#</a>Boolean Laws Cheatsheet</h2><table><caption></caption><thead><tr><th>Law</th>
+<th>OR Form</th>
+<th>AND Form</th></tr></thead>
+
+<tbody>
+<tr><td>Identity</td>
+<td><code>x + 0 = x</code></td>
+<td><code>x * 1 = x</code></td></tr>
+
+<tr><td>Domination (Null)</td>
+<td><code>x + 1 = 1</code></td>
+<td><code>x * 0 = 0</code></td></tr>
+
+<tr><td>Idempotent</td>
+<td><code>x + x = x</code></td>
+<td><code>x * x = x</code></td></tr>
+
+<tr><td>Complement</td>
+<td><code>x + !x = 1</code></td>
+<td><code>x * !x = 0</code></td></tr>
+
+<tr><td>Double Complement</td>
+<td><code>!!x = x</code></td>
+<td>—</td></tr>
+
+<tr><td>Commutative</td>
+<td><code>x + y = y + x</code></td>
+<td><code>x * y = y * x</code></td></tr>
+
+<tr><td>Associative</td>
+<td><code>(x + y) + z = x + (y + z)</code></td>
+<td><code>(x * y) * z = x * (y * z)</code></td></tr>
+
+<tr><td>Distributive</td>
+<td><code>x * (y + z) = (x * y) + (x * z)</code></td>
+<td><code>x + (y * z) = (x + y) * (x + z)</code></td></tr>
+
+<tr><td>Absorption</td>
+<td><code>x + (x * y) = x</code></td>
+<td><code>x * (x + y) = x</code></td></tr>
+
+<tr><td>De Morgan's</td>
+<td><code>!(x + y) = !x * !y</code></td>
+<td><code>!(x * y) = !x + !y</code></td></tr>
+</tbody></table><h2 id="derived_boolean_laws_cheatsheet"><a class="anchor" href="#derived_boolean_laws_cheatsheet">#</a>Derived Boolean Laws Cheatsheet</h2><table><caption></caption><thead><tr><th>Derived Law</th>
+<th>Expression</th>
+<th>Notes</th></tr></thead>
+
+<tbody>
+<tr><td>Absorption Variant</td>
+<td><code>x + (!x * y) = x + y</code></td>
+<td>Very common simplification</td></tr>
+
+<tr><td>Dual Absorption Variant</td>
+<td><code>x * (!x + y) = x * y</code></td>
+<td>Dual of the above</td></tr>
+
+<tr><td>Consensus Theorem</td>
+<td><code>(x * y) + (!x * z) + (y * z) = (x * y) + (!x * z)</code></td>
+<td>Eliminates the redundant consensus term</td></tr>
+
+<tr><td>Dual Consensus</td>
+<td><code>(x + y) * (!x + z) * (y + z) = (x + y) * (!x + z)</code></td>
+<td>Dual of the Consensus Theorem</td></tr>
+
+<tr><td>Redundancy</td>
+<td><code>(x * y) + (x * !y) = x</code></td>
+<td>Factor then apply Complement</td></tr>
+
+<tr><td>Dual Redundancy</td>
+<td><code>(x + y) * (x + !y) = x</code></td>
+<td>Dual of Redundancy</td></tr>
+
+<tr><td>Complement Expansion</td>
+<td><code>x = (x * y) + (x * !y)</code></td>
+<td>Useful for proofs and canonical forms</td></tr>
+
+<tr><td>Dual Complement Expansion</td>
+<td><code>x = (x + y) * (x + !y)</code></td>
+<td>Dual of the above</td></tr>
+
+<tr><td>Exclusive-OR</td>
+<td><code>x ⊕ y = (!x * y) + (x * !y)</code></td>
+<td>Definition of XOR</td></tr>
+
+<tr><td>Exclusive-NOR</td>
+<td><code>x ⊙ y = (x * y) + (!x * !y)</code></td>
+<td>Definition of XNOR</td></tr>
+</tbody></table></section><section class="slide"><h2 id="example_simplification"><a class="anchor" href="#example_simplification">#</a>Example Simplification</h2><h3>1. Simplify the following expression:</h3><pre>!(!x * !(x + y))</pre><h3>2. Using DeMorgans law on the inner !(x + y), we can turn it into this:</h3><pre>!(!x * <span style="color:red;">!</span>(x + y))</pre><pre>!(!x * <span style="color:red;">(!x * !y)</span>)</pre><h3>3. Now the entire expression is only using *(ANDs), we can use the associative law to group and do the left part first:</h3><pre>!(!x * <span style="color:red;">(!x * !y)</span>)</pre><pre>!(<span style="color:red;">(!x * !x)</span> * !y)</pre><h3>4. Apply Idempotence Law (!x * !x) which simplifies to itself</h3><pre>!(<span style="color:red;">(!x * !x)</span> * !y)</pre><pre>!(<span style="color:red;">!x</span> * !y)</pre><h3>5. Apply DeMorgans Law again to distribute the outer ! to get:</h3><pre><span style="color:red;">!</span>(!x * !y)</pre><h3>6. Finally:</h3><pre>(x + y)</pre><h3>Conclusion:</h3><p>We went from this:</p><pre><span style="color:green;">!</span>(<span style="color:green;">!</span>x <span style="color:green;">*</span> <span style="color:green;">!</span>(x <span style="color:green;">+</span> y))</pre><p>To this:</p><pre>(x + y)</pre><p>We took something that initially took <strong>5</strong> <span style="color:green;">logic gates</span>, and simplified it to using only <strong>1</strong>.</p><p>Another way to simplify is if you were given a truth table, you could pattern match against known logic gates and recognize it’s an <strong>OR gate</strong>.</p><table><caption>!(!x * !(x + y))</caption><thead><tr><th>x</th><th>y</th><th>f (x, y)</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></tbody></table></section><section class="slide"><h2 id="practice_problem_c"><a class="anchor" href="#practice_problem_c">#</a>Practice Problem C</h2><p>The following is a boolean function from the <a href="https://computersystems.pages.dev/001_boolean_logic">previous section Problem B</a>. Simplify it using the laws above:<br/><code>f(x, y) = (!x * !y) + (!x * y) + (x * !y)</code></p><p>You are going to have to apply:</p><ul><li>deductive reasoning</li><li>boolean algebra and the laws</li><li>expanding and factoring</li><li>combining like terms</li></ul><p><details><summary class="question">Problem C Answer:</summary><p>Given the original function:</p><p><code>f(x, y) = (<span style="color:red;">!x</span> * !y) + (<span style="color:red;">!x</span> * y) + (x * !y)</code></p><p><strong>Step 1: Factor out common terms</strong><br/>Notice that the first two terms both have !x:<br/><code>f(x, y) = <span style="color:red;">!x</span> * (!y + y) + (x * !y)</code></p><p><strong>Step 2: Apply Complement Law</strong><br/><code><span style="color:red;">!y + y = 1</span></code> (Complement Law)<br/><code>f(x, y) = !x * <span style="color:red;">1</span> + (x * !y)</code><br/>Anything <code>* 1</code> is itself, so we just get:<br/><code>f(x, y) = !x + (x * !y)</code></p><p><strong>Step 3: Apply Absorption Law (or Distributive Law)</strong><br/>Using the Identity Law: A + (!A * B) = A + B (this is a form of the Absorption/Reduction law)<br/><code>f(x, y) = <span style="color:red;">!x + (x * !y)</span></code><br/>Turns into:<br/><code>f(x, y) = !x + !y</code></p><p><strong>Step 4: Apply De Morgan’s Law</strong><br/><code>f(x, y) = <span style="color:red;">!</span>(x * y)</code></p><p><strong>Answer</strong><br/><code>!(x * y)</code></p></details></p></section><section class="slide"><h3>More Practice</h3><p>I recommend you prompt AI:<br/>Generate me a boolean expression that involves 3 or 4 variables and simplify it using boolean laws, and explain the boolean laws you used.</p></section><h3>Further boolean simplification</h3><p>The future projects will warn you when your boolean expressions aren’t optimized, that’s when you can either use your knowledge of boolean laws, or check out<br/><a href="https://www.youtube.com/watch?v=RO5alU6PpSU">Karnaugh maps</a></p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>
