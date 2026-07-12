@@ -224,6 +224,7 @@ You'll be given a ◊strong{truth table}, and you're going to need to find the r
 ◊hr{}
 ◊slide{
 ◊h2{Truth Table to Boolean Function}
+◊(yt "aDOtwH9_4vc")
 
 How do you, given this truth table, write a boolean function that produces it?
 ◊(table 

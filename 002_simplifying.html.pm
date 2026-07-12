@@ -1,6 +1,6 @@
 #lang pollen
 
-◊(yt "XYm5CQQeQPI")
+◊(yt "dIXF5LFzXqU")
 
 ◊slide{
 ◊h1{Simplifying logic gates}
