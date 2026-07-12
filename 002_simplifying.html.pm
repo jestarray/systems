@@ -246,29 +246,29 @@ The identity law says that there are values that leave a Boolean expression unch
 ◊slide{
 ◊h2{Example Simplification}
 
-◊h3{1. Simplify the following expression:}
+◊lead{1. Simplify the following expression:}
 ◊pre{!(!x * !(x + y))}
 
-◊h3{2. Using DeMorgans law on the inner !(x + y), we can turn it into this:}
+◊lead{2. Using DeMorgans law on the inner !(x + y), we can turn it into this:}
 
 ◊pre{!(!x * ◊red{!}(x + y))}
 ◊pre{!(!x * ◊red{(!x * !y)})}
 
-◊h3{3. Now the entire expression is only using *(ANDs), we can use the associative law to group and do the left part first:}
+◊lead{3. Now the entire expression is only using *(ANDs), we can use the associative law to group and do the left part first:}
 
 ◊pre{!(!x * ◊red{(!x * !y)})}
 ◊pre{!(◊red{(!x * !x)} * !y)}
 
-◊h3{4. Apply Idempotence Law (!x * !x) which simplifies to itself}
+◊lead{4. Apply Idempotence Law (!x * !x) which simplifies to itself}
 ◊pre{!(◊red{(!x * !x)} * !y)}
 ◊pre{!(◊red{!x} * !y)}
 
-◊h3{5. Apply DeMorgans Law again to distribute the outer ! to get:}
+◊lead{5. Apply DeMorgans Law again to distribute the outer ! to get:}
 ◊pre{◊red{!}(!x * !y)}
 
-◊h3{6. Finally:}
+◊lead{6. Finally:}
 ◊pre{(x + y)}
-◊h3{Conclusion:}
+◊lead{Conclusion:}
 We went from this:
 
 ◊pre{◊green{!}(◊green{!}x ◊green{*} ◊green{!}(x ◊green{+} y))}
@@ -336,14 +336,14 @@ Turns into:
 }
 
 ◊slide{
-◊h3{More Practice}
+◊h3t{Where to get more practice?}
 I recommend you prompt AI:
 ◊quote{
     Generate me a boolean expression that involves 3 or 4 variables and simplify it using boolean laws, and explain the boolean laws you used.
 }
 }
 
-◊h3{Further boolean simplification}
+◊h3t{Further boolean simplification}
 
 The future projects will warn you when your boolean expressions aren't optimized, that's when you can either use your knowledge of boolean laws, or check out 
 ◊a[#:href "https://www.youtube.com/watch?v=RO5alU6PpSU"]{Karnaugh maps}

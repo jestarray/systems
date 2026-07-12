@@ -239,6 +239,20 @@
               '("#"))
       s)))
 
+(define (h3 s)
+  (define slug (string-downcase (string-replace s " " "_")))
+  (txexpr
+    'h3
+    `((id ,slug))
+    (list
+      (txexpr 'a
+              `((class "anchor") (href ,(string-append "#" slug)))
+              '("#"))
+      s)))
+
+(define (lead . contents)
+  (txexpr 'div '((class "lead")) contents))
+
 ;List<T..N> -> List<T..N>
 ;removes special characters and converts racket data types to strings from list
 (define (clean l)

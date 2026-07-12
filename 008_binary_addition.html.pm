@@ -5,7 +5,7 @@
 
 ◊h2{How to add binary numbers?}
 
-◊h3{All 5 possible scenarios of binary addition:}
+◊lead{All 5 possible scenarios of binary addition:}
 
 ◊(img-row "/images/bin-1.svg" "/images/bin-2.svg" "/images/bin-3.svg" "/images/bin-4.svg" "/images/bin-5.svg")
     
@@ -64,7 +64,7 @@ _______
 
 ◊(max-unsigned-limit-table 4)
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "What is 101 + 001 ? (given a 3 bit-width)" ◊(pre "
     1
   1 0 1 (5)

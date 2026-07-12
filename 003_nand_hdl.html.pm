@@ -20,7 +20,7 @@ Above is the ◊strong{NAND} gate(aka ◊strong{NOT AND}), which outputs ◊code
 ◊slide{
 ◊h2{Building the NAND Gate}
 ◊img[#:src "/images/relay.gif"]{}
-◊h3{◊a[#:href "http://nandgame.com/"]{Let's build the NAND gate!}}
+◊lead{◊a[#:href "http://nandgame.com/"]{Let's build the NAND gate!}}
 }
 We can build a ◊strong{NAND} gate by cleverly arranging Relays. Relay's have a wire wrapped around an magnetic rod. When electricity runs through the coil, it creates a magnetic field that can pull down a lever which then outputs electricity depending.
 
@@ -72,11 +72,12 @@ It is highly recommended to follow the order listed above, since the gates becom
 
 ◊slide{
 ◊h2{Resources}
-◊h3{◊a[#:href "https://www.nandgame.com/"]{Nand Game} (drag and drop gates)}
-◊h3{◊a[#:href "https://nand2tetris.github.io/web-ide/chip/"]{Nand2Tetris Web IDE} (text based chip diagrams)}
+◊lead{◊a[#:href "https://www.nandgame.com/"]{Nand Game} (drag and drop gates)}
+◊lead{◊a[#:href "https://nand2tetris.github.io/web-ide/chip/"]{Nand2Tetris Web IDE} (text based chip diagrams)}
+◊lead{◊a[#:href "https://circuitverse.org/simulator"]{Circuitverse} (alternative diagraming)}
 I recommend you ◊strong{first} use the visual NAND game, since the UI is more intuitive, and then transcribe what you did to HDL using the online web IDE.
 
-◊h3{◊a[#:href "/media/project-1.pdf"]{Chip truth tables and specs} (pages 19 to 28)}
+◊lead{◊a[#:href "/media/project-1.pdf"]{Chip truth tables and specs} (pages 19 to 28)}
 ◊; explain the test script, compare file, etc
 ◊object[#:data "/images/diagram_to_hdl.svg" #:type "image/svg+xml"]{}
 }

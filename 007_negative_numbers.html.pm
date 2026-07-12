@@ -6,7 +6,7 @@
 ◊h2{Negative aka Signed Numbers in Two's Complement}
 Signed numbers are numbers that can take on ◊b{negative} values. It's called ◊b{signed} because it can take on a "negative sign" as well as a positive sign. This notation of representing negative numbers is called ◊b{two's complement}.
 
-◊h3{To get the binary representation of a negative number, say -6, we have to:}
+◊lead{To get the binary representation of a negative number, say -6, we have to:}
 
 ◊steps{
   ◊step{
@@ -63,7 +63,7 @@ When representing negative numbers, ◊strong{the width matters, because only th
 
 Let's try a few examples with variable bit-widths:
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "What is -3 in binary?(given a bitwidth of 4)" ◊(deci->bin-table -3 4 #:caption "-8 + 4 + 0 + 1 = -3"))
 ◊(q "What is -15 in binary? (given a bitwidth of 5)"  ◊(deci->bin-table -15 5 #:caption "-16 + 0 + 0 + 0 + 0 + 1 = -15"))
 ◊(q "What is -20 in binary? (given a bitwidth of 6)"  ◊(deci->bin-table -20 6 #:caption "-32 + 0 + 8 + 4 + 0 + 0 = -20"))
@@ -119,7 +119,7 @@ Again, as highlighted in red, the most significant bit(left most bit) in a signe
 
 Now knowing that bit patterns can have 2 (or more) meanings, let's go the other way around get some practice converting bit patterns to signed and unsigned decimal representations.
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "What is 0111 in both signed and unsigned decimal? (given a bitwidth of 4)" 
 ◊(deci->bin-table 7 4 #:caption "0 + 4 + 2 + 1 = 7 (signed)")
 ◊(deci->bin-table 7 4 #:caption "0 + 4 + 2 + 1 = 7 (unsigned)")

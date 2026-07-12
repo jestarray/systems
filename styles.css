@@ -238,3 +238,11 @@ img {
     background-color: rgba(175,184,193,0.2);
     border-radius: 6px;
 }
+
+/* text that is super large and bold like a h2 */
+.lead {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-block: 1em 0.5em;
+}

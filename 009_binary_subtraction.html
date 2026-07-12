@@ -47,7 +47,7 @@ Example: -6 + -1 = -7
 + [ 1 1 1 1 ] (-1)
 _______________
 1 [ 1 0 0 1 ] (-7)
-</pre></more-examples></p><h3>Check your understanding!</h3><p><details><summary class="question">Convert these numbers to binary and add them: -5 + 4</summary><pre>
+</pre></more-examples></p><div class="lead">Check your understanding!</div><p><details><summary class="question">Convert these numbers to binary and add them: -5 + 4</summary><pre>
   [ 1 0 1 1 ] (-5)
 + [ 0 1 0 0 ] (4)
 _______________
@@ -64,12 +64,12 @@ _______________
 + [ 1 1 0 0 0 ] (-8)
 _______________
 1 [ 1 0 0 0 0 ] (-16)
-</pre></details></p><p>Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!</p><p><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a></p><h2 id="overflow_problems"><a class="anchor" href="#overflow_problems">#</a>Overflow Problems</h2><p>There are a few problems with <b>signed</b> arithmetic.</p><h3>Positive overflow:</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
+</pre></details></p><p>Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!</p><p><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a></p><h2 id="overflow_problems"><a class="anchor" href="#overflow_problems">#</a>Overflow Problems</h2><p>There are a few problems with <b>signed</b> arithmetic.</p><h3 id="positive_overflow"><a class="anchor" href="#positive_overflow">#</a>Positive overflow</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
   0110 (6)
 + 0011 (3)
 ___________
   1001 (-7)
-</pre><h3>Negative overflow:</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
+</pre><h3 id="negative_overflow"><a class="anchor" href="#negative_overflow">#</a>Negative overflow</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
  1 11 
   1011 (-5)
 + 1011 (-5)

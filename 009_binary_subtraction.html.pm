@@ -59,7 +59,7 @@ _______________
 ")
 }
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "Convert these numbers to binary and add them: -5 + 4"
 ◊(pre "
   [ 1 0 1 1 ] (-5)
@@ -96,7 +96,7 @@ Fun Fact: New hardware is not required for subtraction, we just re-use what we d
 
 There are a few problems with ◊b{signed} arithmetic. 
 
-◊h3{Positive overflow:}
+◊h3{Positive overflow}
 Positive + Positive = Negative
 Adding two positive numbers can result in a negative value
 ◊(pre "
@@ -105,7 +105,7 @@ Adding two positive numbers can result in a negative value
 ___________
   1001 (-7)
 ")
-◊h3{Negative overflow:}
+◊h3{Negative overflow}
 Negative + Negative = Positive
 Adding two negative numbers will result in a positive
 ◊(pre "

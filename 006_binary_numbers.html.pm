@@ -40,7 +40,7 @@ If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2
     0 + 4 + 0 + 0 = 4; thus 0100 represents 4.
     ◊(deci->bin-table 10 4) 8 + 0 + 2 + 0 = 10; thus 1010 represents 10.}
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "What is the binary number 0011 in decimal?" (deci->bin-table 3 4) "answer: 3; because 2 + 1 = 3")
 
 ◊(q "What is the binary number 0101 in decimal?" (deci->bin-table 5 4) "answer: 5; because 4 + 1 = 5")
@@ -68,7 +68,7 @@ Now we need to look for the next biggest power of 2 that is less than 5, which i
 Lastly 1 fits with 1, so 1 - 1 = 0, and we are done.
 ◊(deci->bin-table 13 4) 8+4+0+1 = 13; thus 1101 represents 7}}
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 ◊(q "What is the decimal number 11 in binary?" (deci->bin-table 11 4) "answer: 1011; because 8 + 2 + 1 = 11")
 ◊(q "What is the decimal number 15 in binary?" (deci->bin-table 15 4) "answer: 1111; because 8 + 4 + 2 + 1 = 15")
 ◊q{
@@ -95,7 +95,7 @@ answer: 11101001; which you can confirm adds up to 233. Notice how we needed to 
         From bottom to top in the remainders column, 11101001, which is the binary representation of 233
     }}
 
-◊h3{Check your understanding!}
+◊lead{Check your understanding!}
 
 Use the division method
 

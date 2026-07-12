@@ -154,7 +154,7 @@ Boolean operations re-use symbols from math such as addition and multiplication 
 Let's evaluate some boolean expressions:
 
 ◊slide{
-◊h3{Evaluate: ◊pre{!((1 * 0) + (1 + 1))}}
+◊lead{Evaluate: ◊pre{!((1 * 0) + (1 + 1))}}
 }
 ◊steps{
     ◊step{Evaluate the inner parentheses and work your way outwards
@@ -195,11 +195,11 @@ Let's evaluate some boolean expressions:
 Abstracting to using functions instead of conrete values, since we're dealing with binary values, we have the luxury of knowing every possible input and output of a boolean function. 
 }
 ◊slide{
-◊h3{Take for example the boolean function}
+◊lead{Take for example the boolean function}
 
 ◊code{f(x, y, z) = (x * y) + (!(x) * z)}
 
-◊h3{Truth Table for f(x, y, z) }
+◊lead{Truth Table for f(x, y, z) }
 ◊(table 
     (table-headings (list "x" "y" "z" "f (x, y, z)"))
 (table-entries 
@@ -241,8 +241,8 @@ Say you're throwing a party, and you only want pizzas that have ◊strong{both} 
 To find the combination of operations that will allow the pizzas you want to pass, while rejecting ones you don't want, all you have to do is:
 
 ◊slide{
-◊h3{Steps to convert Truth Table to a Boolean Function}
-◊h4{This is called "Disjunctive Normal Form"}
+◊h2{Steps to convert Truth Table to a Boolean Function}
+◊lead{This is called "Disjunctive Normal Form"}
 ◊steps{
     ◊step{
         Look at all the patterns that OUTputs 1
@@ -288,7 +288,7 @@ By cleverly combining and arranging these simple logic gates, we can create comp
 Try to come up with your own truth table and see if you can implement it with logic gates. Here are a few example problems:
 
 ◊slide{
-◊h3{Problem A}
+◊h3t{Problem A}
 Given the truth table, write the boolean function ◊code{f(x,y) = ...} and ◊a[#:href "https://circuitverse.org/simulator"]{implement it with logic gates}
 ◊(table 
     (table-headings 
@@ -306,7 +306,7 @@ Given the truth table, write the boolean function ◊code{f(x,y) = ...} and ◊a
 }
 
 ◊slide{
-◊h3{Problem B}
+◊h3t{Problem B}
 Given the truth table, write the boolean function ◊code{f(x,y) = ...} and ◊a[#:href "https://circuitverse.org/simulator"]{implement it with logic gates}
 ◊(table 
     (table-headings 
