@@ -248,3 +248,10 @@ img {
     line-height: 1.4;
     margin-block: 1em 0.5em;
 }
+.api-box {
+    background: #b2b2b2;
+    padding: 1em;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    margin-bottom: 1em;
+}

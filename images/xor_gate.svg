@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 100"
+     width="200" height="100"
+     font-family="sans-serif">
+
+  <!-- A -->
+  <line x1="15" y1="30" x2="58" y2="30"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- B -->
+  <line x1="15" y1="70" x2="58" y2="70"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;red;black;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- XOR gate -->
+  <path d="M58 15
+           Q82 50 58 85
+           Q95 85 112 50
+           Q95 15 58 15"
+        fill="none"
+        stroke="black"
+        stroke-width="2.5"/>
+
+  <!-- Extra XOR curve -->
+  <path d="M52 15 Q76 50 52 85"
+        fill="none"
+        stroke="black"
+        stroke-width="2.5"/>
+
+  <!-- Output -->
+  <line x1="112" y1="50" x2="145" y2="50"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;red;red;black;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- Lamp -->
+  <circle cx="165" cy="50" r="10"
+          fill="white"
+          stroke="black" stroke-width="2.5">
+    <animate attributeName="fill"
+      values="white;gold;gold;white;white"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </circle>
+
+  <text x="5" y="34" font-size="12">A</text>
+  <text x="5" y="74" font-size="12">B</text>
+
+</svg>

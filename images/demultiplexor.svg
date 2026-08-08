@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 100"
+     width="200" height="100"
+     font-family="sans-serif">
+
+  <!-- Input -->
+  <line x1="15" y1="50" x2="75" y2="50"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="red;red;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- DEMUX triangle -->
+  <path d="M75 15 L75 85 L135 50 Z"
+        transform="rotate(180 105 50)"
+        fill="white"
+        stroke="black"
+        stroke-width="2.5"/>
+
+  <!-- Output A -->
+  <line x1="135" y1="30" x2="175" y2="30"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- Output B -->
+  <line x1="135" y1="70" x2="175" y2="70"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="red;red;black;black;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- Select -->
+  <line x1="105" y1="100" x2="105" y2="78"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <text x="3" y="54" font-size="12">in</text>
+  <text x="178" y="34" font-size="12">a</text>
+  <text x="178" y="74" font-size="12">b</text>
+  <text x="98" y="98" font-size="12">sel</text>
+
+</svg>

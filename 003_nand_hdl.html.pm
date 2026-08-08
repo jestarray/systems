@@ -71,11 +71,11 @@ Continue this process for the remaining gates.
 It is highly recommended to follow the order listed above, since the gates become progressively more challenging as you move down the list.
 
 ◊slide{
-◊h2{Resources}
+◊h2{Hardware Simulator}
 ◊lead{◊a[#:href "https://www.nandgame.com/"]{Nand Game} (drag and drop gates)}
 ◊lead{◊a[#:href "https://nand2tetris.github.io/web-ide/chip/"]{Nand2Tetris Web IDE} (text based chip diagrams)}
 ◊lead{◊a[#:href "https://circuitverse.org/simulator"]{Circuitverse} (alternative diagraming)}
-I recommend you ◊strong{first} use the visual NAND game, since the UI is more intuitive, and then transcribe what you did to HDL using the online web IDE.
+I ◊red{highly recommend} you ◊strong{first} use the visual NAND game, since the UI is more intuitive, and then transcribe what you did to HDL using the online web IDE.
 
 ◊lead{◊a[#:href "/media/project-1.pdf"]{Chip truth tables and specs} (pages 19 to 28)}
 ◊; explain the test script, compare file, etc

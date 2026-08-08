@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 100"
+     width="200" height="100"
+     font-family="sans-serif">
+
+  <!-- A input -->
+  <line x1="15" y1="30" x2="65" y2="30"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="red;red;black;black;red"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- B input -->
+  <line x1="15" y1="70" x2="65" y2="70"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- MUX triangle -->
+  <path d="M65 15 L65 85 L125 50 Z"
+        fill="white"
+        stroke="black"
+        stroke-width="2.5"/>
+
+  <!-- Output -->
+  <line x1="125" y1="50" x2="155" y2="50"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="red;red;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- Output lamp -->
+  <circle cx="175" cy="50" r="9"
+          fill="white"
+          stroke="black" stroke-width="2.5">
+    <animate attributeName="fill"
+      values="gold;gold;gold;gold;white"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </circle>
+
+  <!-- Select -->
+  <line x1="95" y1="100" x2="95" y2="78"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <text x="5" y="34" font-size="12">a</text>
+  <text x="5" y="74" font-size="12">b</text>
+  <text x="88" y="98" font-size="12">sel</text>
+  <text x="158" y="54" font-size="12">out</text>
+
+</svg>
