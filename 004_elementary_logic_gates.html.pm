@@ -232,6 +232,7 @@
 
 ◊p{The computer platform that we develop in this book requires two variations of this chip: A 4-way 16-bit multiplexor and an 8-way 16-bit multiplexor:}
 
+◊img[#:src "/images/4way-mux.png"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux4Way16
   ◊strong{Inputs:} a[16], b[16], c[16], d[16], sel[2]
@@ -253,6 +254,7 @@
 
 ◊p{The specific computer platform that we will build requires two variations of this chip: A 4-way 1-bit demultiplexor and an 8-way 1-bit multiplexor, as follows.}
 
+◊img[#:src "/images/4way-demux.png"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux4Way
   ◊strong{Inputs:} in, sel[2]

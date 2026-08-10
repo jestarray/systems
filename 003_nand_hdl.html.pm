@@ -77,7 +77,9 @@ It is highly recommended to follow the order listed above, since the gates becom
 ◊lead{◊a[#:href "https://circuitverse.org/simulator"]{Circuitverse} (alternative diagraming)}
 I ◊red{highly recommend} you ◊strong{first} use the visual NAND game, since the UI is more intuitive, and then transcribe what you did to HDL using the online web IDE.
 
-◊lead{◊a[#:href "/media/project-1.pdf"]{Chip truth tables and specs} (pages 19 to 28)}
+◊lead{◊a[#:href "/004_elementary_logic_gates.html"]{The Elementary Logic Gates, truth tables and specs}}
+
+◊lead{◊a[#:href "/media/project-1.pdf"]{Additional readings, truth tables, and specs} (pages 19 to 28)}
 ◊; explain the test script, compare file, etc
 ◊object[#:data "/images/diagram_to_hdl.svg" #:type "image/svg+xml"]{}
 }

@@ -18,9 +18,12 @@ Reset cache(required every racket update):
 
 ## Distribute:
 
+`./render.sh`
+
 `raco pollen render`
 
 `raco pollen publish`
 
 Make sure `index.html` is rendered! 
 It might require you to visit `index.html` manually if its not rendering with the above commands.
+Or run `raco pollen render index.html`.
