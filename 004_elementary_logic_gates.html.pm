@@ -131,8 +131,8 @@
 ◊(table 
 (table-headings (list "SEL" "OUT"))
 (table-entries 
-(list "0" "0")
-(list "0" "1")) #:caption (list "MUX"))
+(list "0" "a")
+(list "1" "b")) #:caption (list "MUX"))
 ◊p{A multiplexor (figure 1.8) is a three-input gate that uses one of the inputs, called "selection bit," to select and output one of the other two inputs, called "data bits." Thus, a better name for this device might have been selector. The name multiplexor was adopted from communications systems, where similar devices are used to serialize (multiplex) several input signals over a single output wire.}
 
 ◊div[#:class "api-box"]{

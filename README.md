@@ -22,4 +22,5 @@ Reset cache(required every racket update):
 
 `raco pollen publish`
 
-make sure index.html is rendered!
+Make sure `index.html` is rendered! 
+It might require you to visit `index.html` manually if its not rendering with the above commands.
