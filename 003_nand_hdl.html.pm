@@ -2,7 +2,7 @@
 
 ◊h1{NAND theorem}
 
-◊(yt "RQzmQvi1tdU")
+◊(yt "m76bbEl2pcE")
 
 ◊slide{
 ◊h2{The NAND Gate}
@@ -75,6 +75,8 @@ It is highly recommended to follow the order listed above, since the gates becom
 ◊lead{◊a[#:href "https://www.nandgame.com/"]{Nand Game} (drag and drop gates)}
 ◊lead{◊a[#:href "https://nand2tetris.github.io/web-ide/chip/"]{Nand2Tetris Web IDE} (text based chip diagrams)}
 ◊lead{◊a[#:href "https://circuitverse.org/simulator"]{Circuitverse} (alternative diagraming)}
+◊lead{◊a[#:href "https://www.nand2tetris.org/hdl-survival-guide"]{HDL Survival Guide}}
+
 I ◊red{highly recommend} you ◊strong{first} use the visual NAND game, since the UI is more intuitive, and then transcribe what you did to HDL using the online web IDE.
 
 ◊lead{◊a[#:href "/004_elementary_logic_gates.html"]{The Elementary Logic Gates, truth tables and specs}}
