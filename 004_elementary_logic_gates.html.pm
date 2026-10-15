@@ -25,7 +25,13 @@
   ◊strong{Outputs:} out
   ◊strong{Function:} If a=b=1 then out =0 else out =1
   ◊strong{Comment:} This gate is considered primitive and thus there is no need to implement it.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    This gate is primitive; no implementation needed.
+  }
 }
+
+◊hr{}
 
 ◊h2{1.2.2 Basic Logic Gates}
 ◊p{Some of the logic gates presented here are typically referred to as "elementary" or "basic." At the same time, every one of them can be composed from Nand gates alone. Therefore, they need not be viewed as primitive.}
@@ -47,7 +53,13 @@
   ◊strong{Inputs:} in
   ◊strong{Outputs:} out
   ◊strong{Function:} If in=0 then out =1 else out =0.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Nand
+  }
 }
+
+◊hr{}
 
 ◊h3{And}
 ◊layout-spread-row{
@@ -68,7 +80,13 @@
   ◊strong{Inputs:} a, b
   ◊strong{Outputs:} out
   ◊strong{Function:} If a=b=1 then out =1 else out =0.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Nand, Not
+  }
 }
+
+◊hr{}
 
 ◊h3{Or}
 ◊layout-spread-row{
@@ -89,7 +107,13 @@
   ◊strong{Inputs:} a, b
   ◊strong{Outputs:} out
   ◊strong{Function:} If a=b=0 then out =0 else out =1.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Nand
+  }
 }
+
+◊hr{}
 
 ◊h3{Xor}
 ◊layout-spread-row{
@@ -110,7 +134,13 @@
   ◊strong{Inputs:} a, b
   ◊strong{Outputs:} out
   ◊strong{Function:} If a ≠ b then out =1 else out =0.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Not, And, Or
+  }
 }
+
+◊hr{}
 
 ◊h3{Multiplexor}
 ◊layout-spread-row{
@@ -140,7 +170,13 @@
   ◊strong{Inputs:} a, b, sel
   ◊strong{Outputs:} out
   ◊strong{Function:} If sel =0 then out =a else out =b.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Not, And, Or
+  }
 }
+
+◊hr{}
 
 ◊h3{DeMultiplexor}
 ◊layout-spread-row{
@@ -159,14 +195,20 @@
 (table-entries 
 (list "0" "IN" "0")
 (list "1" "0" "IN")) #:caption (list "DEMUX"))
-◊p{A demultiplexor (figure 1.9) performs the opposite function of a multiplexor: It takes a single input and channels it to one of two possible outputs according to a selector bit that specifies which output to chose.}
+◊p{A demultiplexor (figure 1.9) performs the opposite function of a multiplexor: It takes a single input and channels it to one of two ◊strong{POSSIBLE} outputs according to a selector bit that specifies which output to chose.}
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux
   ◊strong{Inputs:} in, sel
   ◊strong{Outputs:} a, b
   ◊strong{Function:} If sel=0 then {a=in, b=0} else {a=0, b=in}.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Not, And
+  }
 }
+
+◊hr{}
 
 ◊h2{1.2.3 Multi-Bit Versions of Basic Gates}
 ◊p{Computer hardware is typically designed to operate on multi-bit arrays called "buses." For example, a basic requirement of a 32-bit computer is to be able to compute (bit-wise) an And function on two given 32-bit buses. To implement this operation, we can build an array of 32 binary And gates, each operating separately on a pair of bits. In order to enclose all this logic in one package, we can encapsulate the gates array in a single chip interface consisting of two 32-bit input buses and one 32-bit output bus.}
@@ -181,7 +223,13 @@
   ◊strong{Inputs:} in[16] // a 16-bit pin
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} For i=0..15 out[i]=Not(in[i]).
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Not
+  }
 }
+
+◊hr{}
 
 ◊h3{Multi-Bit And}
 ◊p{An n-bit And gate applies the Boolean operation And to every one of the n bit-pairs arrayed in its two n-bit input buses:}
@@ -191,7 +239,13 @@
   ◊strong{Inputs:} a[16], b[16]
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} For i=0..15 out[i]=And(a[i],b[i]).
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: And
+  }
 }
+
+◊hr{}
 
 ◊h3{Multi-Bit Or}
 ◊p{An n-bit Or gate applies the Boolean operation Or to every one of the n bit-pairs arrayed in its two n-bit input buses:}
@@ -201,7 +255,13 @@
   ◊strong{Inputs:} a[16], b[16]
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} For i=0..15 out[i]=Or(a[i],b[i]).
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Or
+  }
 }
+
+◊hr{}
 
 ◊h3{Multi-Bit Multiplexor}
 ◊p{An n-bit multiplexor is exactly the same as the binary multiplexor described in figure 1.8, except that the two inputs are each n-bit wide; the selector is a single bit.}
@@ -212,7 +272,13 @@
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} If sel=0 then for i=0..15 out[i]=a[i] 
   else for i=0..15 out[i]=b[i].
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Mux
+  }
 }
+
+◊hr{}
 
 ◊h2{1.2.4 Multi-Way Versions of Basic Gates}
 ◊p{Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. This section describes a set of multi-way gates that will be used subsequently in various chips in our computer architecture. Similar generalizations can be developed for other architectures, as needed.}
@@ -225,7 +291,13 @@
   ◊strong{Inputs:} in[8]
   ◊strong{Outputs:} out
   ◊strong{Function:} out=Or(in[0],in[1],...,in[7]).
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Or
+  }
 }
+
+◊hr{}
 
 ◊h3{Multi-Way/Multi-Bit Multiplexor}
 ◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log_{2}m. Figure 1.10 depicts a typical example.}
@@ -239,7 +311,13 @@
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} If sel=00 then out =a else if sel=01 then out =b else if sel=10 then out =c else if sel=11 then out =d
   ◊strong{Comment:} The assignment operations mentioned above are all 16-bit. For example, "out=a" means "for i=0..15 out[i]=a[i]".
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Mux16
+  }
 }
+
+◊hr{}
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux8Way16
@@ -247,7 +325,13 @@
   ◊strong{Outputs:} out[16]
   ◊strong{Function:} If sel=000 then out =a else if sel=001 then out =b else if sel=010 out =c ... else if sel=111 then out =h
   ◊strong{Comment:} The assignment operations mentioned above are all 16-bit. For example, "out=a" means "for i=0..15 out[i]=a[i]".
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: Mux16
+  }
 }
+
+◊hr{}
 
 ◊h3{Multi-Way/Multi-Bit Demultiplexor}
 ◊p{An m-way n-bit demultiplexor (figure 1.11) channels a single n-bit input into one of m possible n-bit outputs. The selection is specified by a set of k control bits, where k=log_{2}m.}
@@ -264,7 +348,13 @@
   else if sel=01 then {b=in, a=c=d=0} 
   else if sel=10 then {c=in, a=b=d=0} 
   else if sel=11 then {d=in, a=b=c=0}.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: DMux
+  }
 }
+
+◊hr{}
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux8Way
@@ -276,7 +366,13 @@
   else if sel=010 ...
   ...
   else if sel=111 then {h=in, a=b=c=d=e=f=g=0}.
+  ◊details{
+    ◊summary[#:style "color: red;"]{SPOILERS}
+    One ◊strong{POSSIBLE} implementation uses: DMux, DMux4Way
+  }
 }
+
+◊hr{}
 
 ◊h2{1.3 Implementation}
 ◊p{Similar to the role of axioms in mathematics, primitive gates provide a set of elementary building blocks from which everything else can be built. Operationally, primitive gates have an "off-the-shelf" implementation that is supplied externally. Thus, they can be used in the construction of other gates and chips without worrying about their internal design. In the computer architecture that we are now beginning to build, we have chosen to base all the hardware on one primitive gate only: Nand.}
