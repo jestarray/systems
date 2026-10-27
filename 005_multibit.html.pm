@@ -51,11 +51,11 @@ CHIP IsOdd {
     Or(a=in[0], b=false, out=out);
 }   
 }
-}
 
 ◊ul{
 ◊li{◊code{a=in[0]} selects the 1st bit from the ◊code{in} bus, and passes it to the ◊code{a} input of the ◊code{Or} gate. }
 ◊li{◊code{b=false} which sets all input bits of ◊code{b} to ◊code{0}.}
+}
 }
 
 ◊slide{
@@ -76,7 +76,7 @@ In the coming section, You'll see statements like:
 ◊pre{For i=0..15}
 But ◊strong{remember}, our teaching HDL(hardware description language) ◊strong{does not} support for loops, so you'll have to just write them out manually(or copy paste). You only have the previous gates you built and the indexing syntax to rely on.
 
-Now that you've learned how to index a single bit in a bus, you can now build Not16, And16, Or16, Mux16, Or8Way. The projects are provided below. ◊strong{Do not} do ◊stong{Multi-Way} gates just yet until you've learned how to sub-bus(sub indexing).
+Now that you've learned how to index a single bit in a bus, you can now build Not16, And16, Or16, Mux16, Or8Way. The projects are provided below. ◊strong{Do not} do ◊strong{Multi-Way} gates just yet until you've learned how to sub-bus(sub indexing).
 }
 
 ◊hr{}
@@ -106,9 +106,11 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "0011110011000011" "1100001100111100")
 (list "0001001000110100" "1110110111001011")
 ) #:caption (list "Not16"))
+}
 
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Bit And}
 ◊p{An n-bit And gate applies the Boolean operation And to every one of the n bit-pairs arrayed in its two n-bit input buses:}
 
@@ -132,9 +134,11 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "0011110011000011" "0000111111110000" "0000110011000000")
 (list "0001001000110100" "1001100001110110" "0001000000110100")
 ) #:caption (list "And16"))
+}
 
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Bit Or}
 ◊p{An n-bit Or gate applies the Boolean operation Or to every one of the n bit-pairs arrayed in its two n-bit input buses:}
 
@@ -158,9 +162,11 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "0011110011000011" "0000111111110000" "0011111111110011")
 (list "0001001000110100" "1001100001110110" "1001101001110110")
 ) #:caption (list "Or16"))
+}
 
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Bit Multiplexor}
 ◊p{An n-bit multiplexor is exactly the same as the binary multiplexor described in figure 1.8, except that the two inputs are each n-bit wide; the selector is a single bit.}
 
@@ -187,9 +193,11 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "1010101010101010" "0101010101010101" "0" "1010101010101010")
 (list "1010101010101010" "0101010101010101" "1" "0101010101010101")
 ) #:caption (list "Mux16"))
+}
 
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Way Or}
 ◊p{An n-way Or gate outputs 1 when at least one of its n bit inputs is 1, and 0 otherwise. Here is the 8-way variant of this gate:}
 
@@ -212,7 +220,6 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "00000001" "1")
 (list "00100110" "1")
 ) #:caption (list "Or8Way"))
-
 }
 
 ◊hr{}
@@ -220,6 +227,12 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 ◊slide{
 ◊h2{Selecting a range of bits from a bus}
 ◊img[#:src "/images/multibit-indexing-ranged.svg"]{}
+
+◊hdl-code-block{
+// Splitting a 16-bit bus into two 8-bit halves:
+ChipName(in=in[0..7], ...);
+ChipName(in=in[8..15], ...);
+}
 }
 
 ◊; Or16 and And16 are parallel implementation of Or and And
@@ -236,8 +249,9 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Way/Multi-Bit Multiplexor}
-◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log_{2}m. Figure 1.10 depicts a typical example.}
+◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log◊sub{2}(m). Figure 1.10 depicts a typical example.}
 
 ◊p{The computer platform that we develop in this book requires two variations of this chip: A 4-way 16-bit multiplexor and an 8-way 16-bit multiplexor:}
 
@@ -265,9 +279,10 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "0001001000110100" "1001100001110110" "1010101010101010" "0101010101010101" "10" "1010101010101010")
 (list "0001001000110100" "1001100001110110" "1010101010101010" "0101010101010101" "11" "0101010101010101")
 ) #:caption (list "Mux4Way16"))
-
+}
 ◊hr{}
 
+◊slide{
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux8Way16
   ◊strong{Inputs:} a[16], b[16], c[16], d[16], e[16], f[16], g[16], h[16], sel[3]
@@ -299,9 +314,10 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "0001001000110100" "0010001101000101" "0011010001010110" "0100010101100111" "0101011001111000" "0110011110001001" "0111100010011010" "1000100110101011" "110" "0111100010011010")
 (list "0001001000110100" "0010001101000101" "0011010001010110" "0100010101100111" "0101011001111000" "0110011110001001" "0111100010011010" "1000100110101011" "111" "1000100110101011")
 ) #:caption (list "Mux8Way16"))
-
+}
 ◊hr{}
 
+◊slide{
 ◊h3{Multi-Way/Multi-Bit Demultiplexor}
 ◊p{An m-way n-bit demultiplexor (figure 1.11) channels a single n-bit input into one of m possible n-bit outputs. The selection is specified by a set of k control bits, where k=log_{2}m.}
 
@@ -334,9 +350,9 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "1" "10" "0" "0" "1" "0")
 (list "1" "11" "0" "0" "0" "1")
 ) #:caption (list "DMux4Way"))
-
+}
 ◊hr{}
-
+◊slide{
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux8Way
   ◊strong{Inputs:} in, sel[3]
@@ -372,7 +388,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 (list "1" "110" "0" "0" "0" "0" "0" "0" "1" "0")
 (list "1" "111" "0" "0" "0" "0" "0" "0" "0" "1")
 ) #:caption (list "DMux8Way"))
-
+}
 ◊hr{}
 
 ◊ul{
