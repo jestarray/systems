@@ -378,5 +378,5 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 ◊ul{
   ◊li{◊strong{Multi-Bit Not/And/Or Gates:} Since we already know how to implement the elementary versions of these gates, the implementation of their n-ary versions is simply a matter of constructing arrays of n elementary gates, having each gate operate separately on its bit inputs. This implementation task is ◊strong{rather boring}, but it will carry its weight when these multi-bit gates are used in more complex chips, as described in subsequent chapters.}
   ◊li{◊strong{Multi-Bit Multiplexor:} The implementation of an n-ary multiplexor is simply a matter of feeding the same selection bit to every one of n binary multiplexors. Again, a boring task resulting in a very useful chip.}
-  ◊li{◊strong{Multi-Way Gates:} Implementation tip: Think forks.}
+  ◊li{◊strong{Multi-Way Gates:} Implementation tip: Think forks. Break the problem into smaller choices. How can you use gates that select between two inputs to build a gate that selects between four or more?}
 }
