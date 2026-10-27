@@ -37,12 +37,12 @@
 ; String(s) -> txexpr
 ; creates codeblocks with optional data src for download
 ; (racket-code-block #:data-src "mypath.rkt" "foo" "baz" "bar")
-(define (racket-code-block #:data-src [src ""] . contents)
+(define (hdl-code-block #:data-src [src ""] . contents)
   (txexpr 'pre
           (if (non-empty-string? src)
               `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
               `((class "line-numbers match-braces rainbow-braces")))
-          (list (txexpr 'code '((class "language-racket")) contents))))
+          (list (txexpr 'code '((class "language-nand2tetris-hdl")) contents))))
 
 (define (c-code-block #:data-src [src ""] . contents)
   (txexpr 'pre
@@ -66,8 +66,8 @@
   (define solu-path (car solution))
   (define solu-contents (cadr solution))
   ;todo: add option to keep the Q block open?
-  (q (string-append "Exercise " filename) (racket-code-block #:data-src starter-path starter-contents)
-     (q "Answer" (racket-code-block #:data-src solu-path solu-contents)))
+  (q (string-append "Exercise " filename) (hdl-code-block #:data-src starter-path starter-contents)
+     (q "Answer" (hdl-code-block #:data-src solu-path solu-contents)))
   )
 
 ; string -> txexpr

@@ -26,7 +26,7 @@ Notice the following declarations:
 - ◊code{b[16]} declares another 16-bit bus.
 - ◊code{out[16]} declares a 16-bit output bus.
 Notice that ◊code{a[16]} means a bus containing 16 bits, ◊strong{not} the sixteenth bit of the input ◊code{a}.
-◊pre{◊code{
+◊hdl-code-block{
 CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
@@ -34,7 +34,7 @@ CHIP Or16 {
     PARTS:
     //// Replace this comment with your code.
 }
-}}
+}
 That's because the meaning of the brackets ◊strong{depends on where} they're used. 
 If used in ◊strong{IN} and ◊strong{OUT}, it defines the width of the bus. 
 If used in ◊strong{PARTS:} it refers to ◊strong{selecting} individual bits from the bus.
@@ -42,7 +42,7 @@ If used in ◊strong{PARTS:} it refers to ◊strong{selecting} individual bits f
 
 ◊slide{
 ◊h2{Selecting Individual Bits from a Bus}
-◊pre{
+◊hdl-code-block{
 CHIP IsOdd {
     IN in[8];
     OUT out;
