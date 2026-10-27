@@ -498,7 +498,4 @@
   ◊li{◊strong{And:} Once again, the gate implementation is simple. Tip: Think negative.}
   ◊li{◊strong{Or/Xor:} These functions can be defined in terms of some of the Boolean functions implemented previously, using some simple Boolean manipulations. Thus, the respective gates can be built using previously built gates.}
   ◊li{◊strong{Multiplexor/Demultiplexor:} Likewise, these gates can be built using previously built gates.}
-  ◊li{◊strong{Multi-Bit Not/And/Or Gates:} Since we already know how to implement the elementary versions of these gates, the implementation of their n-ary versions is simply a matter of constructing arrays of n elementary gates, having each gate operate separately on its bit inputs. This implementation task is ◊strong{rather boring}, but it will carry its weight when these multi-bit gates are used in more complex chips, as described in subsequent chapters.}
-  ◊li{◊strong{Multi-Bit Multiplexor:} The implementation of an n-ary multiplexor is simply a matter of feeding the same selection bit to every one of n binary multiplexors. Again, a boring task resulting in a very useful chip.}
-  ◊li{◊strong{Multi-Way Gates:} Implementation tip: Think forks.}
 }

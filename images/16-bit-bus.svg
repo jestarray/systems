@@ -1,0 +1,81 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .wire {
+            fill: none;
+            stroke: #222;
+            stroke-width: 3;
+        }
+
+        .bus {
+            fill: none;
+            stroke: #2563eb;
+            stroke-width: 14;
+            stroke-linecap: round;
+        }
+
+        .label {
+            font-family: sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            fill: #222;
+        }
+
+        .bit-label {
+            font-family: monospace;
+            font-size: 16px;
+            fill: #444;
+        }
+    </style>
+
+    <!-- 16 individual wires -->
+    <path class="wire" d="M 80 70  C 230 70, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 94  C 230 94, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 118 C 230 118, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 142 C 230 142, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 166 C 230 166, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 190 C 230 190, 280 220, 400 250"></path>
+    <path class="wire" d="M 80 214 C 230 214, 280 225, 400 250"></path>
+    <path class="wire" d="M 80 238 C 230 238, 280 235, 400 250"></path>
+
+    <path class="wire" d="M 80 262 C 230 262, 280 265, 400 250"></path>
+    <path class="wire" d="M 80 286 C 230 286, 280 275, 400 250"></path>
+    <path class="wire" d="M 80 310 C 230 310, 280 280, 400 250"></path>
+    <path class="wire" d="M 80 334 C 230 334, 280 280, 400 250"></path>
+    <path class="wire" d="M 80 358 C 230 358, 280 280, 400 250"></path>
+    <path class="wire" d="M 80 382 C 230 382, 280 280, 400 250"></path>
+    <path class="wire" d="M 80 406 C 230 406, 280 280, 400 250"></path>
+    <path class="wire" d="M 80 430 C 230 430, 280 280, 400 250"></path>
+
+    <!-- Bit labels -->
+    <text class="bit-label" x="35" y="76">A[15]</text>
+    <text class="bit-label" x="35" y="100">A[14]</text>
+    <text class="bit-label" x="35" y="124">A[13]</text>
+    <text class="bit-label" x="35" y="148">A[12]</text>
+    <text class="bit-label" x="35" y="172">A[11]</text>
+    <text class="bit-label" x="35" y="196">A[10]</text>
+    <text class="bit-label" x="35" y="220">A[9]</text>
+    <text class="bit-label" x="35" y="244">A[8]</text>
+    <text class="bit-label" x="35" y="268">A[7]</text>
+    <text class="bit-label" x="35" y="292">A[6]</text>
+    <text class="bit-label" x="35" y="316">A[5]</text>
+    <text class="bit-label" x="35" y="340">A[4]</text>
+    <text class="bit-label" x="35" y="364">A[3]</text>
+    <text class="bit-label" x="35" y="388">A[2]</text>
+    <text class="bit-label" x="35" y="412">A[1]</text>
+    <text class="bit-label" x="35" y="436">A[0]</text>
+
+    <!-- The resulting bus -->
+    <path class="bus" d="M 400 250 L 720 250"></path>
+
+    <!-- Bus annotation -->
+    <text class="label" x="560" y="220" text-anchor="middle">A[16]</text>
+
+    <text class="bit-label" x="560" y="295" text-anchor="middle">16 wires traveling together</text>
+    <text class="bit-label" x="560" y="312" text-anchor="middle">(conceptualize it as a single thing)</text>
+
+    <!-- Arrow showing direction -->
+    <polygon points="720,250 700,238 700,262" fill="#2563eb"></polygon>
+
+    <!-- Title -->
+    <text class="label" x="400" y="35" text-anchor="middle">16 individual bits → one 16-bit bus</text>
+</svg>

@@ -1,0 +1,20 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="150" viewBox="0 0 300 150">
+  <g fill="none" stroke="currentColor" stroke-width="2.5"
+     stroke-linecap="round" stroke-linejoin="round">
+    <!-- OR gate -->
+    <path d="M90 35 Q125 75 90 115 Q143 125 190 75 Q143 25 90 35 Z"/>
+
+    <!-- Input and output buses -->
+    <path d="M30 53 H101"/>
+    <path d="M30 97 H101"/>
+    <path d="M182 75 H265"/>
+  </g>
+
+  <!-- Bus labels -->
+  <g fill="currentColor" font-family="sans-serif" font-size="14">
+    <text x="30" y="43">a[16]</text>
+    <text x="30" y="119">b[16]</text>
+    <text x="265" y="64" text-anchor="end">out[16]</text>
+  </g>
+</svg>

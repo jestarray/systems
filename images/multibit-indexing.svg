@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+    <style>
+        .label {
+            font-family: sans-serif;
+            font-weight: bold;
+            fill: #222;
+        }
+
+        .bit {
+            font-family: monospace;
+            font-size: 42px;
+            font-weight: bold;
+            fill: #222;
+        }
+
+        .index {
+            font-family: monospace;
+            font-size: 20px;
+            font-weight: bold;
+            fill: #555;
+        }
+
+        .syntax {
+            font-family: monospace;
+            font-size: 42px;
+            font-weight: bold;
+            fill: #d22;
+        }
+
+        .box {
+            fill: white;
+            stroke: #222;
+            stroke-width: 3;
+            rx: 10;
+        }
+
+        .highlight {
+            fill: #d22;
+        }
+
+        /*
+         * Every animation cycle is 8 seconds:
+         *
+         * 0–1s   = a[0]
+         * 1–2s   = a[1]
+         * ...
+         * 7–8s   = a[7]
+         *
+         * The values are discrete so the selection "jumps"
+         * from one bit to the next.
+         */
+    </style>
+
+    <!-- Title -->
+    <text x="500" y="55" text-anchor="middle" class="label" font-size="32">
+        Indexing a Bus individually
+    </text>
+
+    <!-- ====================================================== -->
+    <!-- THE EIGHT BITS                                         -->
+    <!-- ====================================================== -->
+
+    <!-- Bit 7 -->
+    <rect class="box" x="90" y="120" width="90" height="90"></rect>
+    <text class="bit" x="135" y="180" text-anchor="middle">1</text>
+    <text class="index" x="135" y="245" text-anchor="middle">a[7]</text>
+
+    <!-- Bit 6 -->
+    <rect class="box" x="195" y="120" width="90" height="90"></rect>
+    <text class="bit" x="240" y="180" text-anchor="middle">0</text>
+    <text class="index" x="240" y="245" text-anchor="middle">a[6]</text>
+
+    <!-- Bit 5 -->
+    <rect class="box" x="300" y="120" width="90" height="90"></rect>
+    <text class="bit" x="345" y="180" text-anchor="middle">1</text>
+    <text class="index" x="345" y="245" text-anchor="middle">a[5]</text>
+
+    <!-- Bit 4 -->
+    <rect class="box" x="405" y="120" width="90" height="90"></rect>
+    <text class="bit" x="450" y="180" text-anchor="middle">0</text>
+    <text class="index" x="450" y="245" text-anchor="middle">a[4]</text>
+
+    <!-- Bit 3 -->
+    <rect class="box" x="510" y="120" width="90" height="90"></rect>
+    <text class="bit" x="555" y="180" text-anchor="middle">1</text>
+    <text class="index" x="555" y="245" text-anchor="middle">a[3]</text>
+
+    <!-- Bit 2 -->
+    <rect class="box" x="615" y="120" width="90" height="90"></rect>
+    <text class="bit" x="660" y="180" text-anchor="middle">0</text>
+    <text class="index" x="660" y="245" text-anchor="middle">a[2]</text>
+
+    <!-- Bit 1 -->
+    <rect class="box" x="720" y="120" width="90" height="90"></rect>
+    <text class="bit" x="765" y="180" text-anchor="middle">1</text>
+    <text class="index" x="765" y="245" text-anchor="middle">a[1]</text>
+
+    <!-- Bit 0 -->
+    <rect class="box" x="825" y="120" width="90" height="90"></rect>
+    <text class="bit" x="870" y="180" text-anchor="middle">0</text>
+    <text class="index" x="870" y="245" text-anchor="middle">a[0]</text>
+
+
+    <!-- ====================================================== -->
+    <!-- ANIMATED RED HIGHLIGHTED BITS                          -->
+    <!-- ====================================================== -->
+
+    <!-- a[7] -->
+    <text x="135" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        1
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;0;0;1" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[6] -->
+    <text x="240" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        0
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;0;1;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[5] -->
+    <text x="345" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        1
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;1;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[4] -->
+    <text x="450" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        0
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;1;0;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[3] -->
+    <text x="555" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        1
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;1;0;0;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[2] -->
+    <text x="660" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        0
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;1;0;0;0;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[1] -->
+    <text x="765" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        1
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0;0;0;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+    <!-- a[0] -->
+    <text x="870" y="180" text-anchor="middle" class="bit highlight" opacity="0">
+        0
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;0;0;0;0;0;0" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875"></animate>
+    </text>
+
+
+    <!-- ====================================================== -->
+    <!-- ANIMATED SYNTAX                                        -->
+    <!-- ====================================================== -->
+
+    <text x="500" y="335" text-anchor="middle" class="syntax">
+        a[0]
+
+        <!-- Change the text position/opacity via eight
+             separately overlaid labels below. -->
+    </text>
+
+    <!-- We cover the generic label with animated labels -->
+    <rect x="380" y="295" width="240" height="60" fill="white"></rect>
+
+    <!-- a[0] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[0]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;0;0;0;0;0;0"></animate>
+    </text>
+
+    <!-- a[1] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[1]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0;0;0;0;0"></animate>
+    </text>
+
+    <!-- a[2] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[2]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;1;0;0;0;0;0"></animate>
+    </text>
+
+    <!-- a[3] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[3]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;1;0;0;0;0"></animate>
+    </text>
+
+    <!-- a[4] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[4]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;1;0;0;0"></animate>
+    </text>
+
+    <!-- a[5] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[5]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;1;0;0"></animate>
+    </text>
+
+    <!-- a[6] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[6]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;0;1;0"></animate>
+    </text>
+
+    <!-- a[7] -->
+    <text x="500" y="340" text-anchor="middle" class="syntax" opacity="0">
+        a[7]
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;0;0;0;0;1"></animate>
+    </text>
+
+    <text x="500" y="385" text-anchor="middle" class="label" font-size="20">
+        The index selects one bit from the bus(NOTICE: RIGHT to LEFT←)
+    </text>
+
+</svg>

@@ -24,6 +24,8 @@ Above is the ◊strong{NAND} gate(aka ◊strong{NOT AND}), which outputs ◊code
 }
 We can build a ◊strong{NAND} gate by cleverly arranging Relays. Relay's have a wire wrapped around an magnetic rod. When electricity runs through the coil, it creates a magnetic field that can pull down a lever which then outputs electricity depending.
 
+◊hr{}
+
 ◊slide{
 ◊h2{The Universal Gate}
 The ◊strong{NAND} is also known as the ◊em{"universal gate"}, meaning it can be used to build all the other gates, like ◊em{AND, NOT, OR, etc}.
@@ -70,6 +72,8 @@ Continue this process for the remaining gates.
 
 It is highly recommended to follow the order listed above, since the gates become progressively more challenging as you move down the list.
 
+◊hr{}
+
 ◊slide{
 ◊h2{Hardware Simulator}
 ◊lead{◊a[#:href "https://www.nandgame.com/"]{Nand Game} (drag and drop gates)}
@@ -86,6 +90,8 @@ I ◊red{highly recommend} you ◊strong{first} use the visual NAND game, since 
 ◊object[#:data "/images/diagram_to_hdl.svg" #:type "image/svg+xml"]{}
 }
 
+◊hr{}
+
 ◊slide{
 ◊h2{HDL}
 HDL also known as ◊em{Hardware Description Language} is what real chip designers use and we have stripped it down to its bare bones to make it easier to learn.
@@ -99,5 +105,3 @@ It is ◊strong{NOT} a programming language in the typical sense.
 You just plug in variables to outputs.
 It is ◊strong{case sensitive}, mandatory semicolons, commands, becareful of typos!
 }
-
-◊; internal pins
