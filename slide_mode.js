@@ -2,6 +2,7 @@
 function slide_mode(bg_color, color) {
     //if there isnt enough content for a slide and it looks to small, just zoom in! it also helps emphasizes the point
     let body = document.getElementsByTagName("body")[0];
+    body.classList.add("slide-mode");
     if (bg_color != undefined) {
         body.style.background = bg_color;
     }
@@ -57,6 +58,7 @@ function slide_mode(bg_color, color) {
 }
 
 function disable_slide_mode() {
+    document.body.classList.remove("slide-mode");
     let all = document.getElementsByTagName("article")[0].children;
     Array.from(all).forEach((v) => {
         v.style.display = "";

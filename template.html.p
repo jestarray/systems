@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=3" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=4" />
     ◊(define has-code-block? (select 'code doc))
     ◊when/splice[has-code-block?]{
     <script src="/prism_highlight.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     }
-    <script src="./slide_mode.js?v=2"></script>
+    <script src="./slide_mode.js?v=3"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>◊select['h1 doc]</title>
@@ -45,9 +45,13 @@
                 <div id="home"><a href="javascript:void(0)" onclick="slide_mode()">Slide Mode</a></div>
             }
             </nav>
-            <article>
-                ◊(->html doc #:splice? #t)
-            </article>
+            ◊(define page-doc (prepare-page-document doc))
+            <div class="page-layout">
+                <article>
+                    ◊(->html page-doc #:splice? #t)
+                </article>
+                ◊(->html (generate-page-toc page-doc))
+            </div>
         </main>
     </div>
 </body>

@@ -3,6 +3,7 @@
 (require pollen/setup)
 (require pollen/core)
 (require pollen/pagetree)
+(require net/uri-codec)
 
 (provide (all-defined-out)) ;make everything global in this file
 
@@ -249,6 +250,97 @@
               `((class "anchor") (href ,(string-append "#" slug)))
               '("#"))
       s)))
+
+; Page-local navigation is built from the decoded document, including slide headings.
+(define (page-heading? element)
+  (and (txexpr? element) (memq (get-tag element) '(h1 h2 h3 h4 h5 h6))))
+
+(define (page-toc-text element)
+  (cond [(string? element) element]
+        [(txexpr? element)
+         (if (member "anchor" (string-split (attr-ref element 'class "")))
+             ""
+             (apply string-append (map page-toc-text (get-elements element))))]
+        [else ""]))
+
+; Add missing anchors without changing existing fragment URLs. Wrap tables here,
+; after decoding, so wide tables stay in the reading column without JavaScript.
+(define (prepare-page-document doc)
+  (define used-ids (make-hash))
+  (for ([id '("page-toc-title" "theme-toggle" "prev" "home" "next")])
+    (hash-set! used-ids id #t))
+  (define (collect-ids element)
+    (when (txexpr? element)
+      (define id (attr-ref element 'id #f))
+      (when id (hash-set! used-ids id #t))
+      (for-each collect-ids (get-elements element))))
+  (collect-ids doc)
+
+  (define (new-id heading)
+    (define text (string-trim (page-toc-text heading)))
+    (define base-id (if (non-empty-string? text)
+                        (regexp-replace* #px"\\s+" (string-downcase text) "_")
+                        "heading"))
+    (let loop ([id base-id] [suffix 2])
+      (if (hash-has-key? used-ids id)
+          (loop (format "~a_~a" base-id suffix) (add1 suffix))
+          (begin (hash-set! used-ids id #t) id))))
+
+  (define (prepare element)
+    (cond [(not (txexpr? element)) element]
+          [else
+           (define attrs
+             (get-attrs (if (and (page-heading? element)
+                                (not (non-empty-string? (attr-ref element 'id ""))))
+                           (attr-set element 'id (new-id element))
+                           element)))
+           (define heading-attrs
+             (if (page-heading? element)
+                 (append attrs
+                         (if (attrs-have-key? element 'tabindex)
+                             empty '((tabindex "-1"))))
+                 attrs))
+           (define prepared
+             (txexpr (get-tag element) heading-attrs (map prepare (get-elements element))))
+           (if (eq? (get-tag prepared) 'table)
+               (let* ([caption (findf (lambda (el) (and (txexpr? el) (eq? (get-tag el) 'caption)))
+                                     (get-elements prepared))]
+                      [label (if caption (string-trim (page-toc-text caption)) "")])
+                 (txexpr 'div
+                         `((class "table-scroll") (role "region") (tabindex "0")
+                           (aria-label ,(if (non-empty-string? label) label "Table")))
+                         (list prepared)))
+               prepared)]))
+  (prepare doc))
+
+; Build nested lists in document order, allowing skipped heading levels.
+(define (generate-page-toc doc)
+  (define (headings element)
+    (cond [(not (txexpr? element)) empty]
+          [(page-heading? element)
+           (if (non-empty-string? (string-trim (page-toc-text element))) (list element) empty)]
+          [else (append-map headings (get-elements element))]))
+  (define (level heading)
+    (string->number (substring (symbol->string (get-tag heading)) 1)))
+  (define (items remaining parent-level)
+    (cond [(or (empty? remaining) (<= (level (first remaining)) parent-level))
+           (values empty remaining)]
+          [else
+           (define heading (first remaining))
+           (define-values (children after-children) (items (rest remaining) (level heading)))
+           (define-values (siblings after-siblings) (items after-children parent-level))
+           (define link
+             (txexpr 'a `((href ,(string-append "#" (uri-encode (attr-ref heading 'id)))))
+                     (list (string-trim (page-toc-text heading)))))
+           (values (cons (txexpr 'li empty
+                                 (cons link (if (empty? children) empty
+                                                (list (txexpr 'ul empty children)))))
+                         siblings)
+                   after-siblings)]))
+  (define-values (entries remaining) (items (headings doc) 0))
+  (txexpr 'nav '((class "page-toc") (aria-labelledby "page-toc-title"))
+          (list (txexpr 'p '((id "page-toc-title")) '("On this page"))
+                (txexpr 'ul empty entries))))
 
 (define (lead . contents)
   (txexpr 'div '((class "lead")) contents))

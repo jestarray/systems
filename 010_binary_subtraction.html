@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=3" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=4" />
 
-    <script src="./slide_mode.js?v=2"></script>
+    <script src="./slide_mode.js?v=3"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>Binary Subtraction</title>
@@ -34,16 +34,17 @@
             <div id="next"><a href="/011_alu.html">ALU</a> →</div>
 
             </nav>
-            <article>
-                <h1>Binary Subtraction</h1><h2 id="how_to_subtract_binary_numbers?"><a class="anchor" href="#how_to_subtract_binary_numbers?">#</a>How to subtract binary numbers?</h2><pre>x + y = x + -y</pre><p>Subtraction is just addition with negative numbers! To put it shortly, if you already know how to add two binary numbers, you know how to subtract.<br/>In decimal for example:</p><pre>6 - 4 = 6 + -4
-2 = 2</pre><p>Now let’s do this in binary.</p><div style="display:flex; justify-content: space-evenly; flex-wrap:wrap;"><img src="/images/bin-1.svg" style="width: 10vh"/><img src="/images/bin-2.svg" style="width: 10vh"/><img src="/images/bin-3.svg" style="width: 10vh"/><img src="/images/bin-4.svg" style="width: 10vh"/><img src="/images/bin-5.svg" style="width: 10vh"/></div><ol class="steps"><li><details open=""><summary class="step">Subtracting via adding negative binary numbers. Just do binary addition and it will work out. Throw away the extra carry overflow</summary><div style="display:flex; justify-content: space-evenly;"><table><caption>6</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>1</td><td>1</td><td>0</td></tr></tbody></table><table><caption>-4</caption><thead><tr><th><span style="color:var(--lesson-red, red);">8</span></th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td><span style="color:var(--lesson-red, red);">1</span></td><td>1</td><td>0</td><td>0</td></tr></tbody></table></div><pre>
+            <div class="page-layout">
+                <article>
+                    <h1 id="binary_subtraction" tabindex="-1">Binary Subtraction</h1><h2 id="how_to_subtract_binary_numbers?" tabindex="-1"><a class="anchor" href="#how_to_subtract_binary_numbers?">#</a>How to subtract binary numbers?</h2><pre>x + y = x + -y</pre><p>Subtraction is just addition with negative numbers! To put it shortly, if you already know how to add two binary numbers, you know how to subtract.<br/>In decimal for example:</p><pre>6 - 4 = 6 + -4
+2 = 2</pre><p>Now let’s do this in binary.</p><div style="display:flex; justify-content: space-evenly; flex-wrap:wrap;"><img src="/images/bin-1.svg" style="width: 10vh"/><img src="/images/bin-2.svg" style="width: 10vh"/><img src="/images/bin-3.svg" style="width: 10vh"/><img src="/images/bin-4.svg" style="width: 10vh"/><img src="/images/bin-5.svg" style="width: 10vh"/></div><ol class="steps"><li><details open=""><summary class="step">Subtracting via adding negative binary numbers. Just do binary addition and it will work out. Throw away the extra carry overflow</summary><div style="display:flex; justify-content: space-evenly;"><div class="table-scroll" role="region" tabindex="0" aria-label="6"><table><caption>6</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div><div class="table-scroll" role="region" tabindex="0" aria-label="-4"><table><caption>-4</caption><thead><tr><th><span style="color:var(--lesson-red, red);">8</span></th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td><span style="color:var(--lesson-red, red);">1</span></td><td>1</td><td>0</td><td>0</td></tr></tbody></table></div></div><pre>
   1 1
   [ 0 1 1 0 ] (6)
 + [ 1 1 0 0 ] (-4)
 _______________
 1 [ 0 0 1 0 ] (2)
 ^ overflow
-</pre><p>the overflow is ignored because it can’t fit inside the bit width.</p><table><caption>2 in binary (signed)</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table><p>Due to tossing away the overflow, we get <span>2<sub>10</sub></span>, which is the answer to our subtraction problem in decimal: 6 + -4 = 2</p></details></li></ol><div style="display:flex; justify-content: space-evenly;"><table><caption>signed</caption><thead><tr><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>-8</td><td><span><span style="color:var(--lesson-red, red);">1</span>000</span></td></tr><tr><td>-7</td><td><span><span style="color:var(--lesson-red, red);">1</span>001</span></td></tr><tr><td>-6</td><td><span><span style="color:var(--lesson-red, red);">1</span>010</span></td></tr><tr><td>-5</td><td><span><span style="color:var(--lesson-red, red);">1</span>011</span></td></tr><tr><td>-4</td><td><span><span style="color:var(--lesson-red, red);">1</span>100</span></td></tr><tr><td>-3</td><td><span><span style="color:var(--lesson-red, red);">1</span>101</span></td></tr><tr><td>-2</td><td><span><span style="color:var(--lesson-red, red);">1</span>110</span></td></tr><tr><td>-1</td><td><span><span style="color:var(--lesson-red, red);">1</span>111</span></td></tr><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr></tbody></table></div><p><more-examples><pre>
+</pre><p>the overflow is ignored because it can’t fit inside the bit width.</p><div class="table-scroll" role="region" tabindex="0" aria-label="2 in binary (signed)"><table><caption>2 in binary (signed)</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table></div><p>Due to tossing away the overflow, we get <span>2<sub>10</sub></span>, which is the answer to our subtraction problem in decimal: 6 + -4 = 2</p></details></li></ol><div style="display:flex; justify-content: space-evenly;"><div class="table-scroll" role="region" tabindex="0" aria-label="signed"><table><caption>signed</caption><thead><tr><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>-8</td><td><span><span style="color:var(--lesson-red, red);">1</span>000</span></td></tr><tr><td>-7</td><td><span><span style="color:var(--lesson-red, red);">1</span>001</span></td></tr><tr><td>-6</td><td><span><span style="color:var(--lesson-red, red);">1</span>010</span></td></tr><tr><td>-5</td><td><span><span style="color:var(--lesson-red, red);">1</span>011</span></td></tr><tr><td>-4</td><td><span><span style="color:var(--lesson-red, red);">1</span>100</span></td></tr><tr><td>-3</td><td><span><span style="color:var(--lesson-red, red);">1</span>101</span></td></tr><tr><td>-2</td><td><span><span style="color:var(--lesson-red, red);">1</span>110</span></td></tr><tr><td>-1</td><td><span><span style="color:var(--lesson-red, red);">1</span>111</span></td></tr><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr></tbody></table></div></div><p><more-examples><pre>
 Example: -8 + 3 = -5
 
   [ 1 0 0 0 ] (-8)
@@ -70,25 +71,27 @@ _______________
 + [ 1 0 0 1 ] (-7)
 _______________
 1 [ 0 0 0 0 ] (0)
-</pre></details><br/><details><summary class="question">Convert these numbers to binary and add them: -8 + -8</summary><p>We have to up to a 5 bit or more system because -8 + -8 = -16, which does not fit into a 4 bits</p><table><caption>-8 in 5bit binary</caption><thead><tr><th><span style="color:var(--lesson-red, red);">16</span></th><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td><span style="color:var(--lesson-red, red);">1</span></td><td>1</td><td>0</td><td>0</td><td>0</td></tr></tbody></table><pre>
+</pre></details><br/><details><summary class="question">Convert these numbers to binary and add them: -8 + -8</summary><p>We have to up to a 5 bit or more system because -8 + -8 = -16, which does not fit into a 4 bits</p><div class="table-scroll" role="region" tabindex="0" aria-label="-8 in 5bit binary"><table><caption>-8 in 5bit binary</caption><thead><tr><th><span style="color:var(--lesson-red, red);">16</span></th><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td><span style="color:var(--lesson-red, red);">1</span></td><td>1</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div><pre>
   1 1
   [ 1 1 0 0 0 ] (-8)
 + [ 1 1 0 0 0 ] (-8)
 _______________
 1 [ 1 0 0 0 0 ] (-16)
-</pre></details></p><p>Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!</p><p><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a></p><h2 id="overflow_problems"><a class="anchor" href="#overflow_problems">#</a>Overflow Problems</h2><p>There are a few problems with <b>signed</b> arithmetic.</p><h3 id="positive_overflow"><a class="anchor" href="#positive_overflow">#</a>Positive overflow</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
+</pre></details></p><p>Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!</p><p><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a></p><h2 id="overflow_problems" tabindex="-1"><a class="anchor" href="#overflow_problems">#</a>Overflow Problems</h2><p>There are a few problems with <b>signed</b> arithmetic.</p><h3 id="positive_overflow" tabindex="-1"><a class="anchor" href="#positive_overflow">#</a>Positive overflow</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
   0110 (6)
 + 0011 (3)
 ___________
   1001 (-7)
-</pre><h3 id="negative_overflow"><a class="anchor" href="#negative_overflow">#</a>Negative overflow</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
+</pre><h3 id="negative_overflow" tabindex="-1"><a class="anchor" href="#negative_overflow">#</a>Negative overflow</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
  1 11 
   1011 (-5)
 + 1011 (-5)
 ________
   0110 (6)
 </pre><p>If you’re adding two signed numbers of opposite sign, e.g positive + negative, you will never overflow</p><p><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Overflow Problems</a></p>
-            </article>
+                </article>
+                <nav class="page-toc" aria-labelledby="page-toc-title"><p id="page-toc-title">On this page</p><ul><li><a href="#binary_subtraction">Binary Subtraction</a><ul><li><a href="#how_to_subtract_binary_numbers%3F">How to subtract binary numbers?</a></li><li><a href="#overflow_problems">Overflow Problems</a><ul><li><a href="#positive_overflow">Positive overflow</a></li><li><a href="#negative_overflow">Negative overflow</a></li></ul></li></ul></li></ul></nav>
+            </div>
         </main>
     </div>
 </body>
