@@ -173,7 +173,7 @@
     start-open
     (list
       (txexpr
-        'summary '((style "color:red;")) (list headline))
+        'summary '((style "color:var(--lesson-red, red);")) (list headline))
       (txexpr
         'iframe
         `((srcdoc ,sdoc-string)
@@ -292,12 +292,12 @@
   (define discrim (cond [(number? t) (number->string t)]
                         [(char? t) (string t)]
                         [else t]))
-  (txexpr 'span '((style "color:red;")) (list discrim)))
+  (txexpr 'span '((style "color:var(--lesson-red, red);")) (list discrim)))
 
 ;highlight the first element red
 ; List<Char> -> Txexpr<Span "" <Span "">>
 (define (highlight-msb lst)
-  (txexpr 'span empty (list (txexpr 'span '((style "color:red;")) (list (list->string (list (car lst))))) (list->string (rest lst)))))
+  (txexpr 'span empty (list (txexpr 'span '((style "color:var(--lesson-red, red);")) (list (list->string (list (car lst))))) (list->string (rest lst)))))
 
 ; Number -> List<List<String Number Number>>
 ; returns the binary division string method of converting decimal to binary
@@ -404,6 +404,6 @@
         (h3 ,title)
         (pre ((class "")) ,@content)))
 
-(define (red x) (txexpr 'span '((style "color:red;")) (list x)))
-(define (blue x) (txexpr 'span '((style "color:blue;")) (list x)))
-(define (green x) (txexpr 'span '((style "color:green;")) (list x)))
+(define (red x) (txexpr 'span '((style "color:var(--lesson-red, red);")) (list x)))
+(define (blue x) (txexpr 'span '((style "color:var(--lesson-blue, blue);")) (list x)))
+(define (green x) (txexpr 'span '((style "color:var(--lesson-green, green);")) (list x)))

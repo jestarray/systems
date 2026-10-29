@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=3" />
 
-    <script src="./slide_mode.js"></script>
+    <script src="./slide_mode.js?v=2"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>Binary Addition</title>
@@ -16,6 +17,17 @@
 <body>
     <div class="container">
         <main class="main-wrapper">
+            <div class="page-tools">
+                <button id="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden>
+                    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+                    </svg>
+                    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2 M12 20v2 M2 12h2 M20 12h2 M4.93 4.93l1.42 1.42 M17.65 17.65l1.42 1.42 M4.93 19.07l1.42-1.42 M17.65 6.35l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
             <nav>
             <div id="prev">← <a href="/008_negative_numbers.html"> Negative Binary Numbers</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
@@ -23,7 +35,7 @@
 
             </nav>
             <article>
-                <h1>Binary Addition</h1><p><details><summary style="color:red;">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/_XEl45i8YqM?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/_XEl45i8YqM/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details></p><h2 id="how_to_add_binary_numbers?"><a class="anchor" href="#how_to_add_binary_numbers?">#</a>How to add binary numbers?</h2><div class="lead">All 5 possible scenarios of binary addition:</div><div style="display:flex; justify-content: space-evenly; flex-wrap:wrap;"><img src="/images/bin-1.svg" style="width: 10vh"/><img src="/images/bin-2.svg" style="width: 10vh"/><img src="/images/bin-3.svg" style="width: 10vh"/><img src="/images/bin-4.svg" style="width: 10vh"/><img src="/images/bin-5.svg" style="width: 10vh"/></div><p>You add binary numbers the same as you would regular decimal numbers! In a decimal system, we carry to the left whenever we go above 9. In a binary system we carry when we go above 2 as highlighted in red.</p><p>To make sense of why 1 + 1 + 1 = 11, imagine 5 + 5 + 5. We add the two fives: 5 + 5 = 10 and we have to carry over the 1 but we still have a 5 left over, leaving us with 15.</p><p>Let’s add 4 bit binary numbers 0111 + 1110.</p><ol class="steps"><li><details open=""><summary class="step">Start from right to left (&lt;–)</summary><pre>
+                <h1>Binary Addition</h1><p><details><summary style="color:var(--lesson-red, red);">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/_XEl45i8YqM?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/_XEl45i8YqM/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details></p><h2 id="how_to_add_binary_numbers?"><a class="anchor" href="#how_to_add_binary_numbers?">#</a>How to add binary numbers?</h2><div class="lead">All 5 possible scenarios of binary addition:</div><div style="display:flex; justify-content: space-evenly; flex-wrap:wrap;"><img src="/images/bin-1.svg" style="width: 10vh"/><img src="/images/bin-2.svg" style="width: 10vh"/><img src="/images/bin-3.svg" style="width: 10vh"/><img src="/images/bin-4.svg" style="width: 10vh"/><img src="/images/bin-5.svg" style="width: 10vh"/></div><p>You add binary numbers the same as you would regular decimal numbers! In a decimal system, we carry to the left whenever we go above 9. In a binary system we carry when we go above 2 as highlighted in red.</p><p>To make sense of why 1 + 1 + 1 = 11, imagine 5 + 5 + 5. We add the two fives: 5 + 5 = 10 and we have to carry over the 1 but we still have a 5 left over, leaving us with 15.</p><p>Let’s add 4 bit binary numbers 0111 + 1110.</p><ol class="steps"><li><details open=""><summary class="step">Start from right to left (&lt;–)</summary><pre>
   0 1 1 1 (7)
 + 1 1 1 0 (14)
 __________

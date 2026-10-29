@@ -21,6 +21,7 @@ For language and command details, consult the [Pollen manual](https://docs.racke
 | `template.html.p` | HTML shell, title, navigation, conditional highlighting assets, and slide mode link. |
 | `styles.css.pp` | Pollen preprocessor source for the site's main stylesheet. |
 | `slide_mode.js` | Presentation behavior for lesson slides. |
+| `theme.js` | System theme detection, the dark mode toggle, and the saved theme preference. |
 | `prism_highlight.js`, `prism.css` | Syntax highlighting assets, including the project's nand2tetris HDL grammar. |
 | `images/`, `media/` | Diagrams, illustrations, and downloadable material. |
 | `drafts/`, `other/`, `c/`, `InconsistenCies.html.pm` | Drafts, supplementary material, and code examples outside the main lesson tree. |

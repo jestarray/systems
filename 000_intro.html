@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=3" />
     <script src="/prism_highlight.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
-    <script src="./slide_mode.js"></script>
+    <script src="./slide_mode.js?v=2"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>Introduction</title>
@@ -17,6 +18,17 @@
 <body>
     <div class="container">
         <main class="main-wrapper">
+            <div class="page-tools">
+                <button id="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden>
+                    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+                    </svg>
+                    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2 M12 20v2 M2 12h2 M20 12h2 M4.93 4.93l1.42 1.42 M17.65 17.65l1.42 1.42 M4.93 19.07l1.42-1.42 M17.65 6.35l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
             <nav>
 
             <div id="home"><a href="/index.html">Index</a></div>
@@ -24,7 +36,7 @@
             <div id="home"><a href="javascript:void(0)" onclick="slide_mode()">Slide Mode</a></div>
             </nav>
             <article>
-                <p><details><summary style="color:red;">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/Z_oxt8XlZ4g?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/Z_oxt8XlZ4g/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details></p><h1>Introduction</h1><section class="slide"><h2 id="abstraction_stack"><a class="anchor" href="#abstraction_stack">#</a>Abstraction Stack</h2><p><object data="/images/abstraction_stack.svg" type="image/svg+xml"></object></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-C">int main() {
+                <p><details><summary style="color:var(--lesson-red, red);">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/Z_oxt8XlZ4g?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/Z_oxt8XlZ4g/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details></p><h1>Introduction</h1><section class="slide"><h2 id="abstraction_stack"><a class="anchor" href="#abstraction_stack">#</a>Abstraction Stack</h2><p><object data="/images/abstraction_stack.svg" type="image/svg+xml"></object></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-C">int main() {
     printf("Hello, World!\n");
     return 0;
 }</code></pre></section><p>In this series, we’re going to unravel the mysteries of how computers work, from the bottom up.</p><p>Most programmers never see what’s happening underneath their code.<br/>We write Python, C++, or JavaScript... and somehow it turns into apps and games.</p><p>But between your code and the hardware is a giant stack of abstractions.</p><p>Growing up, you may have been told computers speak 0s and 1s, but that’s as far as most people get. It can be a little intimidating to think about what happens below, with intimidating terms such as <em>logic gates, boolean algebra, and microarchitecture</em>, but I promise you it’s not as complicated as it seems, nor do you need to be some math genius to understand it. By the way, we won’t really cover Physics, Devices(Transistors).</p><section class="slide"><h2 id="what_is_abstraction?"><a class="anchor" href="#what_is_abstraction?">#</a>What is Abstraction?</h2><p>Abstraction is the idea of hiding unnecessary details so you can think about something at the right level of complexity. It is a <strong>mental tool</strong> to manage complexity.</p><p>Abstraction is using something by understanding <strong>what</strong> it does rather than <strong>how</strong> it works internally.</p></section><p>It’s similar how people know how to drive a car <em>but</em> have no idea how the engine works. Knowing how things work under the hood will prevent you from being ripped off, and in our case it will enable you to be a better developer unlocking the full power of the CPU to build things like operating systems, game engines, and high performance software.</p><section class="slide"><h2 id="roadmap"><a class="anchor" href="#roadmap">#</a>Roadmap</h2><p><img src="/images/roadmap.png"/></p></section><p>We will be building a 16-bit virtual computer from scratch over the next few weeks. We will be building <em>the CPU, the RAM, and the assembly language</em>, all virtually using an emulator.</p><p>You <strong>won’t</strong> have to deal with <strong>physical</strong> wires and chips. You won’t need to purchase any materials. By the end of this, you’ll understand how 0s and 1s get transformed into language we can understand and manipulate, and eventually into the apps and games you use everyday!</p><section class="slide"><h2 id="prerequisites"><a class="anchor" href="#prerequisites">#</a>Prerequisites</h2><ul><li>Virtually None!</li><li>Although some programming and basic algebra will help.</li><li>No need to purchase any materials, everything is free!</li></ul></section><p>Overtly this is an effort to merge and condense:</p><section class="slide"><img src="/images/rec-books.webp"/></section><ul><li><a href="https://www.nand2tetris.org/book">The Elements of Computing System(aka nand2tetris)</a>, a full hands on approach on building a modern computer from logic gates</li><li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>, an in depth look at how modern hardware and software interacts</li></ul><p>I also recommend checking out <a href="https://www.codehiddenlanguage.com/">Code by Charles Petzold</a> for a fun read, which gives a great historical overview on how we’ve deduced our way to binary and eventually computing, using just logic gates.</p><p>The 2nd half of nand2tetris covers the software side of things, like building a programming language, compiler, virtual machine, and an operating system. I think these are better left to other resources, as they have far better in-depth coverage than nand2tetris. Once we finish the first half of nand2tetris which <strong>demistifies</strong> the hardware that’s been such a blackbox to us, we can then jump into <a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> to learn about how software interacts with <strong>modern hardware</strong>.</p>

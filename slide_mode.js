@@ -1,4 +1,4 @@
-/// call with slide_mode("black", "white"), for black bg and white text, although this may conflict with table coloring. In the future, it is better if we have a seperate toggle for dark mode independent of doing it here. All this function should do is grab all slide mode elements
+// Slides inherit the page theme unless explicit colors are supplied.
 function slide_mode(bg_color, color) {
     //if there isnt enough content for a slide and it looks to small, just zoom in! it also helps emphasizes the point
     let body = document.getElementsByTagName("body")[0];
@@ -28,14 +28,13 @@ function slide_mode(bg_color, color) {
         slide_points.forEach((v, index2) => {
             if (index2 !== index) {
                 v.style.display = "none";
-                v.style.background = "black";
             } else {
-                v.style = "";
+                v.style.display = "";
             }
         });
     }
     show_rev(); //initialize the slideshow by hiding everything
-    window.addEventListener("keydown", (ev) => {
+    function handleSlideKeydown(ev) {
         const key_pressed = ev.key;
         if (key_pressed.toLowerCase() === "a" || key_pressed === "ArrowLeft") {
             if (!(index - 1 < 0)) {
@@ -47,19 +46,20 @@ function slide_mode(bg_color, color) {
             }
         } else if (key_pressed === "F2") {
             // using f2 instead of escape because you might just want to escape fullscreen mode but not slide mode
+            window.removeEventListener("keydown", handleSlideKeydown);
             disable_slide_mode();
+            return;
         }
         show_rev();
 
-    });
+    }
+    window.addEventListener("keydown", handleSlideKeydown);
 }
 
 function disable_slide_mode() {
     let all = document.getElementsByTagName("article")[0].children;
     Array.from(all).forEach((v) => {
-        if (!v.classList.contains("slide")) {
-            v.style.display = "";
-        }
+        v.style.display = "";
     });
 
     let nav = document.getElementsByTagName("nav")[0];

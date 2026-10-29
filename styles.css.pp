@@ -1,11 +1,112 @@
 #lang pollen
 
+:root {
+    color-scheme: light;
+    --page-bg: #fff;
+    --page-text: #202124;
+    --link: #0645ad;
+    --visited-link: #663399;
+    --surface-bg: #f2f2f2;
+    --table-heading-bg: #e0e0e0;
+    --table-border: #cbcbcb;
+    --border: #aaa;
+    --question: #07a;
+    --step: purple;
+    --examples: green;
+    --anchor: #c2c2c2;
+    --api-bg: #b2b2b2;
+    --inline-code-bg: rgba(175,184,193,0.2);
+    --lesson-red: red;
+    --lesson-blue: blue;
+    --lesson-green: green;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --page-bg: #111418;
+    --page-text: #e3e8ef;
+    --link: #8ab4f8;
+    --visited-link: #c5a5ef;
+    --surface-bg: #1b222c;
+    --table-heading-bg: #273240;
+    --table-border: #44505f;
+    --border: #556171;
+    --question: #88cfff;
+    --step: #d8a7ef;
+    --examples: #87d79a;
+    --anchor: #929eae;
+    --api-bg: #273240;
+    --inline-code-bg: rgba(175,184,193,0.15);
+    --lesson-red: #ff8b89;
+    --lesson-blue: #8ab4f8;
+    --lesson-green: #87d79a;
+}
+
+html,
+body {
+    background-color: var(--page-bg);
+    color: var(--page-text);
+}
+
+.page-tools {
+    display: flex;
+    justify-content: flex-end;
+    margin-block: 1rem;
+}
+
+#theme-toggle {
+    width: 2.75rem;
+    padding: .5rem;
+    min-height: 2.75rem;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background-color: var(--surface-bg);
+    color: var(--page-text);
+    font: inherit;
+    cursor: pointer;
+}
+
+#theme-toggle:not([hidden]) {
+    display: grid;
+    place-items: center;
+}
+
+.theme-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.theme-icon-sun,
+:root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+}
+
+#theme-toggle:hover,
+#theme-toggle[aria-pressed="true"] {
+    background-color: var(--table-heading-bg);
+}
+
+#theme-toggle:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
+}
+
+/* Give transparent diagrams a light canvas so black labels stay readable. */
+:root[data-theme="dark"] article img {
+    background-color: #fff;
+    border-radius: 4px;
+}
+
 table {
     /* Remove spacing between table cells (from Normalize.css) */
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
-    border: 1px solid #cbcbcb;
+    border: 1px solid var(--table-border);
     table-layout: fixed;
 }
 
@@ -17,7 +118,7 @@ table {
 
  td,
  th {
-    border-left: 1px solid #cbcbcb;/*  inner column border */
+    border-left: 1px solid var(--table-border);/*  inner column border */
     border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
@@ -26,8 +127,8 @@ table {
 }
 
  thead {
-    background-color: #e0e0e0;
-    color: #000;
+    background-color: var(--table-heading-bg);
+    color: var(--page-text);
     text-align: left;
     vertical-align: bottom;
 }
@@ -42,11 +143,11 @@ td {
 }
 /* nth-child selector for modern browsers */
 tr:nth-child(odd) td {
-    background-color: #f2f2f2;
+    background-color: var(--surface-bg);
 }
 /* BORDERED TABLES */
 td {
-    border-bottom: 1px solid #cbcbcb;
+    border-bottom: 1px solid var(--table-border);
 }
 tbody > tr:last-child > td {
     border-bottom-width: 0;
@@ -57,7 +158,7 @@ tbody > tr:last-child > td {
 .pure-table-horizontal td,
 .pure-table-horizontal th {
     border-width: 0 0 1px 0;
-    border-bottom: 1px solid #cbcbcb;
+    border-bottom: 1px solid var(--table-border);
 }
 .pure-table-horizontal tbody > tr:last-child > td {
     border-bottom-width: 0;
@@ -109,10 +210,15 @@ pre {
 a{
     /* remove underline */
     text-decoration: none;
+    color: var(--link);
+}
+
+a:visited {
+    color: var(--visited-link);
 }
 
 .question {
-    color: #07a;
+    color: var(--question);
 }
 
 .steps {
@@ -120,11 +226,11 @@ a{
 }
 
 .step {
-    color: purple;
+    color: var(--step);
 }
 
 .more-examples{
-    color: green;
+    color: var(--examples);
 }
 
 .anchor {
@@ -133,13 +239,13 @@ a{
     margin-left: -20px;
     line-height: 1;
     text-decoration: none;
-    color: #c2c2c2;
+    color: var(--anchor);
     opacity: .9;
     font-size: 65%;
 }
 
 details {
-    border: 1px solid #aaa;
+    border: 1px solid var(--border);
     border-radius: 4px;
     padding: .5em .5em 0;
 }
@@ -155,7 +261,7 @@ details[open] {
 }
 
 details[open] summary {
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid var(--border);
     margin-bottom: .5em;
 }
 /* LAYOUT */
@@ -193,6 +299,7 @@ article {
 
 .main-wrapper {
     grid-area: content;
+    min-width: 0;
 }
 
 .wrap {
@@ -237,7 +344,7 @@ img {
     padding: .2em .4em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(175,184,193,0.2);
+    background-color: var(--inline-code-bg);
     border-radius: 6px;
 }
 
@@ -249,9 +356,9 @@ img {
     margin-block: 1em 0.5em;
 }
 .api-box {
-    background: #b2b2b2;
+    background: var(--api-bg);
     padding: 1em;
     border-radius: 4px;
-    border: 1px solid #aaa;
+    border: 1px solid var(--border);
     margin-bottom: 1em;
 }
