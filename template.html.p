@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=4" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=5" />
     ◊(define has-code-block? (select 'code doc))
     ◊when/splice[has-code-block?]{
     <script src="/prism_highlight.js"></script>

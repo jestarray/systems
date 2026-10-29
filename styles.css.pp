@@ -398,9 +398,19 @@ body.slide-mode .page-toc {
     display: none;
 }
 
+/* Keep the theme control available without reserving space above a slide. */
+body.slide-mode .page-tools {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 10;
+    margin: 0;
+}
+
 body.slide-mode .page-layout {
     grid-template-areas: "article";
     grid-template-columns: minmax(0, 1fr);
+    margin-top: 0;
 }
 
 .wrap {
