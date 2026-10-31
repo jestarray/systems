@@ -155,7 +155,7 @@ If we want  to represent -14, it's only possible in bit-width of 5 and above. Le
   ◊pre{
 ◊(layout-spread-row
   ◊(pre
-    "     
+    "
           1
       0 0 0 1 
     + 0 0 0 1
@@ -164,7 +164,7 @@ If we want  to represent -14, it's only possible in bit-width of 5 and above. Le
     "
     )
   ◊(pre
-    "     
+    "
           1
       0 0 0 1
     + 0 0 0 1

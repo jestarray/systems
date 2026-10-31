@@ -14,7 +14,7 @@ For language and command details, consult the [Pollen manual](https://docs.racke
 
 | Path | Purpose |
 | --- | --- |
-| `000_intro.html.pm` through `011_alu.html.pm` | Lesson sources, written in Pollen markup. |
+| `000_intro.html.pm` through `010_alu.html.pm` | Lesson sources, written in Pollen markup. |
 | `index.ptree` | Hierarchical lesson order, used for navigation and the table of contents. |
 | `index.html.pm` | Index source; calls `generate-toc` with the page tree. |
 | `pollen.rkt` | Shared Racket functions, custom tags, decoding, and Pollen setup. |

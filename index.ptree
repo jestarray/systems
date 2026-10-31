@@ -8,10 +8,9 @@
     005_multibit.html
 }
 
-◊006_binary.html{
-    007_binary_numbers.html
-    008_negative_numbers.html
-    009_binary_addition.html
-    010_binary_subtraction.html
-    011_alu.html
+◊006_binary_numbers.html{
+    007_negative_numbers.html
+    008_binary_addition.html
+    009_binary_subtraction.html
+    010_alu.html
 }
