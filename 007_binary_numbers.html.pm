@@ -8,16 +8,51 @@
 ◊(yt "bFLB4dyNKUk")
 
 ◊h1{Binary Numbers}
-◊object[#:data "/images/binary.svg" #:type "image/svg+xml"]{}
-◊object[#:data "/images/deci.svg" #:type "image/svg+xml"]{}
 
-Humans use a base 10 number system for counting numbers, most likely because have 10 fingers. For example, using your fingers to do ◊code{8 + 4}, since we don't have 11 fingers we close our hands and have to hold a 10 in our mind, reset our fingers and add two: + 2 = 12.
+◊slide{
+◊h2{Base 10}
+◊object[#:data "/images/decimal_yellow_lock.svg" #:type "image/svg+xml"]{}
 
-◊img[#:src "/images/dolphin.svg" #:height "100px"]{}
+Humans typically use a ◊strong{base-10 (decimal) number system}, likely because we have 10 fingers.
 
-This number system is natural for us but imagine a dolphin counting with it's 2 fins. 1 + 2 = 3, but they don't have 3 fins so they have to hold in their mind increments of 2. Computers are just like this in that they use a base 2 system(aka binary) of couting in contrast to our base 10(decimal).
+Use this rotating lock to count. Every time we add 1, we rotate the rightmost wheel forward by one digit. But what happens when we reach 9 and want to add another 1?
 
-Recall(in the language chapter) that 4 bits gives us a maximum of 16 unique combinations because (◊(2^ "4") = 16).
+We've run out of digits! The rightmost wheel rolls back to 0, and the wheel to its left advances by 1. We've gone from ◊strong{09 to 10}.
+
+But notice something interesting: ◊strong{the position of each digit determines its value}.
+
+Each position has a weight of ◊strong{10^n}, where n starts at 0 for the rightmost position and increases as we move left.
+
+For our four-wheel lock, the weights from left to right are:
+
+◊code{1000, 100, 10, 1}
+
+To find the value of a number, multiply each digit by its position's weight and add the results.
+
+For example, ◊strong{1234} means:
+
+◊code{(1 × 1000) + (2 × 100) + (3 × 10) + (4 × 1) = 1234}
+
+This is how our base-10 number system works.
+}
+
+◊slide{
+◊h2{Base 2}
+◊object[#:data "/images/binary_yellow_lock.svg" #:type "image/svg+xml"]{}
+
+
+But what if we had a lock where each wheel had only ◊strong{two possible digits: 0 and 1}?
+
+We'd start at 0, advance to 1, but then we'd already be out of digits! So the wheel rolls back to 0, and the next wheel advances to 1, giving us 10.
+
+This is ◊strong{base 2, also known as binary}, the number system computers use.
+
+Both number systems follow the same rules. The only difference is how many digits each wheel can display before rolling over.
+}
+
+Now just as these combination locks have a max limit of numbers it can represent, so do computers! It depends on the bit width.
+
+4 bits gives us a maximum of 16 unique combinations because (◊(2^ "4") = 16).
 
 ◊(max-unsigned-limit-table 4)
 
