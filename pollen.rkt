@@ -403,8 +403,9 @@
 
 ; string path relative to image folder, e.g "/images"
 (define (img-row #:width [width "10vh"] . paths)
-  (txexpr 'div '((style "display:flex; justify-content: space-evenly; flex-wrap:wrap;")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh")) empty)) paths)
-          ))
+  (txexpr 'div '((style "display:flex; justify-content: space-evenly; flex-wrap:wrap;"))
+          (for/list ([path paths])
+            (txexpr 'img `((src ,path) (style ,(string-append "width: " width))) empty))))
 
 (define (max-bit-table f caption)
   (table #:caption caption (table-headings (list "Decimal" "Binary")) (table-entries (f '()))))
