@@ -430,7 +430,8 @@
     (cond [(= LEN MAX) (reverse acc)]
           [else
            (aux (cons (list LEN (list->string (deci->binary LEN #:width bits))) acc))]))
-  (max-bit-table aux "unsigned"))
+  (table #:caption "unsigned" (table-headings (list "Decimal" "Binary"))
+         (attr-set (table-entries (aux '())) 'style "font-family: monospace;")))
 
 (define (max-signed-limit-table bits)
   (define MAX (expt 2 bits))
