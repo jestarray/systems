@@ -2,6 +2,24 @@
 (require rackunit txexpr "pollen.rkt")
 
 (module+ test
+  (test-case "list helpers preserve tagged items and accept empty collections"
+    (define items (list (red "a") (blue "b")))
+    (check-equal? (list->li) empty)
+    (check-equal? (list->li empty) empty)
+    (check-equal? (apply list->li items) (list->li items))
+    (check-equal? (map (compose first get-elements) (apply list->li items)) items)
+    (check-equal? (get-elements (steps)) empty)
+    (check-equal? (length (get-elements (steps (step "a") (step "b")))) 2))
+  (test-case "table helpers accept empty rows and tagged cells"
+    (check-equal? (get-elements (table-entries)) empty)
+    (check-equal? (get-elements (table-entries empty)) empty)
+    (check-equal? (get-elements (table-entries (list empty))) '((tr)))
+    (define row (list (red "a") (blue "b")))
+    (check-equal? (table-entries row) (table-entries (list row)))
+    (check-equal? (table-entries (list 0 1) (list 1 0))
+                  (table-entries (list (list 0 1) (list 1 0))))))
+
+(module+ test
   (test-case "book index contains no nested anchors"
     (define toc (generate-toc (dynamic-require "index.ptree" 'doc)))
     (define (check-links element [inside-link? #f])

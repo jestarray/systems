@@ -129,11 +129,13 @@
 ;List<List<T>> or List<T>...N -> tbody<tr<td>>
 ; takes a list of values and produces table entries
 (define (table-entries . l)
-  (define c (first (first l))) ; Primitive or list
-  (define convert-to-2d (cond
-                          [(and (list? c) (symbol? (first c))) l] ;if already list and first el is a symbol
-                          [(list? c) (car l)] ; if called like (list (list d1 d2) (list d3 d4)) ; already defined each row in a list
-                          [else l])) ; if called (list 1 2 3) (list 1 2 3) in which case already a 2d list because of rest
+  ; Unwrap a single collection of rows, but keep tagged cells intact.
+  (define convert-to-2d
+    (if (and (= (length l) 1)
+             (list? (car l))
+             (andmap (lambda (item) (and (list? item) (not (txexpr? item)))) (car l)))
+        (car l)
+        l))
   (define (process-items row) (map (lambda (i)
                                      (txexpr 'td empty (list (cond [(number? i) (number->string i)]
                                                                    [(char? i) (string i)]
@@ -352,11 +354,11 @@
 ;...T -> <li>i</li>
 ; takes a racket list and convers them to txexpr html list of items
 (define (list->li . l)
-  (define first (car l))
-  (define (aux i) (map (lambda (x) (txexpr 'li empty (list x))) i))
-  (cond [(list? first) (aux (clean first))]
-        [else (aux (clean l))])
-  )
+  (define items
+    (if (and (= (length l) 1) (list? (car l)) (not (txexpr? (car l))))
+        (car l)
+        l))
+  (map (lambda (item) (txexpr 'li empty (list item))) (clean items)))
 
 (define (steps . l)
   (txexpr 'ol (list '(class "steps")) (list->li l)))
