@@ -197,27 +197,24 @@
   (~r (+ (string->number (string-append "#b" a))
          (string->number (string-append "#b" b))) #:base 2))
 
-;Number -> List<Char>
-;use padded version for padding negative numbers
-; NEGATIVE NUMBERS HAVE TO ACCOUNT FOR BIT WIDTH
+; Integer -> List<Char>
+; Width 0 means unpadded unsigned output. Negative numbers require a width
+; and use two's complement, prefixed with "-" for the existing table helpers.
 (define (deci->binary n #:width [width 0])
-  (define conv (~r #:base 2 (abs n)))
-  ; Number -> Binary String
-  (define (pad n)
-    (define pad-zeros (make-list (abs (- (string-length conv) width)) #\0))
-    (cond
-      [(positive? n) (string-append (list->string pad-zeros) conv)]
-      [(negative? n)
-       (define flipped (bnot (list->string (append pad-zeros (string->list conv)))))
-       (string-append "-" (binary-sum flipped "1"))]
-      ))
-  (define t (cond
-              [(= n 0) (make-string width #\0)]
-              [(positive? width) (pad n)]
-              [(and (= width 0) (negative? n)) (raise-user-error "must provide #:width to convert negative")]
-              [else
-               conv]))
-  (string->list t))
+  (unless (exact-integer? n)
+    (raise-argument-error 'deci->binary "exact-integer?" n))
+  (unless (exact-nonnegative-integer? width)
+    (raise-argument-error 'deci->binary "exact-nonnegative-integer?" width))
+  (when (and (negative? n) (zero? width))
+    (raise-user-error 'deci->binary "must provide #:width to convert negative numbers"))
+  (when (and (positive? width)
+             (or (>= n (expt 2 width))
+                 (< n (- (expt 2 (sub1 width))))))
+    (raise-arguments-error 'deci->binary "number does not fit within the given bit width"
+                           "number" n "width" width))
+  (define conv (number->string (if (negative? n) (+ (expt 2 width) n) n) 2))
+  (define padded (string-append (make-string (max 0 (- width (string-length conv))) #\0) conv))
+  (string->list (if (negative? n) (string-append "-" padded) padded)))
 
 ; number number -> txexpr
 ; 101011 -> 101011_2 where _2 will be printed in a subscript form
