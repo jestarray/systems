@@ -367,7 +367,7 @@
 (define (deci->bin-table num bits #:caption [caption empty])
   (define bin (deci->binary num #:width bits))
   (define headings (pot bits))
-  (define discrim (cond [(positive? num) (cons headings bin)]
+  (define discrim (cond [(>= num 0) (cons headings bin)]
                         [(negative? num) (cons (append (list (highlight-first headings)) (rest headings))
                                                (append (list (highlight-first (rest bin))) (rest (rest bin))))]))
   (define h (car discrim))
