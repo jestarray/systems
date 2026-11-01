@@ -96,6 +96,7 @@
 (define (root . elements)
   (txexpr 'root empty (decode-elements elements
                                        #:exclude-tags (list 'code 'pre 'a 'table 'figure 'figcaption) ; do not do smartquotes or dashes in code blocks or tables
+                                       #:exclude-attrs '((class "book-toc")) ; generated navigation already has its final structure
                                        #:txexpr-elements-proc (compose1 decode-paragraphs)
                                        #:string-proc (compose1 smart-quotes smart-dashes))))
 
@@ -495,7 +496,7 @@
     (define headings (map get-headings items))
     (define section-heading (first (first headings)))
     (txexpr 'li empty (list (h2 section-heading) (txexpr 'ol '((start "0")) (map wrap headings)))))
-  (txexpr 'ol '((start "0")) (map section (cdr root))))
+  (txexpr 'ol '((start "0") (class "book-toc")) (map section (cdr root))))
 
 (define ptree-example '((introduction.html learning_stages.html installation.html) (expressions.html exercise_pythag.html strings.html images.html rtfm.html variables.html functions.html parens_error.html stepper.html)))
 ;(generate-toc (list (list 'misc/EvolvedSimplicity.html)))

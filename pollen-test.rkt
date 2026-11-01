@@ -31,15 +31,20 @@
                   (table-entries (list (list 0 1) (list 1 0))))))
 
 (module+ test
-  (test-case "book index contains no nested anchors"
+  (test-case "decoded book index keeps links unwrapped and unnested"
     (define toc (generate-toc (dynamic-require "index.ptree" 'doc)))
+    (define decoded-toc (first (get-elements (root toc))))
+    (check-equal? decoded-toc toc)
     (define (check-links element [inside-link? #f])
       (when (txexpr? element)
+        (check-not-equal? (get-tag element) 'p)
         (define link? (eq? (get-tag element) 'a))
         (check-false (and inside-link? link?))
         (for ([child (get-elements element)])
           (check-links child (or inside-link? link?)))))
-    (check-links toc)))
+    (check-links decoded-toc)
+    (check-equal? (get-elements (root "First paragraph." "\n\n" "Second paragraph."))
+                  '((p "First paragraph.") (p "Second paragraph.")))))
 
 (module+ test
   (test-case "zero renders as a row of bits"
