@@ -4,6 +4,7 @@
 (require pollen/core)
 (require pollen/pagetree)
 (require net/uri-codec)
+(require net/url)
 
 (provide (all-defined-out)) ;make everything global in this file
 
@@ -169,8 +170,17 @@
   (define split (string-split link "?"))
   (define cleaned-link-for-thumbnail (if (cons? split) (car split) link))
   (define start-open (if open '((open "")) null))
+  (define embed-url (string->url (string-append "https://www.youtube.com/embed/" link)))
+  (define autoplay-url
+    (url->string
+     (struct-copy url embed-url
+                  [query (append (filter (lambda (entry) (not (eq? (car entry) 'autoplay)))
+                                         (url-query embed-url))
+                                 '((autoplay . "1")))])))
   (define sdoc-string
-    (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>"))
+    (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=\""
+                   (string-replace autoplay-url "&" "&amp;")
+                   "\"><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>"))
   (txexpr
     'details
     start-open

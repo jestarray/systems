@@ -2,6 +2,17 @@
 (require rackunit txexpr "pollen.rkt")
 
 (module+ test
+  (test-case "video queries retain parameters and set autoplay once"
+    (define (srcdoc link)
+      (attr-ref (second (get-elements (yt link))) 'srcdoc))
+    (check-true (string-contains? (srcdoc "abc") "href=\"https://www.youtube.com/embed/abc?autoplay=1\""))
+    (check-true (string-contains? (srcdoc "abc?start=60") "abc?start=60&amp;autoplay=1"))
+    (define existing (srcdoc "abc?start=60&autoplay=0"))
+    (check-true (string-contains? existing "abc?start=60&amp;autoplay=1"))
+    (check-equal? (length (regexp-match* #rx"autoplay=" existing)) 1)
+    (check-true (string-contains? existing "/vi/abc/hqdefault.jpg"))))
+
+(module+ test
   (test-case "list helpers preserve tagged items and accept empty collections"
     (define items (list (red "a") (blue "b")))
     (check-equal? (list->li) empty)
