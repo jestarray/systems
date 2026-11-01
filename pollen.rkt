@@ -473,8 +473,8 @@
                      (filter-not string? subs) (filter string? subs)))
     (txexpr 'li empty
             (list (txexpr 'a (list (cons 'href (list filename)))
-                          (list heading
-                                (txexpr 'ul empty h2s))))))
+                          (list heading))
+                  (txexpr 'ul empty h2s))))
 
   ; List<Symbol> -> txexpr
   ; '(intro.html)

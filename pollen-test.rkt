@@ -2,6 +2,17 @@
 (require rackunit txexpr "pollen.rkt")
 
 (module+ test
+  (test-case "book index contains no nested anchors"
+    (define toc (generate-toc (dynamic-require "index.ptree" 'doc)))
+    (define (check-links element [inside-link? #f])
+      (when (txexpr? element)
+        (define link? (eq? (get-tag element) 'a))
+        (check-false (and inside-link? link?))
+        (for ([child (get-elements element)])
+          (check-links child (or inside-link? link?)))))
+    (check-links toc)))
+
+(module+ test
   (test-case "zero renders as a row of bits"
     (define tbl (deci->bin-table 0 4))
     (define body (findf (lambda (el) (eq? (get-tag el) 'tbody)) (get-elements tbl)))
