@@ -120,40 +120,54 @@
   (cond [(= n 0) '()]
         [else (cons (2^ (- n 1)) (two-subscripts (- n 1)))]))
 
-;List<T> -> thead<tr<th>>
-; takes a list of values and produces table headings
-(define (table-headings l #:style [style empty])
-  (txexpr 'thead style (list (txexpr 'tr empty (map (lambda (i)
-                                                      (txexpr 'th empty (list (cond [(number? i) (number->string i)]
-                                                                                    [(char? i) (string i)]
-                                                                                    [else i])))) l)))))
-
-;List<List<T>> or List<T>...N -> tbody<tr<td>>
-; takes a list of values and produces table entries
-(define (table-entries . l)
-  ; Unwrap a single collection of rows, but keep tagged cells intact.
-  (define convert-to-2d
-    (if (and (= (length l) 1)
-             (list? (car l))
-             (andmap (lambda (item) (and (list? item) (not (txexpr? item)))) (car l)))
-        (car l)
-        l))
-  (define (process-items row) (map (lambda (i)
-                                     (txexpr 'td empty (list (cond [(number? i) (number->string i)]
-                                                                   [(char? i) (string i)]
-                                                                   [else i])))) row))
-  (txexpr 'tbody empty (map (lambda (r) (txexpr 'tr empty (process-items r))) convert-to-2d)))
-
-;thead<tr<th>> -> xml table
-; can take 1 heading, or list of them
-(define (table headings #:caption [caption empty] #:style [style empty] . entries)
-  (txexpr 'table style
-          (append (match caption
-                    [s #:when (string? caption) (list (txexpr 'caption empty (list s)))]
-                    [s #:when (and (not (empty? caption)) (symbol? (car caption))) (list (txexpr 'caption empty (list s)))]
-                    [_ (list (txexpr 'caption empty caption))])
-                  (cond [(symbol? (car headings)) (list headings)]
-                        [else headings]) entries)))
+; Build a rectangular table from data. Cells may contain literal values or markup.
+; Use #:attrs for HTML attributes and #:monospace? for body cells only.
+(define (table #:headings headings #:rows rows
+               #:caption [caption #f] #:attrs [attrs empty]
+               #:monospace? [monospace? #f])
+  (unless (list? headings)
+    (raise-argument-error 'table "list? for #:headings" headings))
+  (unless (list? rows)
+    (raise-argument-error 'table "list of row lists for #:rows" rows))
+  (unless (boolean? monospace?)
+    (raise-argument-error 'table "boolean? for #:monospace?" monospace?))
+  (unless (txexpr-attrs? attrs)
+    (raise-argument-error 'table "HTML attribute list for #:attrs" attrs))
+  (define (cell-content value)
+    (cond [(number? value) (number->string value)]
+          [(char? value) (string value)]
+          [(or (string? value) (txexpr? value)) value]
+          [else (raise-argument-error 'table
+                                     "string, number, character, or tagged expression for a cell"
+                                     value)]))
+  (define (make-row tag values attrs)
+    (txexpr 'tr empty
+            (for/list ([value (in-list values)])
+              (txexpr tag attrs (list (cell-content value))))))
+  (define body-rows
+    (for/list ([row (in-list rows)] [index (in-naturals 1)])
+      (unless (list? row)
+        (raise-arguments-error 'table "expected a row list" "row" index "value" row))
+      (unless (= (length row) (length headings))
+        (error 'table "row ~a: expected ~a cells, received ~a"
+               index (length headings) (length row)))
+      (make-row 'td row empty)))
+  (define caption-elements
+    (cond [(eq? caption #f) empty]
+          [(or (string? caption) (txexpr? caption)) (list caption)]
+          [(and (list? caption)
+                (andmap (lambda (item) (or (string? item) (txexpr? item))) caption)) caption]
+          [else (raise-argument-error 'table
+                                     "text, tagged expression, list of caption content, or #f"
+                                     caption)]))
+  (txexpr 'table attrs
+          (append
+           (if (null? caption-elements) empty
+               (list (txexpr 'caption empty caption-elements)))
+           (list (txexpr 'thead empty
+                         (list (make-row 'th headings '((scope "col")))))
+                 (txexpr 'tbody (if monospace? '((class "table-monospace")) empty)
+                         body-rows)))))
 
 ;String String -> txexpr
 (define (q heading . content)
@@ -377,7 +391,7 @@
 ;Number Number -> Table
 ; converts a number in decimal to binary with a small bit table
 ; supports highlighting msb for negative numbers
-(define (deci->bin-table num bits #:caption [caption empty])
+(define (deci->bin-table num bits #:caption [caption #f])
   (define bin (deci->binary num #:width bits))
   (define headings (pot bits))
   (define discrim (cond [(>= num 0) (cons headings bin)]
@@ -385,7 +399,7 @@
                                                (append (list (highlight-first (rest bin))) (rest (rest bin))))]))
   (define h (car discrim))
   (define e (cdr discrim))
-  (table #:caption caption (table-headings h) (table-entries e)))
+  (table #:monospace? #t #:caption caption #:headings h #:rows (list e)))
 
 ; highlight first element
 ; List<T> -> txexpr<span T>
@@ -421,7 +435,7 @@
             (txexpr 'img `((src ,path) (style ,(string-append "width: " width))) empty))))
 
 (define (max-bit-table f caption)
-  (table #:caption caption (table-headings (list "Decimal" "Binary")) (table-entries (f '()))))
+  (table #:monospace? #t #:caption caption #:headings '("Decimal" "Binary") #:rows (f '())))
 
 (define (max-unsigned-limit-table bits)
   (define MAX (expt 2 bits))
@@ -430,8 +444,8 @@
     (cond [(= LEN MAX) (reverse acc)]
           [else
            (aux (cons (list LEN (list->string (deci->binary LEN #:width bits))) acc))]))
-  (table #:caption "unsigned" (table-headings (list "Decimal" "Binary"))
-         (attr-set (table-entries (aux '())) 'style "font-family: monospace;")))
+  (table #:caption "unsigned" #:headings '("Decimal" "Binary")
+         #:rows (aux '()) #:monospace? #t))
 
 (define (max-signed-limit-table bits)
   (define MAX (expt 2 bits))

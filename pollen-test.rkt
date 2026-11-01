@@ -21,14 +21,44 @@
     (check-equal? (map (compose first get-elements) (apply list->li items)) items)
     (check-equal? (get-elements (steps)) empty)
     (check-equal? (length (get-elements (steps (step "a") (step "b")))) 2))
-  (test-case "table helpers accept empty rows and tagged cells"
-    (check-equal? (get-elements (table-entries)) empty)
-    (check-equal? (get-elements (table-entries empty)) empty)
-    (check-equal? (get-elements (table-entries (list empty))) '((tr)))
-    (define row (list (red "a") (blue "b")))
-    (check-equal? (table-entries row) (table-entries (list row)))
-    (check-equal? (table-entries (list 0 1) (list 1 0))
-                  (table-entries (list (list 0 1) (list 1 0))))))
+  (test-case "tables preserve cell content, headers, and optional body styling"
+    (define markup (red "a"))
+    (define tbl (table #:headings '("A" "B" "C")
+                       #:rows (list (list markup 2 #\0))
+                       #:monospace? #t #:attrs '((id "bits"))))
+    (check-equal? (attr-ref tbl 'id) "bits")
+    (check-equal? (get-elements tbl)
+                  `((thead (tr (th ((scope "col")) "A")
+                               (th ((scope "col")) "B")
+                               (th ((scope "col")) "C")))
+                    (tbody ((class "table-monospace"))
+                           (tr (td ,markup) (td "2") (td "0")))))
+    (check-equal? (get-attrs (second (get-elements
+                                   (table #:headings '("A") #:rows empty)))) empty))
+  (test-case "table captions accept text, markup, and mixed content"
+    (define markup (red "AND"))
+    (for ([caption (list "AND" markup (list "Gate: " markup))]
+          [expected (list '("AND") (list markup) (list "Gate: " markup))])
+      (check-equal? (first (get-elements (table #:headings empty #:rows empty
+                                              #:caption caption)))
+                    (txexpr 'caption empty expected)))
+    (for ([caption (list #f empty "")])
+      (define tbl (table #:headings empty #:rows empty #:caption caption))
+      (check-equal? (length (get-elements tbl)) (if (equal? caption "") 3 2))))
+  (test-case "tables reject malformed rows and unsupported content"
+    (check-exn #rx"row 2: expected 2 cells, received 1"
+               (lambda () (table #:headings '("A" "B") #:rows '((0 1) (0)))))
+    (check-exn #rx"expected a row list"
+               (lambda () (table #:headings '("A") #:rows '(0))))
+    (for ([make-bad-table
+           (list (lambda () (table #:headings "A" #:rows empty))
+                 (lambda () (table #:headings empty #:rows 0))
+                 (lambda () (table #:headings '("A") #:rows '((#t))))
+                 (lambda () (table #:headings empty #:rows empty #:caption 42))
+                 (lambda () (table #:headings empty #:rows empty #:attrs "bad"))
+                 (lambda () (table #:headings empty #:rows empty #:monospace? 1)))])
+      (check-exn exn:fail:contract? make-bad-table))))
+
 
 (module+ test
   (test-case "decoded book index keeps links unwrapped and unnested"

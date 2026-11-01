@@ -6,14 +6,14 @@
 
 ◊slide{
 ◊h2{The NAND Gate}
-◊(table 
-    (table-headings (list "A" "B" "OUT"))
-(table-entries 
-(list "0" "0" "1")
-(list "0" "1" "1")
-(list "1" "0" "1")
-(list "1" "1" "0")
-) #:caption (list "NAND" ◊img[#:src "/images/nand_gate.svg"]{}))
+◊(table #:monospace? #t
+   #:headings (list "A" "B" "OUT")
+   #:rows (list
+     (list "0" "0" "1")
+     (list "0" "1" "1")
+     (list "1" "0" "1")
+     (list "1" "1" "0"))
+   #:caption (list "NAND" ◊img[#:src "/images/nand_gate.svg"]{}))
 }
 Above is the ◊strong{NAND} gate(aka ◊strong{NOT AND}), which outputs ◊code{0} ◊strong{if and only if} both inputs are ◊code{1}, and outputs ◊code{1} otherwise. It looks like an ◊strong{AND} gate, just with a ◊strong{bubble} at the end, which represents the ◊strong{NOT} operation.
 

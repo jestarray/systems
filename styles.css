@@ -108,6 +108,22 @@ table {
     table-layout: fixed;
 }
 
+/* Body-only monospace leaves headings and captions in the page font. */
+tbody.table-monospace > tr > td {
+    font-family: monospace;
+    /* Compensate for the monospace font's smaller apparent character size. */
+    font-size: 1.2em;
+}
+
+table.table-full-width {
+    width: 100%;
+}
+
+table.table-centered,
+table.table-centered thead {
+    text-align: center;
+}
+
  caption {
     padding: 1em 0;
     text-align: center;

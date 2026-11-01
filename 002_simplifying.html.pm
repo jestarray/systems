@@ -92,155 +92,35 @@ The identity law says that there are values that leave a Boolean expression unch
 ◊slide{
 ◊h2{Boolean Laws Cheatsheet}
 
-◊table{
-  ◊thead{
-    ◊tr{
-      ◊th{Law}
-      ◊th{OR Form}
-      ◊th{AND Form}
-    }
-  }
-
-  ◊tbody{
-
-    ◊tr{
-      ◊td{Identity}
-      ◊td{◊code{x + 0 = x}}
-      ◊td{◊code{x * 1 = x}}
-    }
-
-    ◊tr{
-      ◊td{Domination (Null)}
-      ◊td{◊code{x + 1 = 1}}
-      ◊td{◊code{x * 0 = 0}}
-    }
-
-    ◊tr{
-      ◊td{Idempotent}
-      ◊td{◊code{x + x = x}}
-      ◊td{◊code{x * x = x}}
-    }
-
-    ◊tr{
-      ◊td{Complement}
-      ◊td{◊code{x + !x = 1}}
-      ◊td{◊code{x * !x = 0}}
-    }
-
-    ◊tr{
-      ◊td{Double Complement}
-      ◊td{◊code{!!x = x}}
-      ◊td{—}
-    }
-
-    ◊tr{
-      ◊td{Commutative}
-      ◊td{◊code{x + y = y + x}}
-      ◊td{◊code{x * y = y * x}}
-    }
-
-    ◊tr{
-      ◊td{Associative}
-      ◊td{◊code{(x + y) + z = x + (y + z)}}
-      ◊td{◊code{(x * y) * z = x * (y * z)}}
-    }
-
-    ◊tr{
-      ◊td{Distributive}
-      ◊td{◊code{x * (y + z) = (x * y) + (x * z)}}
-      ◊td{◊code{x + (y * z) = (x + y) * (x + z)}}
-    }
-
-    ◊tr{
-      ◊td{Absorption}
-      ◊td{◊code{x + (x * y) = x}}
-      ◊td{◊code{x * (x + y) = x}}
-    }
-
-    ◊tr{
-      ◊td{De Morgan's}
-      ◊td{◊code{!(x + y) = !x * !y}}
-      ◊td{◊code{!(x * y) = !x + !y}}
-    }
-
-  }
-}
+◊(table
+   #:headings (list "Law" "OR Form" "AND Form")
+   #:rows (list
+     (list "Identity" ◊span{◊code{x + 0 = x}} ◊span{◊code{x * 1 = x}})
+     (list "Domination (Null)" ◊span{◊code{x + 1 = 1}} ◊span{◊code{x * 0 = 0}})
+     (list "Idempotent" ◊span{◊code{x + x = x}} ◊span{◊code{x * x = x}})
+     (list "Complement" ◊span{◊code{x + !x = 1}} ◊span{◊code{x * !x = 0}})
+     (list "Double Complement" ◊span{◊code{!!x = x}} "—")
+     (list "Commutative" ◊span{◊code{x + y = y + x}} ◊span{◊code{x * y = y * x}})
+     (list "Associative" ◊span{◊code{(x + y) + z = x + (y + z)}} ◊span{◊code{(x * y) * z = x * (y * z)}})
+     (list "Distributive" ◊span{◊code{x * (y + z) = (x * y) + (x * z)}} ◊span{◊code{x + (y * z) = (x + y) * (x + z)}})
+     (list "Absorption" ◊span{◊code{x + (x * y) = x}} ◊span{◊code{x * (x + y) = x}})
+     (list "De Morgan's" ◊span{◊code{!(x + y) = !x * !y}} ◊span{◊code{!(x * y) = !x + !y}})))
 
 ◊h2{Derived Boolean Laws Cheatsheet}
 
-◊table{
-  ◊thead{
-    ◊tr{
-      ◊th{Derived Law}
-      ◊th{Expression}
-      ◊th{Notes}
-    }
-  }
-
-  ◊tbody{
-
-    ◊tr{
-      ◊td{Absorption Variant}
-      ◊td{◊code{x + (!x * y) = x + y}}
-      ◊td{Very common simplification}
-    }
-
-    ◊tr{
-      ◊td{Dual Absorption Variant}
-      ◊td{◊code{x * (!x + y) = x * y}}
-      ◊td{Dual of the above}
-    }
-
-    ◊tr{
-      ◊td{Consensus Theorem}
-      ◊td{◊code{(x * y) + (!x * z) + (y * z) = (x * y) + (!x * z)}}
-      ◊td{Eliminates the redundant consensus term}
-    }
-
-    ◊tr{
-      ◊td{Dual Consensus}
-      ◊td{◊code{(x + y) * (!x + z) * (y + z) = (x + y) * (!x + z)}}
-      ◊td{Dual of the Consensus Theorem}
-    }
-
-    ◊tr{
-      ◊td{Redundancy}
-      ◊td{◊code{(x * y) + (x * !y) = x}}
-      ◊td{Factor then apply Complement}
-    }
-
-    ◊tr{
-      ◊td{Dual Redundancy}
-      ◊td{◊code{(x + y) * (x + !y) = x}}
-      ◊td{Dual of Redundancy}
-    }
-
-    ◊tr{
-      ◊td{Complement Expansion}
-      ◊td{◊code{x = (x * y) + (x * !y)}}
-      ◊td{Useful for proofs and canonical forms}
-    }
-
-    ◊tr{
-      ◊td{Dual Complement Expansion}
-      ◊td{◊code{x = (x + y) * (x + !y)}}
-      ◊td{Dual of the above}
-    }
-
-    ◊tr{
-      ◊td{Exclusive-OR}
-      ◊td{◊code{x ⊕ y = (!x * y) + (x * !y)}}
-      ◊td{Definition of XOR}
-    }
-
-    ◊tr{
-      ◊td{Exclusive-NOR}
-      ◊td{◊code{x ⊙ y = (x * y) + (!x * !y)}}
-      ◊td{Definition of XNOR}
-    }
-
-  }
-}
+◊(table
+   #:headings (list "Derived Law" "Expression" "Notes")
+   #:rows (list
+     (list "Absorption Variant" ◊span{◊code{x + (!x * y) = x + y}} "Very common simplification")
+     (list "Dual Absorption Variant" ◊span{◊code{x * (!x + y) = x * y}} "Dual of the above")
+     (list "Consensus Theorem" ◊span{◊code{(x * y) + (!x * z) + (y * z) = (x * y) + (!x * z)}} "Eliminates the redundant consensus term")
+     (list "Dual Consensus" ◊span{◊code{(x + y) * (!x + z) * (y + z) = (x + y) * (!x + z)}} "Dual of the Consensus Theorem")
+     (list "Redundancy" ◊span{◊code{(x * y) + (x * !y) = x}} "Factor then apply Complement")
+     (list "Dual Redundancy" ◊span{◊code{(x + y) * (x + !y) = x}} "Dual of Redundancy")
+     (list "Complement Expansion" ◊span{◊code{x = (x * y) + (x * !y)}} "Useful for proofs and canonical forms")
+     (list "Dual Complement Expansion" ◊span{◊code{x = (x + y) * (x + !y)}} "Dual of the above")
+     (list "Exclusive-OR" ◊span{◊code{x ⊕ y = (!x * y) + (x * !y)}} "Definition of XOR")
+     (list "Exclusive-NOR" ◊span{◊code{x ⊙ y = (x * y) + (!x * !y)}} "Definition of XNOR")))
 }
 
 ◊slide{
@@ -281,14 +161,14 @@ We took something that initially took ◊strong{5} ◊green{logic gates}, and si
 
 Another way to simplify is if you were given a truth table, you could pattern match against known logic gates and recognize it's an ◊strong{OR gate}.
 
-◊(table 
-(table-headings (list "x" "y" "f (x, y)"))
-(table-entries 
-(list 0	0 0)
-(list 0	1 1)
-(list 1	0 1)
-(list 1	1 1)
-) #:caption "!(!x * !(x + y))")
+◊(table #:monospace? #t
+   #:headings (list "x" "y" "f (x, y)")
+   #:rows (list
+     (list 0	0 0)
+     (list 0	1 1)
+     (list 1	0 1)
+     (list 1	1 1))
+   #:caption "!(!x * !(x + y))")
 }
 
 ◊slide{

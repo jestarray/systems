@@ -53,28 +53,26 @@ I'll cover the ALU specifically because its the most complex one of in this sect
 
 Function:
 
-◊(table #:style '((width "100%;") (style "text-align: center;")) 
-◊(table-headings
-(list "zx"	"nx" "zy" "ny" "f" "no" "out") #:style '((style "text-align:inherit;"))) 
-◊(table-entries
-(list "if zx then x=0" "if nx then x=!x" "if zy then y=0" "if ny then y=!y" "if f then out=x+y else out=x&y" "if no then out=!out" "f(x,y)=")
-(list 1	1 1 0 1 0 -1)
-(list 0	0 1 1 0 0 "x")
-(list 1	1 0 0 0 0 "y")
-(list 0	0 1 1 0 1 "!x")
-(list 1	1 0 0 0 1 "!y")
-(list 0	0 1 1 1 1 "-x")
-(list 1	1 0 0 1 1 "-y")
-(list 0	1 1 1 1 1 "x+1")
-(list 1	1 0 1 1 1 "y+1")
-(list 0	0 1 1 1 0 "x-1")
-(list 1	1 0 0 1 0 "y-1")
-(list 0	0 0 0 1 0 "x+y")
-(list 0	1 0 0 1 1 "x-y")
-(list 0	0 0 1 1 1 "y-x")
-(list 0	0 0 0 0 0 "x&y")
-(list 0	1 0 1 0 1 "x|y")
-))
+◊(table #:monospace? #t #:attrs '((class "table-centered table-full-width"))
+   #:headings (list "zx"	"nx" "zy" "ny" "f" "no" "out")
+   #:rows (list
+     (list "if zx then x=0" "if nx then x=!x" "if zy then y=0" "if ny then y=!y" "if f then out=x+y else out=x&y" "if no then out=!out" "f(x,y)=")
+     (list 1	1 1 0 1 0 -1)
+     (list 0	0 1 1 0 0 "x")
+     (list 1	1 0 0 0 0 "y")
+     (list 0	0 1 1 0 1 "!x")
+     (list 1	1 0 0 0 1 "!y")
+     (list 0	0 1 1 1 1 "-x")
+     (list 1	1 0 0 1 1 "-y")
+     (list 0	1 1 1 1 1 "x+1")
+     (list 1	1 0 1 1 1 "y+1")
+     (list 0	0 1 1 1 0 "x-1")
+     (list 1	1 0 0 1 0 "y-1")
+     (list 0	0 0 0 1 0 "x+y")
+     (list 0	1 0 0 1 1 "x-y")
+     (list 0	0 0 1 1 1 "y-x")
+     (list 0	0 0 0 0 0 "x&y")
+     (list 0	1 0 1 0 1 "x|y")))
 
 There are 6 control bits being:
 ◊pre{zx, nx, zy, ny, f, no}
@@ -85,10 +83,10 @@ Let's elaborate any row with any input, and let's start with the row that adds 1
 ◊steps{
     ◊step{
 x + 1 
-◊(table (table-headings (list "zx"	"nx" "zy" "ny" "f" "no" "out") #:style '((style "text-align:inherit;")))
-(table-entries 
-(list 0	1 1 1 1 1 "x+1")
-) #:caption "increment x by 1")
+◊(table #:monospace? #t #:headings (list "zx"	"nx" "zy" "ny" "f" "no" "out")
+   #:rows (list
+     (list 0	1 1 1 1 1 "x+1"))
+   #:caption "increment x by 1")
 Following the table from left to right(~>) sequentially,
 
 Say the inputs are:
@@ -116,10 +114,10 @@ and thus we have done x+1
     ◊step{
 y - x 
 
-◊(table (table-headings (list "zx"	"nx" "zy" "ny" "f" "no" "out") #:style '((style "text-align:inherit;")))
-(table-entries 
-(list 0	0 0 1 1 1 "y-x")
-) #:caption "subtracts the input Y by the input X")
+◊(table #:monospace? #t #:headings (list "zx"	"nx" "zy" "ny" "f" "no" "out")
+   #:rows (list
+     (list 0	0 0 1 1 1 "y-x"))
+   #:caption "subtracts the input Y by the input X")
 
 Let's say our inputs are:
 x: 0100 (4)

@@ -45,7 +45,7 @@ Useful project helpers:
 | `h2`, `h3` | Generate heading IDs and anchor links by lowercasing and replacing spaces with underscores. |
 | `q`, `step`, `steps` | Collapsible question, initially open step, and ordered steps. `q` and `step` take the summary first. |
 | `hdl-code-block`, `c-code-block`, `r1-liner` | Code markup with Prism language classes; block helpers accept optional `#:data-src`. |
-| `table`, `table-headings`, `table-entries` | Build tables from Racket values; inspect signatures and nearby working calls. |
+| `table` | Build tables with `#:headings` (a list) and `#:rows` (a list of row lists). Rows must match the heading count. Optional `#:caption` accepts text or markup, `#:attrs` accepts HTML attributes, and `#:monospace? #t` applies monospace to body cells only. |
 | `base`, `2^`, `deci->binary`, `deci->bin-table`, `max-unsigned-limit-table`, `max-signed-limit-table` | Numeric notation, conversion, and teaching tables. Verify bit width and signed interpretation when using them. |
 | `yt`, `lead`, `layout-spread-row`, `img-row` | Video embeds, emphasized text, and layout. `yt` expects a video ID rather than a full URL. |
 

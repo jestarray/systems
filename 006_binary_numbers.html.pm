@@ -1,9 +1,9 @@
 #lang pollen
 ◊(require txexpr)
 
-◊(define (deci->div-table e #:caption [caption empty])
-    (table #:caption caption (table-headings (list "Division" "Quotient" "Remainder"))
-        (table-entries e)))
+◊(define (deci->div-table e #:caption [caption #f])
+    (table #:caption caption #:headings (list "Division" "Quotient" "Remainder")
+        #:rows e))
 
 ◊(yt "bFLB4dyNKUk")
 
@@ -57,11 +57,11 @@ Now just as these combination locks have a max limit of numbers it can represent
 ◊(max-unsigned-limit-table 4)
 
 Every 1 toggles corresponding powers of two: 
-◊(table (table-headings (two-subscripts 4)) (table-entries (list 0 0 0 0)))
+◊(table #:monospace? #t #:headings (two-subscripts 4) #:rows (list (list 0 0 0 0)))
 
 If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2^ 5) = 32
 
-◊(table (table-headings (two-subscripts 5)) (table-entries (list 0 0 0 0 0)))
+◊(table #:monospace? #t #:headings (two-subscripts 5) #:rows (list (list 0 0 0 0 0)))
 
 ◊(hr)
 ◊h2{How to convert a binary number to a decimal number?}
