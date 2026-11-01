@@ -1,9 +1,6 @@
 # Project guide
 
-## Scope and reference material
-
-This project is **Computer Systems**, a Pollen site of lessons for a YouTube series about computer systems, Boolean logic, binary arithmetic, and nand2tetris. Work on the book in this repository's root.
-
+This project produces a website/book for learning about Computer Systems. It uses Pollen, a DSL of the Racket language, to generate html webpages. Work on the book in this repositoriy's root.
 `pollen-tfl/` is a separate, complete Pollen book supplied as a learning reference. Consult its source for Pollen techniques; leave it unchanged unless the user explicitly requests changes there. Its dependencies, tags, metadata conventions, and design belong to that example, not automatically to this project.
 
 Useful reference entry points are `pollen-tfl/README.md`, `pollen-tfl/template.html.p`, and `pollen-tfl/index.ptree`. Its `pollen.rkt` delegates most definitions to the documented implementation in `pollen-tfl/scribblings/pollen-rkt.scrbl`. Follow that file when studying its tag functions and decoding. Respect the reference book's reuse terms in its README, particularly for prose, images, and PDFs.
