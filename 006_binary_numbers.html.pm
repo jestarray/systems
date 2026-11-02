@@ -21,7 +21,7 @@ We've run out of digits! The rightmost wheel rolls back to 0, and the wheel to i
 
 But notice something interesting: ◊strong{the position of each digit determines its value}.
 
-Each position has a weight of ◊strong{10^n}, where n starts at 0 for the rightmost position and increases as we move left.
+Each position has a weight of ◊strong{◊(x^n 10 "n")}, where n starts at 0 for the rightmost position and increases as we move left.
 
 For our four-wheel lock, the weights from left to right are:
 
@@ -29,9 +29,9 @@ For our four-wheel lock, the weights from left to right are:
 
 To find the value of a number, multiply each digit by its position's weight and add the results.
 
-For example, ◊strong{1234} means:
+For example, ◊strong{6274} means:
 
-◊code{(1 × 1000) + (2 × 100) + (3 × 10) + (4 × 1) = 1234}
+◊code{(6 × 1000) + (2 × 100) + (7 × 10) + (4 × 1) = 6274}
 
 This is how our base-10 number system works.
 }
@@ -50,18 +50,35 @@ This is ◊strong{base 2, also known as binary}, the number system computers use
 Both number systems follow the same rules. The only difference is how many digits each wheel can display before rolling over.
 }
 
-Now just as these combination locks have a max limit of numbers it can represent, so do computers! It depends on the bit width.
+Each binary digit is called a ◊strong{bit}. The ◊strong{bit width} is the number of bits in a representation. Our binary lock has four wheels, so it displays four bits.
 
-4 bits gives us a maximum of 16 unique combinations because (◊(2^ "4") = 16).
+Compare the position weights in decimal and binary. Positions count from 0 at the rightmost digit:
+
+◊(table #:caption "Decimal and binary position weights"
+        #:headings (list "Position" "n" "…" "4" "3" "2" "1" "0")
+        #:rows (list
+                (list "Decimal" (x^n 10 "n") "…" (x^n 10 4) (x^n 10 3) (x^n 10 2) (x^n 10 1) (x^n 10 0))
+                (list "Binary" (2^ "n") "…" (2^ 4) (2^ 3) (2^ 2) (2^ 1) (2^ 0))))
+
+Both ◊(x^n 10 0) and ◊(2^ 0) equal 1: the rightmost digit is the ones place in either system.
+
+Each 1 contributes its position's weight to the total; each 0 contributes nothing. For example:
+
+◊(deci->bin-table 13 4)
+
+◊(base "1101" 2) = (1 × 8) + (1 × 4) + (0 × 2) + (1 × 1) = ◊(base 13 10).
+
+The small subscript tells us the base: ◊(base "10" 2) means two, while ◊(base 10 10) means ten.
+
+Like a lock with a fixed number of wheels, a representation with a fixed bit width has a limited number of patterns. Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they represent ◊strong{0 through 15}, because zero is one of the 16 values.
 
 ◊(max-unsigned-limit-table 4)
 
-Every 1 toggles corresponding powers of two: 
-◊(table #:monospace? #t #:headings (two-subscripts 4) #:rows (list (list 0 0 0 0)))
+To represent 16, we need a fifth bit: ◊(base "10000" 2) = ◊(base 16 10). Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 through 31.
 
-If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2^ 5) = 32
+◊(deci->bin-table 16 5)
 
-◊(table #:monospace? #t #:headings (two-subscripts 5) #:rows (list (list 0 0 0 0 0)))
+In general, ◊strong{n bits give us ◊(2^ "n") different patterns}, representing unsigned values from 0 through ◊(2^ "n") − 1.
 
 ◊(hr)
 ◊h2{How to convert a binary number to a decimal number?}
@@ -88,20 +105,22 @@ If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2
 ◊h3{Subtraction method}
 ◊steps{
     ◊step{
-Find the biggest power of 2 that is less than the decimal number and place a 1 in that position
+Find the biggest power of 2 that is less than or equal to the remaining number and place a 1 in that position
 
-Let's try converting the number 13
+Let's try converting the number 13. Start with zeros in all four positions.
 ◊(deci->bin-table 8 4)
-8 is the biggest power of 2 that is less than 13, hence we put a 1 there.}
+8 is the biggest power of 2 that is less than or equal to 13, so we put a 1 in the 8's position.}
     ◊step{
-Subtract it from the original number and repeat step 1 until you subtract to 0
-13-8 = 5
-◊(deci->bin-table 12 4)
-Now we need to look for the next biggest power of 2 that is less than 5, which is 4, hence we put a 1 there.
+Subtract the chosen power of 2 from the remaining number and repeat until the remainder is 0
 
-◊p{5 - 4 = 1}
-Lastly 1 fits with 1, so 1 - 1 = 0, and we are done.
-◊(deci->bin-table 13 4) 8+4+0+1 = 13; thus 1101 represents 7}}
+13 − 8 = 5. Now 4 is the biggest power of 2 that is less than or equal to 5, so we put a 1 in the 4's position.
+◊(deci->bin-table 12 4)
+
+5 − 4 = 1. The 2's position stays 0 because 2 is greater than the remaining number, 1. We choose 1, put a 1 in the 1's position, and subtract: 1 − 1 = 0.
+
+Leave 0 in every unused position.
+◊(deci->bin-table 13 4)
+8 + 4 + 0 + 1 = 13; thus ◊(base "1101" 2) represents ◊(base 13 10).}}
 
 ◊lead{Check your understanding!}
 ◊(q "What is the decimal number 11 in binary?" (deci->bin-table 11 4) "answer: 1011; because 8 + 2 + 1 = 11")
@@ -115,19 +134,24 @@ answer: 11101001; which you can confirm adds up to 233. Notice how we needed to 
 ◊h3{Division method}
 ◊steps{
     ◊step{
-     Modulo the number by two
-     Let's try for the number 233
-     233/2 = 116 remainder 1
+     Divide by 2 and record the whole-number quotient and remainder
+
+     Let's try converting 233. Dividing 233 by 2 gives a quotient of 116 and a remainder of 1: 233 = 2 × 116 + 1.
     }
     ◊step{
-        Recursively modulo the quotient while keeping track of the remainder
+        Repeat with the quotient until the quotient becomes 0
+
+        Next, divide 116 by 2 to get a quotient of 58 and a remainder of 0. Keep dividing each new quotient by 2 and record its remainder.
         ◊(deci->div-table (deci->bin-div 233) #:caption "11101001")
 
-        Note: The remainder will always be 0 or 1
+        The remainder is always 0 or 1. Stop after the row where dividing 1 by 2 gives a quotient of 0 and a remainder of 1.
     }
     ◊step{
-        Gather all the remainders from bottom to top
-        From bottom to top in the remainders column, 11101001, which is the binary representation of 233
+        Read the remainders from bottom to top
+
+        The first remainder gives the 1's bit: it tells us whether the number is even (0) or odd (1). Dividing by 2 removes that bit, so the next remainder gives the original number's 2's bit, then the 4's bit, and so on. We find the bits from right to left, which is why we read the table from bottom to top.
+
+        From bottom to top, the remainders are 11101001, so ◊(base "11101001" 2) = ◊(base 233 10).
     }}
 
 ◊lead{Check your understanding!}

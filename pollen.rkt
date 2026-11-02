@@ -62,7 +62,9 @@
   (define s
     (cond [(string? n) n]
           [(number? n) (number->string n)]))
-  (txexpr 'span style (list x (txexpr 'sup empty (list s)))))
+  (txexpr 'span style
+          (list (if (number? x) (number->string x) x)
+                (txexpr 'sup empty (list s)))))
 
 ; Number -> List<txexpr>
 ; returns a list of powers of 2 html subscript
