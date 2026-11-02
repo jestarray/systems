@@ -21,44 +21,45 @@ But real computers frequently operate on ◊strong{groups} of bits simultaneousl
 
 ◊slide{
 ◊h2{Reading HDL Bus Syntax}
-◊hdl-code-block[#:id "or16-bus-example"]{CHIP Or16 {
-    IN a[16], b[16];
-    OUT out[16];
+This ◊code{SwapBits} chip swaps the two bits of its input: ◊code{10} becomes ◊code{01}, and ◊code{01} becomes ◊code{10}.
+
+◊div[#:style "display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.75rem; margin: 0.75em 0;"]{
+◊div[#:style "flex: 0 0 110px;"]{
+◊(table #:monospace? #t
+   #:headings (list "IN" "OUT")
+   #:rows (list
+     (list "00" "00")
+     (list "01" "10")
+     (list "10" "01")
+     (list "11" "11")))
+}
+◊figure[#:style "flex: 0 1 330px; min-width: 0; margin: 0;"]{
+◊img[#:src "/images/swap-bits.svg" #:alt "01 → SwapBits → 10: two output cards swap places." #:style "display: block;"]{}
+}
+}
+
+◊hdl-code-block[#:id "swap-bits-bus-example"]{CHIP SwapBits {
+    IN in[2];
+    OUT out[2];
 
     PARTS:
-    //// Replace this comment with your code.
+    Or(a=in[0], b=false, out=out[1]);
+    Or(a=in[1], b=false, out=out[0]);
 }
-}
-- ◊code{a[16]} and ◊code{b[16]} declare a bus containing 16 input bits.
-- ◊code{out[16]} declares a 16-bit output bus.
-Notice that ◊code{a[16]} means a bus containing 16 bits, ◊strong{not} the sixteenth bit of the input ◊code{a}.
-
-
-That's because the meaning of the square braces ◊code{[N]} ◊strong{depends on where} they're used.
-If used in ◊code-link[#:to "or16-bus-example" #:lines "2-3"]{the top part}, ◊strong{IN} and ◊strong{OUT}, it defines the width of the bus.
-If used in ◊code-link[#:to "or16-bus-example" #:lines "5-6"]{the bottom part}, ◊strong{PARTS:} it refers to ◊strong{selecting} individual bits from the bus.
-}
-
-◊slide{
-◊h2{Selecting Individual Bits from a Bus}
-◊hdl-code-block{
-CHIP IsOdd {
-    IN in[8];
-    OUT out;
-
-    PARTS:
-    Or(a=in[0], b=false, out=out);
-}   
 }
 
 ◊ul{
-◊li{◊code{a=in[0]} selects the 1st bit from the ◊code{in} bus, and passes it to the ◊code{a} input of the ◊code{Or} gate. }
-◊li{◊code{b=false} which sets all input bits of ◊code{b} to ◊code{0}.}
+◊li{In ◊code-link[#:to "swap-bits-bus-example" #:lines "2-3"]{the declarations}, ◊code{in[2]} and ◊code{out[2]} set each bus's ◊strong{width}: two bits, indexed 0 and 1.}
+◊li{In ◊code-link[#:to "swap-bits-bus-example" #:lines "6"]{the first connection}, ◊code{a=in[0]} selects the rightmost input bit and connects it to the ◊code{Or} gate's ◊code{a} input.}
+◊li{◊code{b=false} sets ◊code{b} to all zeros: here, just one ◊code{0}, since ◊code{b} is a single-bit input. The gate copies the selected bit because ◊code{Or(x, 0) = x}.}
+◊li{◊code{out=out[1]} connects the gate's single-bit output (left) to bit 1 of our chip's output bus (right). The ◊code-link[#:to "swap-bits-bus-example" #:lines "7"]{second connection} copies input bit 1 to output bit 0.}
 }
+
+The brackets declare a ◊strong{width} in ◊code{IN}/◊code{OUT}, but select a ◊strong{bit} in ◊code{PARTS:}—for both input and output buses. Each gate here carries just one bit.
 }
 
 ◊slide{
-◊h2{Selecting a single bit from a bus}
+◊h2{Bit Order and Indexing}
 
 We ◊strong{read} binary numbers from left to right (→), but HDL ◊strong{indexes} bits from right to left (←), starting at bit 0.
 
