@@ -8,34 +8,6 @@
 
 (provide (all-defined-out)) ;make everything global in this file
 
-(define (practice-url name)
-  (string-append "https://jestlearn.com/how_to_code/#" name))
-
-; String -> List<(String, String)>
-; read the contents of the filename from "starter" and "solution" directores and produce List<(FilePath, Contents)>
-(define (starter&solution filename)
-  ; Path -> String
-  ; returns the file string with the first 3 lines if it contains racket teaching lang metadata
-  (define (strip-meta path)
-    (define contents (file->lines path #:line-mode 'any))
-    (cond [(<= (length contents) 3) contents]
-          [else
-           (define third-line (third contents))
-           (define has-metadata? (and (>= (string-length third-line) 8) (string=? (substring third-line 0 7) "#reader")))
-           (string-join (if has-metadata?
-                            (drop contents 3)
-                            contents) "\n")]))
-
-  (define starter-fname (string-append "starter/" filename "_starter.rkt"))
-  ; (println (file->string starter-fname))
-  ; (println (strip-meta starter-fname))
-  ; (println (file->lines starter-fname #:line-mode 'return-linefeed))
-  (define solution-fname (string-append "solutions/" filename "_solution.rkt"))
-  (define file-contents (map strip-meta (list starter-fname solution-fname)))
-  (list (list starter-fname (car file-contents))
-        (list solution-fname (cadr file-contents))))
-
-
 ; String(s) -> txexpr
 ; creates codeblocks with optional data src for download
 ; (racket-code-block #:data-src "mypath.rkt" "foo" "baz" "bar")
@@ -53,33 +25,6 @@
               `((class "line-numbers match-braces rainbow-braces")))
           (list (txexpr 'code '((class "language-C")) contents))))
 
-; String -> Txexpr
-; short for "racket-1-line" produces a racket 1 liner of code
-(define (r1-liner . contents)
-  (txexpr 'code '((class "language-racket")) contents))
-
-; String -> txexpr
-(define (code-problem filename)
-  (define files (starter&solution filename))
-  (define starter (car files))
-  (define starter-path (car starter))
-  (define starter-contents (cadr starter))
-  (define solution (cadr files))
-  (define solu-path (car solution))
-  (define solu-contents (cadr solution))
-  ;todo: add option to keep the Q block open?
-  (q (string-append "Exercise " filename) (hdl-code-block #:data-src starter-path starter-contents)
-     (q "Answer" (hdl-code-block #:data-src solu-path solu-contents)))
-  )
-
-; string -> txexpr
-; returns a search link to the search of the racket docs
-(define (rk op)
-  (txexpr 'a (list (list 'href (string-append "https://docs.racket-lang.org/search/index.html?q=" op)))
-          (list (txexpr 'code empty
-                        (list op)))))
-
-;todo: introduce (slide-only) content? that is invis in reading mode and only vis in slide_mode ?
 ; to active slidemode, hit f12 and run the global function slide_mode()
 (define (slide . contents)
   (txexpr 'section '((class "slide")) contents))
@@ -102,17 +47,22 @@
 
 ;Number -> List<Number>
 ; returns a list of powers of two
-(define (pot n)
+(define (pow2s n)
   (cond [(= n 0) '()]
-        [else (cons (expt 2 (- n 1)) (pot (- n 1)))]))
+        [else (cons (expt 2 (- n 1)) (pow2s (- n 1)))]))
 
 ; String or Number -> Txexpr
-;returns 2^n rendered correctly in html
+; returns 2^n rendered correctly in html
 (define (2^ n #:style [style '()])
+  (x^n 2 n #:style style))
+
+; String or Number -> Txexpr
+; returns x^n rendered correctly in html
+(define (x^n x n #:style [style '()])
   (define s
     (cond [(string? n) n]
           [(number? n) (number->string n)]))
-  (txexpr 'span style (list "2" (txexpr 'sup empty (list s)))))
+  (txexpr 'span style (list x (txexpr 'sup empty (list s)))))
 
 ; Number -> List<txexpr>
 ; returns a list of powers of 2 html subscript
@@ -213,8 +163,8 @@
         empty))))
 
 ; String -> String
-; flips the bits
-(define (bnot s)
+; flips the bits, given 010 -> 101
+(define (binary-not s)
   (define (flip i) (if (char=? i #\0) #\1 #\0))
   (list->string (map flip (string->list s))))
 
@@ -393,7 +343,7 @@
 ; supports highlighting msb for negative numbers
 (define (deci->bin-table num bits #:caption [caption #f])
   (define bin (deci->binary num #:width bits))
-  (define headings (pot bits))
+  (define headings (pow2s bits))
   (define discrim (cond [(>= num 0) (cons headings bin)]
                         [(negative? num) (cons (append (list (highlight-first headings)) (rest headings))
                                                (append (list (highlight-first (rest bin))) (rest (rest bin))))]))
@@ -466,12 +416,7 @@
 (define (ptime #:style [style empty] . c)
   (txexpr 'time style c))
 
-; String -> String
-; example.html -> example
-(define (trim-ext s)
-  (string-replace s (bytes->string/utf-8 (path-get-extension s)) "" #:all? #f))
-
-(define ex '(pagetree-root (introduction.html installation.html) (misc/evolvedsimplicity.html misc/effective_education.html misc/howtowritecleancode.html misc/badui.html misc/learning_stages.html)))
+(define page-root-example '(pagetree-root (introduction.html installation.html) (misc/evolvedsimplicity.html misc/effective_education.html misc/howtowritecleancode.html misc/badui.html misc/learning_stages.html)))
 
 ; List<'page-root List<Symbol>>
 ; takes a pollen ptree pageroot
