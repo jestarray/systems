@@ -13,11 +13,11 @@
 ◊h2{Base 10}
 ◊object[#:data "/images/decimal_yellow_lock.svg" #:type "image/svg+xml"]{}
 
-Humans typically use a ◊strong{base-10 (decimal) number system}, likely because we have 10 fingers.
+Humans typically use a ◊strong{base-10 (decimal) number system}, likely developed because we have 10 fingers.
 
-Use this rotating lock to count. Every time we add 1, we rotate the rightmost wheel forward by one digit. But what happens when we reach 9 and want to add another 1?
+Click any wheel on this lock to advance just that digit. To count upward by 1, we rotate the rightmost wheel forward by one digit. But what happens when we reach 9 and want to add another 1?
 
-We've run out of digits! The rightmost wheel rolls back to 0, and the wheel to its left advances by 1. We've gone from ◊strong{09 to 10}.
+We've run out of digits! The rightmost wheel rolls back to 0. To keep counting, we must also advance the wheel to its left by 1: try clicking those two wheels to go from ◊strong{09 to 10}.
 
 But notice something interesting: ◊strong{the position of each digit determines its value}.
 
@@ -43,11 +43,15 @@ This is how our base-10 number system works.
 
 But what if we had a lock where each wheel had only ◊strong{two possible digits: 0 and 1}?
 
-We'd start at 0, advance to 1, but then we'd already be out of digits! So the wheel rolls back to 0, and the next wheel advances to 1, giving us 10.
+We'd start at 0, advance to 1, but then we'd already be out of digits! Click the rightmost wheel again to roll it back to 0, then click the next wheel to advance it to 1, giving us 10.
 
 This is ◊strong{base 2, also known as binary}, the number system computers use.
 
-Both number systems follow the same rules. The only difference is how many digits each wheel can display before rolling over.
+Both number systems follow the same rules. The big differences being:
+◊ul{
+    ◊li{we roll over after 1 in binary, whereas we roll over after 9 in decimal.}
+    ◊li{the weights of each position are powers of 2 in binary, whereas they are powers of 10 in decimal.}
+}
 }
 
 Each binary digit is called a ◊strong{bit}. The ◊strong{bit width} is the number of bits in a representation. Our binary lock has four wheels, so it displays four bits.
@@ -60,15 +64,7 @@ Compare the position weights in decimal and binary. Positions count from 0 at th
                 (list "Decimal" (x^n 10 "n") "…" (x^n 10 4) (x^n 10 3) (x^n 10 2) (x^n 10 1) (x^n 10 0))
                 (list "Binary" (2^ "n") "…" (2^ 4) (2^ 3) (2^ 2) (2^ 1) (2^ 0))))
 
-Both ◊(x^n 10 0) and ◊(2^ 0) equal 1: the rightmost digit is the ones place in either system.
-
-Each 1 contributes its position's weight to the total; each 0 contributes nothing. For example:
-
-◊(deci->bin-table 13 4)
-
-◊(base "1101" 2) = (1 × 8) + (1 × 4) + (0 × 2) + (1 × 1) = ◊(base 13 10).
-
-The small subscript tells us the base: ◊(base "10" 2) means two, while ◊(base 10 10) means ten.
+To reduce confusion, we use a small subscript, ◊(base "10" 2) to represent binary numbers, and ◊(base 10 10) means ten .
 
 Like a lock with a fixed number of wheels, a representation with a fixed bit width has a limited number of patterns. Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they represent ◊strong{0 through 15}, because zero is one of the 16 values.
 
