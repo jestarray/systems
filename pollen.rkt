@@ -9,14 +9,23 @@
 (provide (all-defined-out)) ;make everything global in this file
 
 ; String(s) -> txexpr
-; creates codeblocks with optional data src for download
-; (racket-code-block #:data-src "mypath.rkt" "foo" "baz" "bar")
-(define (hdl-code-block #:data-src [src ""] . contents)
+; Creates HDL code blocks with optional downloads and Prism line highlighting.
+; (hdl-code-block #:id "example" #:data-line "2-3" "CHIP ...")
+(define (hdl-code-block #:data-src [src ""] #:data-line [lines ""] #:id [id ""] . contents)
   (txexpr 'pre
-          (if (non-empty-string? src)
-              `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
-              `((class "line-numbers match-braces rainbow-braces")))
+          (append
+           '((class "line-numbers match-braces rainbow-braces"))
+           (if (non-empty-string? src) `((data-src ,src) (data-download-link "")) '())
+           ; An empty data-line also enables Prism's initial URL-hash handling.
+           (if (or (non-empty-string? lines) (non-empty-string? id)) `((data-line ,lines)) '())
+           (if (non-empty-string? id) `((id ,id)) '()))
           (list (txexpr 'code '((class "language-nand2tetris-hdl")) contents))))
+
+; Prism hash link, enhanced by code_links.js for previews without page jumps.
+; (code-link #:to "example" #:lines "2-3" "input declarations")
+(define (code-link #:to target #:lines lines . contents)
+  (txexpr 'a `((href ,(format "#~a.~a" target lines)))
+          contents))
 
 (define (c-code-block #:data-src [src ""] . contents)
   (txexpr 'pre

@@ -10,6 +10,7 @@
     ◊(define has-code-block? (select 'code doc))
     ◊when/splice[has-code-block?]{
     <script src="/prism_highlight.js"></script>
+    <script src="/code_links.js" defer></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     }
     <script src="./slide_mode.js?v=3"></script>

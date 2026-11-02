@@ -8,6 +8,7 @@
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=5" />
     <script src="/prism_highlight.js"></script>
+    <script src="/code_links.js" defer></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     <script src="./slide_mode.js?v=3"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
@@ -38,13 +39,13 @@
             <div class="page-layout">
                 <article>
                     <section class="slide"><h1 id="multi_bit_buses" tabindex="-1">Multi bit Buses</h1><p>The gates you’ve finished building <em>And, Or, Not, Mux, and Demux</em>, all operated on <strong>individual</strong> bits.</p><pre>A ───────────────► B
-       1 bit</pre><p>But real computers frequently operate on <strong>groups</strong> of bits simultaneously. For example, the computer we’re building uses 16-bit values throughout its architecture. This concept is called a <strong>bus</strong>, a collection of wires that carry multiple bits.</p><p><img src="/images/or16.svg" style="width: auto"/></p><p><img src="/images/16-bit-bus.svg"/></p></section><hr/><section class="slide"><h2 id="reading_hdl_bus_syntax" tabindex="-1"><a class="anchor" href="#reading_hdl_bus_syntax">#</a>Reading HDL Bus Syntax</h2><p>Notice the following declarations:<br/>- <code>a[16]</code> declares a bus containing 16 input bits.<br/>- <code>b[16]</code> declares another 16-bit bus.<br/>- <code>out[16]</code> declares a 16-bit output bus.<br/>Notice that <code>a[16]</code> means a bus containing 16 bits, <strong>not</strong> the sixteenth bit of the input <code>a</code>.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-nand2tetris-hdl">CHIP Or16 {
+       1 bit</pre><p>But real computers frequently operate on <strong>groups</strong> of bits simultaneously. For example, the computer we’re building uses 16-bit values throughout its architecture. This concept is called a <strong>bus</strong>, a collection of wires that carry multiple bits.</p><p><img src="/images/or16.svg" style="width: auto"/></p><p><img src="/images/16-bit-bus.svg"/></p></section><hr/><section class="slide"><h2 id="reading_hdl_bus_syntax" tabindex="-1"><a class="anchor" href="#reading_hdl_bus_syntax">#</a>Reading HDL Bus Syntax</h2><pre class="line-numbers match-braces rainbow-braces" data-line="" id="or16-bus-example"><code class="language-nand2tetris-hdl">CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
 
     PARTS:
     //// Replace this comment with your code.
-}</code></pre><p>That’s because the meaning of the brackets <strong>depends on where</strong> they’re used.<br/>If used in <strong>IN</strong> and <strong>OUT</strong>, it defines the width of the bus.<br/>If used in <strong>PARTS:</strong> it refers to <strong>selecting</strong> individual bits from the bus.</p></section><section class="slide"><h2 id="selecting_individual_bits_from_a_bus" tabindex="-1"><a class="anchor" href="#selecting_individual_bits_from_a_bus">#</a>Selecting Individual Bits from a Bus</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-nand2tetris-hdl">CHIP IsOdd {
+}</code></pre><p>- <code>a[16]</code> and <code>b[16]</code> declare a bus containing 16 input bits.<br/>- <code>out[16]</code> declares a 16-bit output bus.<br/>Notice that <code>a[16]</code> means a bus containing 16 bits, <strong>not</strong> the sixteenth bit of the input <code>a</code>.</p><p>That’s because the meaning of the square braces <code>[N]</code> <strong>depends on where</strong> they’re used.<br/>If used in <a href="#or16-bus-example.2-3">the top part</a>, <strong>IN</strong> and <strong>OUT</strong>, it defines the width of the bus.<br/>If used in <a href="#or16-bus-example.5-6">the bottom part</a>, <strong>PARTS:</strong> it refers to <strong>selecting</strong> individual bits from the bus.</p></section><section class="slide"><h2 id="selecting_individual_bits_from_a_bus" tabindex="-1"><a class="anchor" href="#selecting_individual_bits_from_a_bus">#</a>Selecting Individual Bits from a Bus</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-nand2tetris-hdl">CHIP IsOdd {
     IN in[8];
     OUT out;
 

@@ -21,13 +21,7 @@ But real computers frequently operate on ◊strong{groups} of bits simultaneousl
 
 ◊slide{
 ◊h2{Reading HDL Bus Syntax}
-Notice the following declarations:
-- ◊code{a[16]} declares a bus containing 16 input bits.
-- ◊code{b[16]} declares another 16-bit bus.
-- ◊code{out[16]} declares a 16-bit output bus.
-Notice that ◊code{a[16]} means a bus containing 16 bits, ◊strong{not} the sixteenth bit of the input ◊code{a}.
-◊hdl-code-block{
-CHIP Or16 {
+◊hdl-code-block[#:id "or16-bus-example"]{CHIP Or16 {
     IN a[16], b[16];
     OUT out[16];
 
@@ -35,9 +29,14 @@ CHIP Or16 {
     //// Replace this comment with your code.
 }
 }
-That's because the meaning of the brackets ◊strong{depends on where} they're used. 
-If used in ◊strong{IN} and ◊strong{OUT}, it defines the width of the bus. 
-If used in ◊strong{PARTS:} it refers to ◊strong{selecting} individual bits from the bus.
+- ◊code{a[16]} and ◊code{b[16]} declare a bus containing 16 input bits.
+- ◊code{out[16]} declares a 16-bit output bus.
+Notice that ◊code{a[16]} means a bus containing 16 bits, ◊strong{not} the sixteenth bit of the input ◊code{a}.
+
+
+That's because the meaning of the square braces ◊code{[N]} ◊strong{depends on where} they're used.
+If used in ◊code-link[#:to "or16-bus-example" #:lines "2-3"]{the top part}, ◊strong{IN} and ◊strong{OUT}, it defines the width of the bus.
+If used in ◊code-link[#:to "or16-bus-example" #:lines "5-6"]{the bottom part}, ◊strong{PARTS:} it refers to ◊strong{selecting} individual bits from the bus.
 }
 
 ◊slide{
