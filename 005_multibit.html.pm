@@ -38,24 +38,14 @@ This ◊code{SwapBits} chip swaps the two bits of its input: ◊code{10} becomes
 }
 }
 
-◊hdl-code-block[#:id "swap-bits-bus-example"]{CHIP SwapBits {
-    IN in[2];
-    OUT out[2];
+◊img[#:src "/images/swap-bits-diagram.svg"]{}
 
-    PARTS:
-    Or(a=in[0], b=false, out=out[1]);
-    Or(a=in[1], b=false, out=out[0]);
-}
-}
-
+The brackets declare a ◊strong{bit width} in ◊code{IN}/◊code{OUT}, but select a ◊strong{bit} in ◊code{PARTS:}—for both input and output buses.
 ◊ul{
-◊li{In ◊code-link[#:to "swap-bits-bus-example" #:lines "2-3"]{the declarations}, ◊code{in[2]} and ◊code{out[2]} set each bus's ◊strong{width}: two bits, indexed 0 and 1.}
-◊li{In ◊code-link[#:to "swap-bits-bus-example" #:lines "6"]{the first connection}, ◊code{a=in[0]} selects the rightmost input bit and connects it to the ◊code{Or} gate's ◊code{a} input.}
+◊li{The first ◊code{Or} gate, ◊code{a=in[0]} ◊strong{selects} the ◊strong{rightmost} input bit and connects it to the ◊code{Or} gate's ◊code{a} input.}
 ◊li{◊code{b=false} sets ◊code{b} to all zeros: here, just one ◊code{0}, since ◊code{b} is a single-bit input. The gate copies the selected bit because ◊code{Or(x, 0) = x}.}
-◊li{◊code{out=out[1]} connects the gate's single-bit output (left) to bit 1 of our chip's output bus (right). The ◊code-link[#:to "swap-bits-bus-example" #:lines "7"]{second connection} copies input bit 1 to output bit 0.}
+◊li{◊code{out=out[1]} connects the gate's single-bit output (left) to bit 1 of our chip's output bus (right). The ◊code{Or} gate copies input bit 1 to output bit 0.}
 }
-
-The brackets declare a ◊strong{width} in ◊code{IN}/◊code{OUT}, but select a ◊strong{bit} in ◊code{PARTS:}—for both input and output buses. Each gate here carries just one bit.
 }
 
 ◊slide{
@@ -244,18 +234,30 @@ ChipName(in=in[8..15], ...);
 
 ◊hr{}
 
-◊h2{1.2.4 Multi-Way Versions of Basic Gates}
+◊h2{Project Multi-Way: Mux4Way16, Mux8Way16, DMux4Way, DMux8Way}
 ◊p{Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. This section describes a set of multi-way gates that will be used subsequently in various chips in our computer architecture. Similar generalizations can be developed for other architectures, as needed.}
 
 ◊hr{}
 
 ◊slide{
-◊h3{Multi-Way/Multi-Bit Multiplexor}
-◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log◊sub{2}(m). Figure 1.10 depicts a typical example.}
+◊h3{Mux4Way16}
+◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log◊sub{2}(m).}
 
 ◊p{The computer platform that we develop in this book requires two variations of this chip: A 4-way 16-bit multiplexor and an 8-way 16-bit multiplexor:}
 
-◊img[#:src "/images/4way-mux.png"]{}
+◊(table #:monospace? #t
+  #:headings (list "sel[1]" "sel[0]" "out")
+  #:rows (list
+  (list "0" "0" "a")
+  (list "0" "1" "b")
+  (list "1" "0" "c")
+  (list "1" "1" "d")
+  )
+  #:caption (list "Simplified Mux4Way16 table")
+)
+
+◊object[#:data "/images/mux4way16_interactive.svg"
+        #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux4Way16
   ◊strong{Inputs:} a[16], b[16], c[16], d[16], sel[2]
@@ -283,6 +285,9 @@ ChipName(in=in[8..15], ...);
 ◊hr{}
 
 ◊slide{
+◊h3{Mux8Way16}
+◊object[#:data "/images/mux8way16_interactive.svg"
+        #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux8Way16
   ◊strong{Inputs:} a[16], b[16], c[16], d[16], e[16], f[16], g[16], h[16], sel[3]
@@ -318,12 +323,23 @@ ChipName(in=in[8..15], ...);
 ◊hr{}
 
 ◊slide{
-◊h3{Multi-Way/Multi-Bit Demultiplexor}
+◊h3{DMux4Way}
 ◊p{An m-way n-bit demultiplexor (figure 1.11) channels a single n-bit input into one of m possible n-bit outputs. The selection is specified by a set of k control bits, where k=log_{2}m.}
 
 ◊p{The specific computer platform that we will build requires two variations of this chip: A 4-way 1-bit demultiplexor and an 8-way 1-bit multiplexor, as follows.}
 
-◊img[#:src "/images/4way-demux.png"]{}
+◊(table #:monospace? #t
+  #:headings (list "sel[1]" "sel[0]" "a" "b" "c" "d")
+  #:rows (list
+  (list "0" "0" "in" "0" "0" "0")
+  (list "0" "1" "0" "in" "0" "0")
+  (list "1" "0" "0" "0" "in" "0")
+  (list "1" "1" "0" "0" "0" "in")
+  )
+  #:caption (list "Simplified DMux4Way table")
+)
+◊object[#:data "/images/dmux4way_interactive.svg"
+        #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux4Way
   ◊strong{Inputs:} in, sel[2]
@@ -353,6 +369,9 @@ ChipName(in=in[8..15], ...);
 }
 ◊hr{}
 ◊slide{
+◊h3{DMux8Way}
+◊object[#:data "/images/dmux8way_interactive.svg"
+        #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux8Way
   ◊strong{Inputs:} in, sel[3]

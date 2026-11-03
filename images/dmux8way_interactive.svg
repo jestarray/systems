@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 585 442" width="585" height="442" role="img" aria-label="Interactive 8-way demultiplexer">
+<title>Interactive 8-way DMux</title>
+<desc>Click selector bits to send the input signal to one of 8 outputs, labeled a, b, c, d, e, f, g, h.</desc>
+<style>
+text {font-family: Arial, Helvetica, sans-serif; fill:#1c2430}
+.wire {stroke:#7b8795;stroke-width:2.5;fill:none;stroke-linecap:round}
+.wire.active {stroke:#e55331;stroke-width:4.5}
+.name {font-size:18px;font-weight:600}
+.name.active {fill:#b72f17}
+.inner {stroke:#e55331;stroke-width:4;stroke-dasharray:8 5;fill:none}
+.switch {cursor:pointer;outline:none}
+.switch rect {fill:#f0f3f6;stroke:#96a4b5;stroke-width:1.5}
+.switch .state {fill:#334155;font-size:20px;font-weight:bold}
+.switch.on rect {fill:#ffe2d7;stroke:#e55331}
+.switch.on .state {fill:#c24121}
+.switch:focus rect {stroke:#2463eb;stroke-width:3}
+.muted {font-size:14px;fill:#596579}
+</style>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L7 3.5L0 7Z" fill="#7b8795"/></marker>
+<marker id="activeArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L7 3.5L0 7Z" fill="#e55331"/></marker>
+</defs>
+<rect width="585" height="442" fill="white"/>
+<path d="M230 136.5 L365 9 L365 264 Z" fill="#e2e5e9" stroke="#333" stroke-width="2"/>
+<text x="320" y="126.5" font-size="21" font-weight="bold" text-anchor="middle">8-way</text>
+<text x="320" y="153.5" font-size="21" font-weight="bold" text-anchor="middle">DMux</text>
+<path class="wire active" id="input-wire" d="M110 136.5 H230" marker-end="url(#activeArrow)"/>
+<text class="name active" x="76" y="142.5">in</text>
+<path class="inner" id="selected-route" d="M230 136.5 L365 28"/>
+<path class="wire" id="wire-0" d="M365 28 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-0" x="449" y="34">a</text>
+<text id="value-0" x="501" y="34" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-1" d="M365 59 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-1" x="449" y="65">b</text>
+<text id="value-1" x="501" y="65" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-2" d="M365 90 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-2" x="449" y="96">c</text>
+<text id="value-2" x="501" y="96" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-3" d="M365 121 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-3" x="449" y="127">d</text>
+<text id="value-3" x="501" y="127" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-4" d="M365 152 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-4" x="449" y="158">e</text>
+<text id="value-4" x="501" y="158" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-5" d="M365 183 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-5" x="449" y="189">f</text>
+<text id="value-5" x="501" y="189" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-6" d="M365 214 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-6" x="449" y="220">g</text>
+<text id="value-6" x="501" y="220" font-size="17" font-weight="bold">0</text>
+<path class="wire" id="wire-7" d="M365 245 H435" marker-end="url(#arrow)"/>
+<text class="name" id="name-7" x="449" y="251">h</text>
+<text id="value-7" x="501" y="251" font-size="17" font-weight="bold">0</text>
+<path d="M255 297 V254" class="wire" marker-end="url(#arrow)"/>
+<g class="switch" id="switch-2" data-bit="2" tabindex="0" role="button" aria-label="Toggle sel[2]" aria-pressed="false"><rect x="235" y="303" width="40" height="37" rx="8"/><text class="state" id="state-2" x="255" y="329" text-anchor="middle">0</text></g>
+<text x="255" y="362" font-size="15" text-anchor="middle">sel[2]</text>
+<path d="M309 297 V254" class="wire" marker-end="url(#arrow)"/>
+<g class="switch" id="switch-1" data-bit="1" tabindex="0" role="button" aria-label="Toggle sel[1]" aria-pressed="false"><rect x="289" y="303" width="40" height="37" rx="8"/><text class="state" id="state-1" x="309" y="329" text-anchor="middle">0</text></g>
+<text x="309" y="362" font-size="15" text-anchor="middle">sel[1]</text>
+<path d="M363 297 V254" class="wire" marker-end="url(#arrow)"/>
+<g class="switch" id="switch-0" data-bit="0" tabindex="0" role="button" aria-label="Toggle sel[0]" aria-pressed="false"><rect x="343" y="303" width="40" height="37" rx="8"/><text class="state" id="state-0" x="363" y="329" text-anchor="middle">0</text></g>
+<text x="363" y="362" font-size="15" text-anchor="middle">sel[0]</text>
+<text id="selection-label" x="310" y="394" font-size="18" font-weight="bold" text-anchor="middle">sel = 000 → a</text>
+<text x="310" y="417" class="muted" text-anchor="middle">Click selector bits to route in to one output.</text>
+<script><![CDATA[
+(function () {
+ const n = 8;
+ const bits = 3;
+ const labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+ const ys = [28, 59, 90, 121, 152, 183, 214, 245];
+ let selection = 0;
+ const el = id => document.getElementById(id);
+ function render() {
+  for (let i = 0; i < n; i++) {
+   let active = i === selection;
+   el('wire-' + i).setAttribute('class', active ? 'wire active' : 'wire');
+   el('wire-' + i).setAttribute('marker-end', active ? 'url(#activeArrow)' : 'url(#arrow)');
+   el('name-' + i).setAttribute('class', active ? 'name active' : 'name');
+   el('value-' + i).textContent = active ? 'in' : '0';
+   el('value-' + i).setAttribute('fill', active ? '#b72f17' : '#596579');
+  }
+  el('selected-route').setAttribute('d', 'M230 136.5 L365 ' + ys[selection]);
+  el('selection-label').textContent = 'sel = ' + selection.toString(2).padStart(bits, '0') + ' → ' + labels[selection];
+  for (let bit=0;bit<bits;bit++) {
+   let on = !!(selection & (1 << bit));
+   el('state-'+bit).textContent = on ? '1' : '0';
+   el('switch-'+bit).setAttribute('class',on ? 'switch on' : 'switch');
+   el('switch-'+bit).setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+ }
+ for (let bit=0;bit<bits;bit++) {
+  const sw=el('switch-'+bit);
+  const toggle=()=>{selection ^= (1<<bit);render();};
+  sw.addEventListener('click',toggle);
+  sw.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle();}});
+ }
+ render();
+})();
+]]></script>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 485" width="100%" height="100%" style="background-color: white;">
+  <style>
+    .code { font-family: monospace; font-size: 16px; font-weight: bold; }
+    .lbl { font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }
+    .pin-text { font-family: sans-serif; font-size: 13px; font-weight: bold; text-anchor: middle; }
+    .wire { fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    .wire-thin { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+    .box { fill: none; stroke-width: 2.5; stroke-dasharray: 8,4; }
+    .gate { fill: white; stroke-width: 2.5; stroke-linejoin: round; }
+    .red { stroke: #ff0000; } .red-fill { fill: #ff0000; }
+    .blue { stroke: #0000ff; } .blue-fill { fill: #0000ff; }
+    .green { stroke: #00bb00; } .green-fill { fill: #00bb00; }
+    .black { stroke: #000000; } .black-fill { fill: #000000; }
+  </style>
+
+  <defs>
+    <polygon id="pin-in" points="0,0 54,0 60,10 54,20 0,20" class="gate"/>
+    <polygon id="pin-out" points="0,0 62,0 68,10 62,20 0,20" class="gate"/>
+    <path id="or-gate" d="M 0,0 Q 15,0 35,20 Q 15,40 0,40 Q 10,20 0,0 Z" class="gate"/>
+  </defs>
+
+  <!-- Top-level chip -->
+  <rect class="box red" x="65" y="10" width="560" height="280"/>
+  <text class="lbl red-fill" x="345" y="30">SwapBits</text>
+
+  <!-- External 2-bit input and output pins -->
+  <use href="#pin-in" x="20" y="139" class="red"/>
+  <text class="pin-text red-fill" x="47" y="153">in[2]</text>
+
+  <use href="#pin-out" x="572" y="139" class="red"/>
+  <text class="pin-text red-fill" x="603" y="153">out[2]</text>
+
+  <!-- Top OR gate, a=in[0], b=false, out=out[1] -->
+  <rect class="box blue" x="228" y="55" width="200" height="100"/>
+  <text class="lbl blue-fill" x="328" y="75">Or</text>
+  <use href="#pin-in" x="228" y="83" class="blue"/>
+  <text class="pin-text blue-fill" x="255" y="97">a</text>
+  <use href="#pin-in" x="228" y="111" class="blue"/>
+  <text class="pin-text blue-fill" x="255" y="125">b</text>
+  <use href="#pin-out" x="366" y="93" class="blue"/>
+  <text class="pin-text blue-fill" x="397" y="107">out</text>
+  <use href="#or-gate" x="306" y="83" class="blue"/>
+  <path class="wire-thin blue" d="M 278,93 H 309 M 278,121 H 298 L 309,113 M 341,103 H 366"/>
+
+  <!-- Bottom OR gate, a=in[1], b=false, out=out[0] -->
+  <rect class="box green" x="228" y="179" width="200" height="100"/>
+  <text class="lbl green-fill" x="328" y="199">Or</text>
+  <use href="#pin-in" x="228" y="207" class="green"/>
+  <text class="pin-text green-fill" x="255" y="221">a</text>
+  <use href="#pin-in" x="228" y="235" class="green"/>
+  <text class="pin-text green-fill" x="255" y="249">b</text>
+  <use href="#pin-out" x="366" y="217" class="green"/>
+  <text class="pin-text green-fill" x="397" y="231">out</text>
+  <use href="#or-gate" x="306" y="207" class="green"/>
+  <path class="wire-thin green" d="M 278,217 H 309 M 278,245 H 298 L 309,237 M 341,227 H 366"/>
+
+  <!-- Input bus enters once, then fans out internally -->
+  <path class="wire red" d="M 80,149 H 145"/>
+  <circle cx="145" cy="149" r="5" class="red-fill"/>
+  <path class="wire red" d="M 145,149 H 175 V 93 H 228"/>
+  <path class="wire red" d="M 145,149 H 175 V 217 H 228"/>
+  <text class="lbl red-fill" x="192" y="86">in[0]</text>
+  <text class="lbl red-fill" x="192" y="210">in[1]</text>
+
+  <!-- Explicit false constants for b inputs -->
+  <text class="lbl black-fill" x="183" y="114">false</text>
+  <path class="wire-thin black" d="M 183,119 V 121 H 228"/>
+  <text class="lbl black-fill" x="183" y="238">false</text>
+  <path class="wire-thin black" d="M 183,243 V 245 H 228"/>
+
+  <!-- Output bus fans in internally, then exits once -->
+  <path class="wire red" d="M 428,103 H 485 V 149 H 572"/>
+  <path class="wire red" d="M 428,227 H 485 V 149"/>
+  <circle cx="485" cy="149" r="5" class="red-fill"/>
+  <text class="lbl red-fill" x="456" y="94">out[1]</text>
+  <text class="lbl red-fill" x="456" y="220">out[0]</text>
+
+  <!-- HDL, color coded -->
+  <text x="90" y="318" class="code">
+    <tspan x="90" dy="0" class="black-fill">CHIP <tspan class="red-fill">SwapBits</tspan> {</tspan>
+    <tspan x="125" dy="23" class="black-fill">IN <tspan class="red-fill">in[2]</tspan>;</tspan>
+    <tspan x="125" dy="23" class="black-fill">OUT <tspan class="red-fill">out[2]</tspan>;</tspan>
+    <tspan x="90" dy="27" class="black-fill">PARTS:</tspan>
+    <tspan x="100" dy="23" font-size="12"><tspan class="blue-fill">Or</tspan><tspan class="black-fill">(</tspan><tspan class="blue-fill">a</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">in[0]</tspan><tspan class="black-fill">, </tspan><tspan class="blue-fill">b</tspan><tspan class="black-fill">=false, </tspan><tspan class="blue-fill">out</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">out[1]</tspan><tspan class="black-fill">);</tspan></tspan>
+    <tspan x="100" dy="23" font-size="12"><tspan class="green-fill">Or</tspan><tspan class="black-fill">(</tspan><tspan class="green-fill">a</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">in[1]</tspan><tspan class="black-fill">, </tspan><tspan class="green-fill">b</tspan><tspan class="black-fill">=false, </tspan><tspan class="green-fill">out</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">out[0]</tspan><tspan class="black-fill">);</tspan></tspan>
+    <tspan x="90" dy="23" class="black-fill">}</tspan>
+  </text>
+</svg>
