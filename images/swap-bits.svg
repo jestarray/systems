@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 130" width="560" height="130" role="img" aria-labelledby="title desc">
+  <title id="title">01 → SwapBits → 10</title>
+  <desc id="desc">The input is 01. After SwapBits, the two output cards trade places to show 10.</desc>
+  <style>
+    text { fill: #253044; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .digit { font-family: monospace; font-size: 26px; font-weight: bold; dominant-baseline: central; }
+    .arrow { font-size: 26px; }
+    .zero rect { fill: #fff7ed; stroke: #b45309; }
+    .one rect { fill: #eff6ff; stroke: #2563eb; }
+    .zero text { fill: #9a4307; }
+    .one text { fill: #1d4ed8; }
+    .card rect { width: 36px; height: 44px; x: -18px; y: -22px; rx: 5px; stroke-width: 1.5; }
+    .swap-zero { animation: swap-zero 4s infinite; }
+    .swap-one { animation: swap-one 4s infinite; }
+    @keyframes swap-zero {
+      0%, 15% { transform: translate(0, 0); }
+      42% { transform: translate(22px, -28px); }
+      70%, 100% { transform: translate(44px, 0); }
+    }
+    @keyframes swap-one {
+      0%, 15% { transform: translate(0, 0); }
+      42% { transform: translate(-22px, 28px); }
+      70%, 100% { transform: translate(-44px, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .swap-zero { animation: none; transform: translate(44px, 0); }
+      .swap-one { animation: none; transform: translate(-44px, 0); }
+    }
+  </style>
+  <rect width="560" height="130" rx="10" fill="#f8fafc"/>
+  <g class="card zero" transform="translate(77 65)"><rect/><text class="digit">0</text></g>
+  <g class="card one" transform="translate(121 65)"><rect/><text class="digit">1</text></g>
+  <text class="arrow" x="184" y="73">→</text>
+  <rect x="223" y="43" width="114" height="44" rx="6" fill="#e2e8f0"/>
+  <text x="280" y="71" font-size="19" font-weight="600">SwapBits</text>
+  <text class="arrow" x="376" y="73">→</text>
+  <g transform="translate(439 65)">
+    <g class="card zero swap-zero"><rect/><text class="digit">0</text></g>
+  </g>
+  <g transform="translate(483 65)">
+    <g class="card one swap-one"><rect/><text class="digit">1</text></g>
+  </g>
+</svg>
