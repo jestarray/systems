@@ -10,22 +10,6 @@
     .zero text { fill: #9a4307; }
     .one text { fill: #1d4ed8; }
     .card rect { width: 36px; height: 44px; x: -18px; y: -22px; rx: 5px; stroke-width: 1.5; }
-    .swap-zero { animation: swap-zero 4s infinite; }
-    .swap-one { animation: swap-one 4s infinite; }
-    @keyframes swap-zero {
-      0%, 15% { transform: translate(0, 0); }
-      42% { transform: translate(22px, -28px); }
-      70%, 100% { transform: translate(44px, 0); }
-    }
-    @keyframes swap-one {
-      0%, 15% { transform: translate(0, 0); }
-      42% { transform: translate(-22px, 28px); }
-      70%, 100% { transform: translate(-44px, 0); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .swap-zero { animation: none; transform: translate(44px, 0); }
-      .swap-one { animation: none; transform: translate(-44px, 0); }
-    }
   </style>
   <rect width="560" height="130" rx="10" fill="#f8fafc"/>
   <g class="card zero" transform="translate(77 65)"><rect/><text class="digit">0</text></g>
@@ -35,9 +19,15 @@
   <text x="280" y="71" font-size="19" font-weight="600">SwapBits</text>
   <text class="arrow" x="376" y="73">→</text>
   <g transform="translate(439 65)">
-    <g class="card zero swap-zero"><rect/><text class="digit">0</text></g>
+    <g class="card zero moving">
+      <animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite" values="0 0;0 0;22 -28;44 0;44 0" keyTimes="0;0.15;0.42;0.7;1"/>
+      <rect/><text class="digit">0</text>
+    </g>
   </g>
   <g transform="translate(483 65)">
-    <g class="card one swap-one"><rect/><text class="digit">1</text></g>
+    <g class="card one moving">
+      <animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite" values="0 0;0 0;-22 28;-44 0;-44 0" keyTimes="0;0.15;0.42;0.7;1"/>
+      <rect/><text class="digit">1</text>
+    </g>
   </g>
 </svg>
