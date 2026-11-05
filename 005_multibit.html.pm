@@ -225,13 +225,6 @@ ChipName(in=in[8..15], ...);
 }
 }
 
-◊; Or16 and And16 are parallel implementation of Or and And
-◊; MultiwayOr relies on "cascading" adjacent bits
-◊; mention temporary variables/internal pins will be used a lot
-
-◊; slide{◊img[#:src "/images/16-bit-select-1.svg"]{}}
-◊; slide{◊img[#:src "/images/16-bit-select-4.svg"]{}}
-
 ◊hr{}
 
 ◊h2{Project Multi-Way: Mux4Way16, Mux8Way16, DMux4Way, DMux8Way}
