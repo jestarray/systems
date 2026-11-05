@@ -52,21 +52,30 @@ Both number systems follow the same rules. The big differences being:
     ◊li{we roll over after 1 in binary, whereas we roll over after 9 in decimal.}
     ◊li{the weights of each position are powers of 2 in binary, whereas they are powers of 10 in decimal.}
 }
+
+Each binary digit is called a ◊strong{bit}. The ◊strong{bit width} is the number of bits(slots) in a representation. Our binary lock has four wheels, so it displays four bits.
+
+Comparing our decimal and binary positional weights side by side, we see that the weight of each slot is different.
+◊ul{
+    ◊li{Decimal system increases by ◊(x^n 10 "n")}
+    ◊li{Binary system increases by ◊(x^n 2 "n")}
 }
-
-Each binary digit is called a ◊strong{bit}. The ◊strong{bit width} is the number of bits in a representation. Our binary lock has four wheels, so it displays four bits.
-
-Compare the position weights in decimal and binary. Positions count from 0 at the rightmost digit:
-
 ◊(table #:caption "Decimal and binary position weights"
         #:headings (list "Position" "n" "…" "4" "3" "2" "1" "0")
         #:rows (list
                 (list "Decimal" (x^n 10 "n") "…" (x^n 10 4) (x^n 10 3) (x^n 10 2) (x^n 10 1) (x^n 10 0))
                 (list "Binary" (2^ "n") "…" (2^ 4) (2^ 3) (2^ 2) (2^ 1) (2^ 0))))
+}
 
-To reduce confusion, we use a small subscript, ◊(base 10 2) to represent binary numbers, and ◊(base 10 10) means ten .
+◊hr{}
 
-Similar to how locks have a finite amount of combinations, the bit width of a number also determines the amoutn of possible combinations.
+◊slide{
+◊h2{How Many Values Can N Bits Represent?}
+◊ul{
+  ◊li{With ◊strong{n bits}(slots), we can represent ◊strong{◊(2^ "n") unique combinations}.}
+  ◊li{For unsigned numbers, these combinations represent values ranging from ◊strong{0 to ◊(2^ "n") − 1}.}
+}
+Similar to how locks have a ◊strong{finite} amount of combinations, in computers, the bit width of a number also determines the amount of possible combinations.
 Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they represent ◊strong{0 through 15}, because zero is one of the 16 values.
 
 ◊(max-unsigned-limit-table 4)
@@ -75,26 +84,21 @@ To represent 16, we'd need to ◊strong{expand} the bit width from 4 slots to 5 
 ◊(base 10000 2) = ◊(base 16 10). 
 ◊(deci->bin-table 16 5)
 Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 through 31.
-
-◊hr{}
-
-◊h2{How Many Values Can N Bits Represent?}
-◊ul{
-  ◊li{With ◊strong{n bits}, we can represent ◊strong{◊(2^ "n") unique combinations}.}
-  ◊li{For unsigned numbers, these combinations represent values ranging from ◊strong{0 to ◊(2^ "n") − 1}.}
 }
 
 ◊(hr)
+◊slide{
 ◊h2{How to convert a binary number to a decimal number?}
+◊lead{What does ◊code{0111} equal in decimal?}
 ◊steps{
     ◊(step "Look at where there is a 1" (deci->bin-table 7 4) 
-    "Notice there are 1's underneeth the 4,2, and 1 headers")
-    ◊(step "Sum up the corresponding power of 2 number" "you can think of it as an on/off switch" (deci->bin-table 7 4)  "0 + 4 + 2 + 1 = 7; thus our answer is 0111 represents 7")}
+    "Notice there are 1's underneeth the 4, 2, and 1 headers")
+    ◊(step "Sum up the corresponding power of 2 number" "You can think of it as an on/off switch" (deci->bin-table 7 4)  "0 + 4 + 2 + 1 = 7; thus our answer is ◊(base2 "0111") represents 7")}
 
 ◊more-examples{
     ◊(deci->bin-table 4 4)
     0 + 4 + 0 + 0 = 4; thus ◊code{0100} represents 4.
-    ◊(deci->bin-table 10 4) 8 + 0 + 2 + 0 = 10; thus ◊code{1010} represents 10.}
+    ◊(deci->bin-table 10 4) 8 + 0 + 2 + 0 = 10; thus ◊(base2 "1010") represents ◊(base10 10)}
 
 ◊lead{Check your understanding!}
 ◊(q "What is the binary number 10011 in decimal?" (deci->bin-table 19 5) "16 + 2 + 1 = 19; Answer: 19")
@@ -102,10 +106,11 @@ Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 t
 ◊(q "What is the binary number 10101 in decimal?" (deci->bin-table 21 5) "16 + 4 + 1 = 21; Answer: 21")
 
 ◊(q "What is the binary number 101001 in decimal ?" (deci->bin-table 41 6) "32 + 8 + 1; Answer 41")
-
+}
 ◊(hr)
+◊slide{
 ◊(h2 "How to convert a decimal number to a binary number?")
-
+◊lead{How to convert 13 in decimal to binary?}
 ◊h3{Subtraction method}
 ◊steps{
     ◊step{
@@ -124,7 +129,7 @@ Subtract the chosen power of 2 from the remaining number and repeat until the re
 
 Leave 0 in every unused position.
 ◊(deci->bin-table 13 4)
-8 + 4 + 0 + 1 = 13; thus ◊(base "1101" 2) represents ◊(base 13 10).}}
+8 + 4 + 0 + 1 = 13; thus ◊(base2 "1101") represents ◊(base10 13).}}
 
 ◊lead{Check your understanding!}
 ◊(q "What is the decimal number 11 in binary?" (deci->bin-table 11 4) "answer: 1011; because 8 + 2 + 1 = 11")
@@ -134,7 +139,9 @@ What is the decimal number 233 in binary?
 ◊(deci->bin-table 233 8)
 answer: 11101001; which you can confirm adds up to 233. Notice how we needed to expand to 8 bits to represent this number because 233 can only fit into 8 bits or higher: ◊(2^ "8") = 256
 }
+}
 
+◊slide{
 ◊h3{Division method}
 ◊steps{
     ◊step{
@@ -155,7 +162,7 @@ answer: 11101001; which you can confirm adds up to 233. Notice how we needed to 
 
         The first remainder gives the 1's bit: it tells us whether the number is even (0) or odd (1). Dividing by 2 removes that bit, so the next remainder gives the original number's 2's bit, then the 4's bit, and so on. We find the bits from right to left, which is why we read the table from bottom to top.
 
-        From bottom to top, the remainders are 11101001, so ◊(base "11101001" 2) = ◊(base 233 10).
+        From bottom to top, the remainders are 11101001, so ◊(base2 "11101001") = ◊(base10 233).
     }}
 
 ◊lead{Check your understanding!}
@@ -173,13 +180,13 @@ Use the division method
 
 ◊(deci->bin-table 30 5)
 }
-
+}
 ◊hr{}
-
+◊slide{
 ◊h2{Review Questions}
 Try answering each question before opening it to check your reasoning. Treat all numbers as unsigned.
 
-◊q{How many different patterns/combinations can 6 bits represent?
+◊q{What is the maximum amount of combinations/patterns 6 bits can represent?
 ◊p{Each bit has 2 possible values, so 6 bits give us ◊(2^ 6) = 64 different patterns.}
 }
 
@@ -201,4 +208,5 @@ Try answering each question before opening it to check your reasoning. Treat all
 
 ◊q{What are the smallest and largest unsigned values that 9 bits can represent?
 ◊p{The smallest value is 0, and the largest is ◊(2^ 9) − 1 = 511. Zero uses one of the 512 patterns, so the values range from 0 through 511.}
+}
 }

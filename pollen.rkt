@@ -204,13 +204,20 @@
   (define padded (string-append (make-string (max 0 (- width (string-length conv))) #\0) conv))
   (string->list (if (negative? n) (string-append "-" padded) padded)))
 
-; number number -> txexpr
+; Number|String Number|String -> txexpr
 ; 101011 -> 101011_2 where _2 will be printed in a subscript form
-(define (base n n2)
-  (txexpr 'span empty
+; NOTE: Leading zeros should be called with string
+(define (base n n2 #:monospace? [monospace? #f])
+  (txexpr 'span (if monospace? '((style "font-family: monospace;")) empty)
           (list (if (number? n) (number->string n) n)
-                (txexpr 'sub empty (list (cond [(number? n2) (number->string n2)]
-                                               [else n2]))))))
+                (txexpr 'sub empty (list (if (number? n2) (number->string n2) n2))))))
+; Number ->Txexpr
+; produces html txexpr subscrpit "ten"
+(define (base10 n)
+  (base n "ten"))
+
+(define (base2 n)
+  (base n "two" #:monospace? #t))
 
 ;String -> txexpr
 ;returns hashlink id of an h2
