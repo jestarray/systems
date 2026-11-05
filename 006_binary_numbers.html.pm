@@ -64,17 +64,25 @@ Compare the position weights in decimal and binary. Positions count from 0 at th
                 (list "Decimal" (x^n 10 "n") "…" (x^n 10 4) (x^n 10 3) (x^n 10 2) (x^n 10 1) (x^n 10 0))
                 (list "Binary" (2^ "n") "…" (2^ 4) (2^ 3) (2^ 2) (2^ 1) (2^ 0))))
 
-To reduce confusion, we use a small subscript, ◊(base "10" 2) to represent binary numbers, and ◊(base 10 10) means ten .
+To reduce confusion, we use a small subscript, ◊(base 10 2) to represent binary numbers, and ◊(base 10 10) means ten .
 
-Like a lock with a fixed number of wheels, a representation with a fixed bit width has a limited number of patterns. Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they represent ◊strong{0 through 15}, because zero is one of the 16 values.
+Similar to how locks have a finite amount of combinations, the bit width of a number also determines the amoutn of possible combinations.
+Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they represent ◊strong{0 through 15}, because zero is one of the 16 values.
 
 ◊(max-unsigned-limit-table 4)
 
-To represent 16, we need a fifth bit: ◊(base "10000" 2) = ◊(base 16 10). Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 through 31.
-
+To represent 16, we'd need to ◊strong{expand} the bit width from 4 slots to 5 slots.
+◊(base 10000 2) = ◊(base 16 10). 
 ◊(deci->bin-table 16 5)
+Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 through 31.
 
-In general, ◊strong{n bits give us ◊(2^ "n") different patterns}, representing unsigned values from 0 through ◊(2^ "n") − 1.
+◊hr{}
+
+◊h2{How Many Values Can N Bits Represent?}
+◊ul{
+  ◊li{With ◊strong{n bits}, we can represent ◊strong{◊(2^ "n") unique combinations}.}
+  ◊li{For unsigned numbers, these combinations represent values ranging from ◊strong{0 to ◊(2^ "n") − 1}.}
+}
 
 ◊(hr)
 ◊h2{How to convert a binary number to a decimal number?}
@@ -85,15 +93,15 @@ In general, ◊strong{n bits give us ◊(2^ "n") different patterns}, representi
 
 ◊more-examples{
     ◊(deci->bin-table 4 4)
-    0 + 4 + 0 + 0 = 4; thus 0100 represents 4.
-    ◊(deci->bin-table 10 4) 8 + 0 + 2 + 0 = 10; thus 1010 represents 10.}
+    0 + 4 + 0 + 0 = 4; thus ◊code{0100} represents 4.
+    ◊(deci->bin-table 10 4) 8 + 0 + 2 + 0 = 10; thus ◊code{1010} represents 10.}
 
 ◊lead{Check your understanding!}
-◊(q "What is the binary number 0011 in decimal?" (deci->bin-table 3 4) "answer: 3; because 2 + 1 = 3")
+◊(q "What is the binary number 10011 in decimal?" (deci->bin-table 19 5) "16 + 2 + 1 = 19; Answer: 19")
 
-◊(q "What is the binary number 0101 in decimal?" (deci->bin-table 5 4) "answer: 5; because 4 + 1 = 5")
+◊(q "What is the binary number 10101 in decimal?" (deci->bin-table 21 5) "16 + 4 + 1 = 21; Answer: 21")
 
-◊(q "What is the binary number 1001 in decimal ?" (deci->bin-table 9 4) "answer: 9; because 8 + 1 = 9")
+◊(q "What is the binary number 101001 in decimal ?" (deci->bin-table 41 6) "32 + 8 + 1; Answer 41")
 
 ◊(hr)
 ◊(h2 "How to convert a decimal number to a binary number?")
@@ -164,4 +172,33 @@ Use the division method
 ◊(deci->div-table ◊(deci->bin-div 30) #:caption "11110")
 
 ◊(deci->bin-table 30 5)
+}
+
+◊hr{}
+
+◊h2{Review Questions}
+Try answering each question before opening it to check your reasoning. Treat all numbers as unsigned.
+
+◊q{How many different patterns/combinations can 6 bits represent?
+◊p{Each bit has 2 possible values, so 6 bits give us ◊(2^ 6) = 64 different patterns.}
+}
+
+◊q{What are the smallest and largest unsigned values that 6 bits can represent?
+◊p{The smallest value is 0, and the largest is ◊(2^ 6) − 1 = 63. Zero uses one of the 64 patterns, so the values range from 0 through 63.}
+}
+
+◊q{Do 101 and 00000101 represent different unsigned values? Do they have the same bit width?
+◊p{Both represent 5: 4 + 1. Leading zeros do not change the value, but they do change the written bit width. ◊code{101} has 3 bits, while ◊code{00000101} has 8 bits.}
+}
+
+◊q{How can you tell whether an unsigned binary number is even or odd by looking at just one bit?
+◊p{Look at the rightmost bit. If it is 0, the number is even; if it is 1, the number is odd. Every other position has an even weight, so only the 1's bit determines whether the total is even or odd.}
+}
+
+◊q{How many different patterns/combinations can 9 bits represent?
+◊p{Each bit has 2 possible values, so 9 bits give us ◊(2^ 9) = 512 different patterns.}
+}
+
+◊q{What are the smallest and largest unsigned values that 9 bits can represent?
+◊p{The smallest value is 0, and the largest is ◊(2^ 9) − 1 = 511. Zero uses one of the 512 patterns, so the values range from 0 through 511.}
 }
