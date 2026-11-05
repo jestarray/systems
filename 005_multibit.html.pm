@@ -216,19 +216,32 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊slide{
 ◊h2{Selecting a range of bits from a bus}
-◊img[#:src "/images/multibit-indexing-ranged.svg"]{}
+◊object[#:data "/images/multibit-indexing-ranged.svg" #:type "image/svg+xml" #:aria-label "Interactive bit range selector" #:style "display: block; width: 100%; aspect-ratio: 2 / 1; border: 0;"]{
+◊a[#:href "/images/multibit-indexing-ranged.svg"]{Open the bit range selector.}
+}
 
-◊hdl-code-block{
-// Splitting a 16-bit bus into two 8-bit halves:
-ChipName(in=in[0..7], ...);
-ChipName(in=in[8..15], ...);
+This custom ◊code{SwapBytes} chip exchanges the two 8-bit halves of its input, keeping the bits within each half in order.
+
+◊img[#:src "/images/swap-bytes-diagram.svg" #:alt "SwapBytes wiring and HDL: in[8..15] connects to Or16 a[0..7], and in[0..7] connects to a[8..15]. With b=false, the rearranged bits pass through to out." ]{}
+
+◊ul{
+◊li{In ◊code{◊span[#:style "color: #0000ff;"]{a[0..7]}=◊span[#:style "color: #e00000;"]{in[8..15]}}, the blue side names part of the ◊span[#:style "color: #0000ff;"]{Or16} input; the red side names part of ◊span[#:style "color: #e00000;"]{SwapBytes}' input. Each range contains ◊strong{8 bits}.}
+◊li{The other connection, ◊code{◊span[#:style "color: #0000ff;"]{a[8..15]}=◊span[#:style "color: #e00000;"]{in[0..7]}}, fills the remaining half of ◊code[#:style "color: #0000ff;"]{a}. Together, the two connections fill all 16 bits.}
+◊li{Bits stay in order within each range: ◊code[#:style "color: #e00000;"]{in[8]} connects to ◊code[#:style "color: #0000ff;"]{a[0]} and passes through to ◊code[#:style "color: #e00000;"]{out[0]}; ◊code[#:style "color: #e00000;"]{in[15]} connects to ◊code[#:style "color: #0000ff;"]{a[7]} and passes through to ◊code[#:style "color: #e00000;"]{out[7]}.}
+◊li{◊code{◊span[#:style "color: #0000ff;"]{b}=false} supplies sixteen zeros, so ◊span[#:style "color: #0000ff;"]{Or16} copies the rearranged bits to ◊code[#:style "color: #e00000;"]{out}.}
+◊li{In the example, the orange byte ◊code[#:style "color: #b45309;"]{10110010} moves to the right, and the green byte ◊code[#:style "color: #008800;"]{01101100} moves to the left.}
 }
 }
 
 ◊hr{}
 
+◊slide{
 ◊h2{Project Multi-Way: Mux4Way16, Mux8Way16, DMux4Way, DMux8Way}
-◊p{Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. This section describes a set of multi-way gates that will be used subsequently in various chips in our computer architecture. Similar generalizations can be developed for other architectures, as needed.}
+◊p{Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. Some of these might require selecting a range of bits depending on your implementation.
+
+Note: Spoilers show a possible implementation, so don't shoehorn into thinking you can only use certain gates. You can use any previous gates you've built.
+}
+}
 
 ◊hr{}
 

@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="group" aria-labelledby="title description">
+    <title id="title">Select a range of bits</title>
+    <desc id="description">Choose the lowest and highest bit indices. Both endpoints are included. The default range a[0..3] selects four bits.</desc>
+    <rect width="1000" height="500" fill="white"/>
     <style>
         .title {
             font-family: sans-serif;
@@ -108,86 +111,49 @@
     <text class="index" x="870" y="235" text-anchor="middle">a[0]</text>
 
 
-    <!-- ===================================================== -->
-    <!-- RANGE 0..3                                            -->
-    <!-- Select a[0], a[1], a[2], a[3]                        -->
-    <!-- ===================================================== -->
+    <!-- Default selection also remains visible when scripts are unavailable. -->
+    <rect id="range-selection" class="selection" x="500" y="100" width="425" height="110"/>
 
-    <rect class="selection" x="605" y="100" width="320" height="110" opacity="0">
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;0;0" keyTimes="0;0.25;0.5;0.75"></animate>
-    </rect>
+    <foreignObject x="130" y="267" width="740" height="80">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; justify-content: center; gap: 36px; align-items: center; padding: 8px; font: 22px sans-serif; color: #222;">
+            <label for="range-low">Lowest index
+                <select id="range-low" style="font: inherit; min-width: 70px; min-height: 44px; background: white; color: #222; border: 2px solid #666; border-radius: 6px;">
+                    <option selected="selected">0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+                </select>
+            </label>
+            <label for="range-high">Highest index
+                <select id="range-high" style="font: inherit; min-width: 70px; min-height: 44px; background: white; color: #222; border: 2px solid #666; border-radius: 6px;">
+                    <option>0</option><option>1</option><option>2</option><option selected="selected">3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+                </select>
+            </label>
+        </div>
+    </foreignObject>
 
+    <text id="range-syntax" class="syntax" x="500" y="380" text-anchor="middle">a[0..3]</text>
+    <text id="range-count" class="caption" x="500" y="425" text-anchor="middle" aria-live="polite">4 bits selected</text>
 
-    <!-- ===================================================== -->
-    <!-- RANGE 4..6                                            -->
-    <!-- Select a[4], a[5], a[6]                              -->
-    <!-- ===================================================== -->
-
-    <rect class="selection" x="185" y="100" width="320" height="110" opacity="0">
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.25;0.5;0.75"></animate>
-    </rect>
-
-
-    <!-- ===================================================== -->
-    <!-- RANGE 1..2                                            -->
-    <!-- ===================================================== -->
-
-    <rect class="selection" x="605" y="100" width="215" height="110" opacity="0">
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;1;0" keyTimes="0;0.25;0.5;0.75"></animate>
-    </rect>
-
-
-    <!-- ===================================================== -->
-    <!-- RANGE 5..7                                            -->
-    <!-- ===================================================== -->
-
-    <rect class="selection" x="80" y="100" width="320" height="110" opacity="0">
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;1" keyTimes="0;0.25;0.5;0.75"></animate>
-    </rect>
-
-
-    <!-- ===================================================== -->
-    <!-- ANIMATED RANGE SYNTAX                                 -->
-    <!-- ===================================================== -->
-
-    <!-- White background to hide labels underneath -->
-    <rect x="340" y="280" width="320" height="70" fill="white"></rect>
-
-    <text class="syntax" x="500" y="325" text-anchor="middle" opacity="0">
-        a[0..3]
-
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="1;0;0;0"></animate>
-    </text>
-
-    <text class="syntax" x="500" y="325" text-anchor="middle" opacity="0">
-        a[4..6]
-
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0"></animate>
-    </text>
-
-    <text class="syntax" x="500" y="325" text-anchor="middle" opacity="0">
-        a[1..2]
-
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;1;0"></animate>
-    </text>
-
-    <text class="syntax" x="500" y="325" text-anchor="middle" opacity="0">
-        a[5..7]
-
-        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="discrete" values="0;0;0;1"></animate>
-    </text>
-
-
-    <!-- ===================================================== -->
-    <!-- EXPLANATION                                           -->
-    <!-- ===================================================== -->
-
-    <text class="caption" x="500" y="385" text-anchor="middle">
-        Several individual bits can be treated as one smaller group
-    </text>
-
-    <text class="index" x="500" y="425" text-anchor="middle">
-        a[0..3] = 4 bits    •    a[4..6] = 3 bits
-    </text>
-
+    <script><![CDATA[
+    (() => {
+        const low = document.getElementById('range-low');
+        const high = document.getElementById('range-high');
+        const selection = document.getElementById('range-selection');
+        function updateRange(event) {
+            // Keep an ascending HDL range when either endpoint crosses the other.
+            if (Number(low.value) > Number(high.value)) {
+                if (event.target === low) high.value = low.value;
+                else low.value = high.value;
+            }
+            const first = Number(low.value);
+            const last = Number(high.value);
+            const count = last - first + 1;
+            selection.setAttribute('x', 80 + (7 - last) * 105);
+            selection.setAttribute('width', 110 + (last - first) * 105);
+            document.getElementById('range-syntax').textContent = `a[${first}..${last}]`;
+            document.getElementById('range-count').textContent =
+                `${count} ${count === 1 ? 'bit' : 'bits'} selected`;
+        }
+        low.addEventListener('change', updateRange);
+        high.addEventListener('change', updateRange);
+    })();
+    ]]></script>
 </svg>
