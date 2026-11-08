@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="540" viewBox="0 0 760 540" role="group" aria-label="Decimal combination lock. Click any wheel to advance only its digit." style="user-select:none;-webkit-user-select:none">
-  <title>Decimal combination lock — click individual wheels</title>
-  <desc>Interactive yellow four-wheel combination padlock. Click any wheel to advance its digit independently. After 9, that wheel returns to 0 without changing other wheels.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" role="group" aria-label="Decimal combination lock. Use Increment to count up by one, or click a wheel to change only its digit." style="user-select:none;-webkit-user-select:none">
+  <title>Decimal combination lock — increment or click individual wheels</title>
+  <desc>Interactive yellow four-wheel combination padlock. The Increment button adds one with carry to the next wheel and wraps back to 0000 after the maximum value. Click any wheel to advance its digit independently. After 9, that wheel returns to 0 without changing other wheels.</desc>
   <defs>
     <linearGradient id="back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e8edf2"/></linearGradient>
     <linearGradient id="yellow" x1="0" y1="0" x2=".15" y2="1">
@@ -31,6 +31,12 @@
     .brand {font:800 12px system-ui,sans-serif;fill:#66420a;text-anchor:middle;letter-spacing:2px;}
     .readout {font:700 20px ui-monospace,Consolas,monospace;fill:#233343;text-anchor:middle;}
     .hint {font:500 13px system-ui,sans-serif;fill:#64748b;text-anchor:middle;}
+    .increment {cursor:pointer;}
+    .increment rect {fill:#233343;stroke:#233343;stroke-width:2;}
+    .increment:hover rect {fill:#3b5268;}
+    .increment:focus-visible {outline:none;}
+    .increment:focus-visible rect {stroke:#a66a00;stroke-width:4;}
+    .increment text {font:700 16px system-ui,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none;}
     .wheel {cursor:pointer;}
     .wheel:hover .digit {fill:#fff3a1;stroke:#fff3a1;}
     .strip {transform:translateY(0);}
@@ -38,7 +44,7 @@
     @keyframes roll {from{transform:translateY(0)}to{transform:translateY(-66px)}}
     @media (prefers-reduced-motion: reduce) {.strip.rolling{animation-duration:.02s;}}
   ]]></style>
-  <rect width="760" height="540" rx="22" fill="url(#back)"/>
+  <rect width="760" height="600" rx="22" fill="url(#back)"/>
   <text x="380" y="35" class="title">Decimal combination lock</text>
   <text x="380" y="57" class="subtitle">4 digits · counts 0–9,999 · click any wheel to change its digit</text>
 
@@ -144,7 +150,11 @@
 
   </g>
   <text id="readout" class="readout" role="status" aria-live="polite" x="380" y="495">Decimal value: 0000</text>
-  <text class="hint" x="380" y="522">CLICK A WHEEL TO ADVANCE ONLY THAT DIGIT</text>
+  <g id="increment" class="increment" role="button" tabindex="0" aria-label="Increment value by one">
+    <rect x="288" y="512" width="184" height="44" rx="10"/>
+    <text x="380" y="540">Increment +1</text>
+  </g>
+  <text class="hint" x="380" y="582">INCREMENT TO COUNT UP · CLICK A WHEEL TO CHANGE ONLY ITS DIGIT</text>
   <script><![CDATA[
     (() => {
       const svg = document.currentScript.ownerSVGElement;
@@ -155,9 +165,7 @@
         current: svg.getElementById('digit' + i),
         next: svg.getElementById('next' + i),
         weight: Math.pow(base, 3 - i),
-        value: 0,
-        queued: 0,
-        rolling: false
+        value: 0
       }));
       const readout = svg.getElementById('readout');
 
@@ -172,29 +180,56 @@
           : `Decimal value: ${digits}`;
       }
 
-      function step(wheel) {
-        if (wheel.rolling || !wheel.queued) return;
-        wheel.rolling = true;
-        wheel.queued--;
-        const nextValue = (wheel.value + 1) % base;
-        wheel.next.textContent = nextValue;
-        wheel.strip.classList.remove('rolling');
-        void wheel.strip.getBBox();
-        wheel.strip.classList.add('rolling');
-        window.setTimeout(() => {
+      // Serialize both kinds of input so rapid clicks preserve carries.
+      const pending = [];
+      let rolling = false;
+
+      function step() {
+        if (rolling || !pending.length) return;
+        rolling = true;
+        const action = pending.shift();
+        const changed = [];
+        if (action === 'increment') {
+          for (let i = wheels.length - 1; i >= 0; i--) {
+            changed.push(wheels[i]);
+            if (wheels[i].value < base - 1) break;
+          }
+        } else {
+          changed.push(wheels[action]);
+        }
+        changed.forEach(wheel => {
+          wheel.next.textContent = (wheel.value + 1) % base;
           wheel.strip.classList.remove('rolling');
-          wheel.value = nextValue;
-          display(wheel);
-          wheel.rolling = false;
-          step(wheel);
+          void wheel.strip.getBBox();
+          wheel.strip.classList.add('rolling');
+        });
+        window.setTimeout(() => {
+          changed.forEach(wheel => {
+            wheel.strip.classList.remove('rolling');
+            wheel.value = (wheel.value + 1) % base;
+          });
+          changed.forEach(display);
+          rolling = false;
+          step();
         }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 30 : 245);
       }
 
-      wheels.forEach(wheel => {
-        wheel.element.addEventListener('click', () => {
-          wheel.queued++;
-          step(wheel);
-        });
+      function enqueue(action) {
+        pending.push(action);
+        step();
+      }
+
+      const increment = svg.getElementById('increment');
+      increment.addEventListener('click', () => enqueue('increment'));
+      increment.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          enqueue('increment');
+        }
+      });
+
+      wheels.forEach((wheel, i) => {
+        wheel.element.addEventListener('click', () => enqueue(i));
         display(wheel);
       });
     })();
