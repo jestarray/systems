@@ -231,16 +231,17 @@ This custom ◊code{SwapBytes} chip exchanges the two 8-bit halves of its input,
 ◊li{◊code{◊span[#:style "color: #0000ff;"]{b}=false} supplies sixteen zeros, so ◊span[#:style "color: #0000ff;"]{Or16} copies the rearranged bits to ◊code[#:style "color: #e00000;"]{out}.}
 ◊li{In the example, the orange byte ◊code[#:style "color: #b45309;"]{10110010} moves to the right, and the green byte ◊code[#:style "color: #008800;"]{01101100} moves to the left.}
 }
+
+See the ◊a[#:href "/media/Nand2Tetris-HDL-Manual.pdf"]{Nand2Tetris HDL Reference Manual} for more HDL details.
 }
 
 ◊hr{}
 
 ◊slide{
 ◊h2{Project Multi-Way: Mux4Way16, Mux8Way16, DMux4Way, DMux8Way}
-◊p{Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. Some of these might require selecting a range of bits depending on your implementation.
+Many 2-way logic gates that accept two inputs have natural generalization to multi-way variants that accept an arbitrary number of inputs. Some of these might require selecting a range of bits depending on your implementation.
 
 Note: Spoilers show a possible implementation, so don't shoehorn into thinking you can only use certain gates. You can use any previous gates you've built.
-}
 }
 
 ◊hr{}
