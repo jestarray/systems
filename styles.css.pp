@@ -238,7 +238,17 @@ a:visited {
 }
 
 .steps {
-    list-style-position: none;
+    list-style-type: none;
+    padding-left: 0;
+    counter-reset: lesson-step;
+}
+
+.steps > li {
+    counter-increment: lesson-step;
+}
+
+.steps > li > details > summary.step::before {
+    content: "Step " counter(lesson-step) ": ";
 }
 
 .step {

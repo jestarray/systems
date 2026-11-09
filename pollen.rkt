@@ -349,6 +349,7 @@
         l))
   (map (lambda (item) (txexpr 'li empty (list item))) (clean items)))
 
+; ... String -> texpr
 (define (steps . l)
   (txexpr 'ol (list '(class "steps")) (list->li l)))
 ;String String ... -> txexpr
