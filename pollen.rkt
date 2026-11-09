@@ -134,10 +134,6 @@
 (define (q heading . content)
   (txexpr 'details empty (append (list (txexpr 'summary '((class "question")) (list heading))) content)))
 
-;String String -> txexpr
-(define (step heading . content)
-  (txexpr 'details '((open "")) (append (list (txexpr 'summary '((class "step")) (list heading))) content)))
-
 ;accepts only the uid, not the full url
 ; https://youtu.be/fQnUTmOu3lc?t=1777
 ; String String Bool -> txexpr
@@ -355,6 +351,9 @@
 
 (define (steps . l)
   (txexpr 'ol (list '(class "steps")) (list->li l)))
+;String String ... -> txexpr
+(define (step heading . content)
+  (txexpr 'details '((open "")) (append (list (txexpr 'summary '((class "step")) (list heading))) content)))
 
 ;Number Number -> Table
 ; converts a number in decimal to binary with a small bit table

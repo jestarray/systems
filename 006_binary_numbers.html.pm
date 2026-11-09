@@ -81,9 +81,12 @@ Four bits give us ◊(2^ 4) = 16 different patterns. As unsigned numbers, they r
 ◊(max-unsigned-limit-table 4)
 
 To represent 16, we'd need to ◊strong{expand} the bit width from 4 slots to 5 slots.
-◊(base 10000 2) = ◊(base 16 10). 
+◊(base2 10000) = ◊(base10 16). 
 ◊(deci->bin-table 16 5)
-Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 through 31.
+
+◊q{Given a bitwidth of 5, how many combinations can it produce?
+Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned decimal values from 0 through 31.
+}
 }
 
 ◊(hr)
@@ -93,7 +96,10 @@ Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned values from 0 t
 ◊steps{
     ◊(step "Look at where there is a 1" (deci->bin-table 7 4) 
     "Notice there are 1's underneeth the 4, 2, and 1 headers")
-    ◊(step "Sum up the corresponding power of 2 number" "You can think of it as an on/off switch" (deci->bin-table 7 4)  "0 + 4 + 2 + 1 = 7; thus our answer is ◊(base2 "0111") represents 7")}
+    ◊step{Sum up the corresponding power of 2 number
+    You can think of it as an on/off switch
+    ◊(deci->bin-table 7 4)
+    0 + 4 + 2 + 1 = 7; thus our answer is ◊(base2 "0111") represents 7}}
 
 ◊more-examples{
     ◊(deci->bin-table 4 4)
