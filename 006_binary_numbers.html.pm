@@ -116,8 +116,8 @@ Five bits give us ◊(2^ 5) = 32 patterns, representing unsigned decimal values 
 ◊(hr)
 ◊slide{
 ◊(h2 "How to convert a decimal number to a binary number?")
-◊lead{How to convert 13 in decimal to binary?}
 ◊h3{Subtraction method}
+◊lead{How to convert 13 to binary?}
 ◊steps{
     ◊step{
 Find the biggest power of 2 that is less than or equal to the remaining number and place a 1 in that position
@@ -149,17 +149,42 @@ answer: 11101001; which you can confirm adds up to 233. Notice how we needed to 
 
 ◊slide{
 ◊h3{Division method}
+◊lead{How to convert 233 to binary?}
 ◊steps{
-    ◊step{
-     Divide by 2 and record the whole-number quotient and remainder
-
-     Let's try converting 233. Dividing 233 by 2 gives a quotient of 116 and a remainder of 1: 233 = 2 × 116 + 1.
+    ◊step{Divide by 2 and record the whole-number quotient and remainder
+     To convert 233 to binary, divide 233 by 2:
+◊(txexpr 'figure '() (list
+    (txexpr 'svg '((xmlns "http://www.w3.org/2000/svg")
+                  (viewBox "0 0 240 280")
+                  (style "display: block; width: 12em; max-width: 100%; height: auto; color: inherit;")
+                  (role "img")
+                  (aria-labelledby "division-233-title division-233-desc"))
+      (append
+        '((title ((id "division-233-title")) "233 divided by 2 using long division")
+          (desc ((id "division-233-desc")) "The quotient is 116 with remainder 1. Subtract 2 from 2 to get 0, bring down 3, subtract 2 to get 1, then bring down the last 3 to make 13. Subtract 12 to leave remainder 1.")
+          (path ((d "M 62 72 L 62 40 L 146 40 M 72 106 H 92 M 96 170 H 116 M 96 234 H 140")
+                 (fill "none") (stroke "currentColor") (stroke-width "1.5"))))
+        (for/list ([entry '((46 68 "2")
+                           (82 28 "1") (106 28 "1") (130 28 "6")
+                           (82 68 "2") (106 68 "3") (130 68 "3")
+                           (58 100 "−") (82 100 "2")
+                           (106 132 "3")
+                           (82 164 "−") (106 164 "2")
+                           (106 196 "1") (130 196 "3")
+                           (82 228 "−") (106 228 "1") (130 228 "2")
+                           (130 260 "1"))])
+          (txexpr 'text `((x ,(number->string (car entry)))
+                         (y ,(number->string (cadr entry)))
+                         (text-anchor "middle") (fill "currentColor")
+                         (font-family "Georgia, serif") (font-size "24"))
+                  (list (caddr entry))))))))
+     The whole-number quotient is 116, and the remainder is 1.
     }
     ◊step{
-        Repeat with the quotient until the quotient becomes 0
+        Repeat dividing the quotient by 2 until the quotient becomes 0
 
         Next, divide 116 by 2 to get a quotient of 58 and a remainder of 0. Keep dividing each new quotient by 2 and record its remainder.
-        ◊(deci->div-table (deci->bin-div 233) #:caption "11101001")
+        ◊(deci->div-table (deci->bin-div 233))
 
         The remainder is always 0 or 1. Stop after the row where dividing 1 by 2 gives a quotient of 0 and a remainder of 1.
     }
@@ -175,8 +200,8 @@ answer: 11101001; which you can confirm adds up to 233. Notice how we needed to 
 
 Use the division method
 
-◊(q "What is 16 in binary?" ◊(deci->div-table ◊(deci->bin-div 16) #:caption "10000")
-◊(deci->bin-table 16 5))
+◊(q "What is 17 in binary?" ◊(deci->div-table ◊(deci->bin-div 17) #:caption "10001")
+◊(deci->bin-table 17 5))
 
 ◊(q "What is 23 in binary?" ◊(deci->div-table ◊(deci->bin-div 23) #:caption "10111")
 ◊(deci->bin-table 23 5))
