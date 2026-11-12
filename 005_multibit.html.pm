@@ -293,6 +293,21 @@ Note: Spoilers show a possible implementation, so don't shoehorn into thinking y
 
 ◊slide{
 ◊h3{Mux8Way16}
+◊(table #:monospace? #t
+  #:headings (list "sel[2]" "sel[1]" "sel[0]" "out")
+  #:rows (list
+  (list "0" "0" "0" "a")
+  (list "0" "0" "1" "b")
+  (list "0" "1" "0" "c")
+  (list "0" "1" "1" "d")
+  (list "1" "0" "0" "e")
+  (list "1" "0" "1" "f")
+  (list "1" "1" "0" "g")
+  (list "1" "1" "1" "h")
+  )
+  #:caption (list "Simplified Mux8Way16 table")
+)
+
 ◊object[#:data "/images/mux8way16_interactive.svg"
         #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
@@ -377,6 +392,21 @@ Note: Spoilers show a possible implementation, so don't shoehorn into thinking y
 ◊hr{}
 ◊slide{
 ◊h3{DMux8Way}
+◊(table #:monospace? #t
+  #:headings (list "sel[2]" "sel[1]" "sel[0]" "a" "b" "c" "d" "e" "f" "g" "h")
+  #:rows (list
+  (list "0" "0" "0" "in" "0" "0" "0" "0" "0" "0" "0")
+  (list "0" "0" "1" "0" "in" "0" "0" "0" "0" "0" "0")
+  (list "0" "1" "0" "0" "0" "in" "0" "0" "0" "0" "0")
+  (list "0" "1" "1" "0" "0" "0" "in" "0" "0" "0" "0")
+  (list "1" "0" "0" "0" "0" "0" "0" "in" "0" "0" "0")
+  (list "1" "0" "1" "0" "0" "0" "0" "0" "in" "0" "0")
+  (list "1" "1" "0" "0" "0" "0" "0" "0" "0" "in" "0")
+  (list "1" "1" "1" "0" "0" "0" "0" "0" "0" "0" "in")
+  )
+  #:caption (list "Simplified DMux8Way table")
+)
+
 ◊object[#:data "/images/dmux8way_interactive.svg"
         #:type "image/svg+xml"]{}
 ◊div[#:class "api-box"]{
