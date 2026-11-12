@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/theme.js?v=2"></script>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=5" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css?v=7" />
+    ◊when/splice[(select 'table doc)]{
+    <script src="/table_expand.js?v=2" defer></script>
+    }
     ◊(define has-code-block? (select 'code doc))
     ◊when/splice[has-code-block?]{
     <script src="/prism_highlight.js"></script>

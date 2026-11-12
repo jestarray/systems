@@ -350,6 +350,73 @@ article {
     outline-offset: 2px;
 }
 
+.table-expand,
+.table-dialog button {
+    padding: .4em .75em;
+    border: 1px solid var(--border);
+    border-radius: .25rem;
+    background: var(--surface-bg);
+    color: var(--page-text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.table-expand {
+    margin-block: .5rem;
+    background: #87ceeb;
+    border-color: #4098bb;
+    color: #102a36;
+}
+
+.table-dialog button {
+    background: #c62828;
+    border-color: #a51f1f;
+    color: #fff;
+}
+
+.table-dialog {
+    /* Override resets that position dialogs relative to the document. */
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    box-sizing: border-box;
+    width: max-content;
+    height: fit-content;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    background: var(--page-bg);
+    color: var(--page-text);
+}
+
+.table-dialog::backdrop {
+    background: rgb(0 0 0 / 60%);
+}
+
+.table-dialog form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .75rem;
+}
+
+.table-dialog .table-scroll {
+    max-height: calc(100dvh - 9rem);
+    overflow: auto;
+}
+
+html:has(.table-dialog[open]) {
+    overflow: hidden;
+}
+
+@media print {
+    .table-expand,
+    .table-dialog {
+        display: none;
+    }
+}
+
 article :is(h1, h2, h3, h4, h5, h6) {
     scroll-margin-top: 1.5rem;
 }
