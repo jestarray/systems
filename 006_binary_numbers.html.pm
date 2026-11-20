@@ -218,26 +218,26 @@ Use the division method
 Try answering each question before opening it to check your reasoning. Treat all numbers as unsigned.
 
 ◊q{What is the maximum amount of combinations/patterns 6 bits can represent?
-◊p{Each bit has 2 possible values, so 6 bits give us ◊(2^ 6) = 64 different patterns.}
+Each bit has 2 possible values, so 6 bits give us ◊(2^ 6) = 64 different patterns.
 }
 
 ◊q{What are the smallest and largest unsigned values that 6 bits can represent?
-◊p{The smallest value is 0, and the largest is ◊(2^ 6) − 1 = 63. Zero uses one of the 64 patterns, so the values range from 0 through 63.}
+The smallest value is 0, and the largest is ◊(2^ 6) − 1 = 63. Zero uses one of the 64 patterns, so the values range from 0 through 63.
 }
 
 ◊q{Do 101 and 00000101 represent different unsigned values? Do they have the same bit width?
-◊p{Both represent 5: 4 + 1. Leading zeros do not change the value, but they do change the written bit width. ◊code{101} has 3 bits, while ◊code{00000101} has 8 bits.}
+Both represent 5: 4 + 1. Leading zeros do not change the value, but they do change the written bit width. ◊code{101} has 3 bits, while ◊code{00000101} has 8 bits.
 }
 
 ◊q{How can you tell whether an unsigned binary number is even or odd by looking at just one bit?
-◊p{Look at the rightmost bit. If it is 0, the number is even; if it is 1, the number is odd. Every other position has an even weight, so only the 1's bit determines whether the total is even or odd.}
+Look at the rightmost bit. If it is 0, the number is even; if it is 1, the number is odd. Every other position has an even weight, so only the 1's bit determines whether the total is even or odd.
 }
 
 ◊q{How many different patterns/combinations can 9 bits represent?
-◊p{Each bit has 2 possible values, so 9 bits give us ◊(2^ 9) = 512 different patterns.}
+Each bit has 2 possible values, so 9 bits give us ◊(2^ 9) = 512 different patterns.
 }
 
 ◊q{What are the smallest and largest unsigned values that 9 bits can represent?
-◊p{The smallest value is 0, and the largest is ◊(2^ 9) − 1 = 511. Zero uses one of the 512 patterns, so the values range from 0 through 511.}
+The smallest value is 0, and the largest is ◊(2^ 9) − 1 = 511. Zero uses one of the 512 patterns, so the values range from 0 through 511.
 }
 }

@@ -75,7 +75,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 ◊h2{Project: Not16, And16, Or16, Mux16, Or8Way} 
 
 ◊h3{Multi-Bit Not}
-◊p{An n-bit Not gate applies the Boolean operation Not to every one of the bits in its n-bit input bus:}
+An n-bit Not gate applies the Boolean operation Not to every one of the bits in its n-bit input bus:
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Not16
@@ -102,7 +102,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊slide{
 ◊h3{Multi-Bit And}
-◊p{An n-bit And gate applies the Boolean operation And to every one of the n bit-pairs arrayed in its two n-bit input buses:}
+An n-bit And gate applies the Boolean operation And to every one of the n bit-pairs arrayed in its two n-bit input buses:
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} And16
@@ -130,7 +130,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊slide{
 ◊h3{Multi-Bit Or}
-◊p{An n-bit Or gate applies the Boolean operation Or to every one of the n bit-pairs arrayed in its two n-bit input buses:}
+An n-bit Or gate applies the Boolean operation Or to every one of the n bit-pairs arrayed in its two n-bit input buses:
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Or16
@@ -158,7 +158,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊slide{
 ◊h3{Multi-Bit Multiplexor}
-◊p{An n-bit multiplexor is exactly the same as the binary multiplexor described in figure 1.8, except that the two inputs are each n-bit wide; the selector is a single bit.}
+An n-bit multiplexor is exactly the same as the binary multiplexor described in figure 1.8, except that the two inputs are each n-bit wide; the selector is a single bit.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux16
@@ -189,7 +189,7 @@ Now that you've learned how to index a single bit in a bus, you can now build No
 
 ◊slide{
 ◊h3{Multi-Way Or}
-◊p{An n-way Or gate outputs 1 when at least one of its n bit inputs is 1, and 0 otherwise. Here is the 8-way variant of this gate:}
+An n-way Or gate outputs 1 when at least one of its n bit inputs is 1, and 0 otherwise. Here is the 8-way variant of this gate:
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Or8Way
@@ -248,9 +248,9 @@ Note: Spoilers show a possible implementation, so don't shoehorn into thinking y
 
 ◊slide{
 ◊h3{Mux4Way16}
-◊p{An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log◊sub{2}(m).}
+An m-way n-bit multiplexor selects one of m n-bit input buses and outputs it to a single n-bit output bus. The selection is specified by a set of k control bits, where k=log◊sub{2}(m).
 
-◊p{The computer platform that we develop in this book requires two variations of this chip: A 4-way 16-bit multiplexor and an 8-way 16-bit multiplexor:}
+The computer platform that we develop in this book requires two variations of this chip: A 4-way 16-bit multiplexor and an 8-way 16-bit multiplexor:
 
 ◊(table #:monospace? #t
   #:headings (list "sel[1]" "sel[0]" "out")
@@ -346,9 +346,9 @@ Note: Spoilers show a possible implementation, so don't shoehorn into thinking y
 
 ◊slide{
 ◊h3{DMux4Way}
-◊p{An m-way n-bit demultiplexor (figure 1.11) channels a single n-bit input into one of m possible n-bit outputs. The selection is specified by a set of k control bits, where k=log_{2}m.}
+An m-way n-bit demultiplexor (figure 1.11) channels a single n-bit input into one of m possible n-bit outputs. The selection is specified by a set of k control bits, where k=log_◊sub{2}(m)
 
-◊p{The specific computer platform that we will build requires two variations of this chip: A 4-way 1-bit demultiplexor and an 8-way 1-bit multiplexor, as follows.}
+The specific computer platform that we will build requires two variations of this chip: A 4-way 1-bit demultiplexor and an 8-way 1-bit multiplexor, as follows.
 
 ◊(table #:monospace? #t
   #:headings (list "sel[1]" "sel[0]" "a" "b" "c" "d")

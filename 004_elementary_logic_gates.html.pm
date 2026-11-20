@@ -15,9 +15,9 @@
    #:caption (list "NAND"))
 ◊img[#:src "/images/nand_gate.svg"]{}
 }
-◊p{The starting point of our computer architecture is the Nand gate, from which all other gates and chips are built. The Nand gate is designed to compute the following Boolean function:}
+The starting point of our computer architecture is the Nand gate, from which all other gates and chips are built. The Nand gate is designed to compute the following Boolean function:
 
-◊p{Throughout the book, we use "chip API boxes" to specify chips. For each chip, the API specifies the chip name, the names of its input and output pins, the function or operation that the chip effects, and an optional comment.}
+Throughout the book, we use "chip API boxes" to specify chips. For each chip, the API specifies the chip name, the names of its input and output pins, the function or operation that the chip effects, and an optional comment.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Nand
@@ -34,7 +34,7 @@
 ◊hr{}
 
 ◊h2{1.2.2 Basic Logic Gates}
-◊p{Some of the logic gates presented here are typically referred to as "elementary" or "basic." At the same time, every one of them can be composed from Nand gates alone. Therefore, they need not be viewed as primitive.}
+Some of the logic gates presented here are typically referred to as "elementary" or "basic." At the same time, every one of them can be composed from Nand gates alone. Therefore, they need not be viewed as primitive.
 
 ◊h3{Not}
 ◊layout-spread-row{
@@ -46,7 +46,7 @@
    #:caption (list "NOT(!)"))
 ◊img[#:src "images/not_gate.svg"]{}
 }
-◊p{The single-input Not gate, also known as "converter," converts its input from 0 to 1 and vice versa. The gate API is as follows:}
+The single-input Not gate, also known as "converter," converts its input from 0 to 1 and vice versa. The gate API is as follows:
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Not
@@ -73,7 +73,7 @@
    #:caption (list "AND(*)"))
 ◊img[#:src "/images/and_gate.svg"]{}
 }
-◊p{The And function returns 1 when both its inputs are 1, and 0 otherwise.}
+The And function returns 1 when both its inputs are 1, and 0 otherwise.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} And
@@ -101,7 +101,8 @@
 ◊img[#:src "/images/or_gate.svg"]{}
 }
 
-◊p{The Or function returns 1 when at least one of its inputs is 1, and 0 otherwise.}
+The Or function returns 1 when at least one of its inputs is 1, and 0 otherwise.
+
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Or
   ◊strong{Inputs:} a, b
@@ -127,7 +128,7 @@
    #:caption (list "XOR"))
 ◊img[#:src "/images/xor_gate.svg"]{}
 }
-◊p{The Xor function, also known as "exclusive or," returns 1 when its two inputs have opposing values, and 0 otherwise.}
+The Xor function, also known as "exclusive or," returns 1 when its two inputs have opposing values, and 0 otherwise.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Xor
@@ -164,7 +165,7 @@
      (list "0" "a")
      (list "1" "b"))
    #:caption (list "MUX"))
-◊p{A multiplexor (figure 1.8) is a three-input gate that uses one of the inputs, called "selection bit," to select and output one of the other two inputs, called "data bits." Thus, a better name for this device might have been selector. The name multiplexor was adopted from communications systems, where similar devices are used to serialize (multiplex) several input signals over a single output wire.}
+A multiplexor (figure 1.8) is a three-input gate that uses one of the inputs, called "selection bit," to select and output one of the other two inputs, called "data bits." Thus, a better name for this device might have been selector. The name multiplexor was adopted from communications systems, where similar devices are used to serialize (multiplex) several input signals over a single output wire.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} Mux
@@ -197,7 +198,7 @@
      (list "0" "IN" "0")
      (list "1" "0" "IN"))
    #:caption (list "DEMUX"))
-◊p{A demultiplexor (figure 1.9) performs the opposite function of a multiplexor: It takes a single input and channels it to one of two ◊strong{POSSIBLE} outputs according to a selector bit that specifies which output to chose.}
+A demultiplexor (figure 1.9) performs the opposite function of a multiplexor: It takes a single input and channels it to one of two ◊strong{POSSIBLE} outputs according to a selector bit that specifies which output to chose.
 
 ◊div[#:class "api-box"]{
   ◊strong{Chip name:} DMux
@@ -211,9 +212,9 @@
 }
 
 ◊h2{1.3 Implementation}
-◊p{Similar to the role of axioms in mathematics, primitive gates provide a set of elementary building blocks from which everything else can be built. Operationally, primitive gates have an "off-the-shelf" implementation that is supplied externally. Thus, they can be used in the construction of other gates and chips without worrying about their internal design. In the computer architecture that we are now beginning to build, we have chosen to base all the hardware on one primitive gate only: Nand.}
+Similar to the role of axioms in mathematics, primitive gates provide a set of elementary building blocks from which everything else can be built. Operationally, primitive gates have an "off-the-shelf" implementation that is supplied externally. Thus, they can be used in the construction of other gates and chips without worrying about their internal design. In the computer architecture that we are now beginning to build, we have chosen to base all the hardware on one primitive gate only: Nand.
 
-◊p{We now turn to outlining the first stage of this bottom-up hardware construction project, one gate at a time. Our implementation guidelines are intentionally partial, since we want you to discover the actual gate architectures yourself. We reiterate that each gate can be implemented in more than one way; the simpler the implementation, the better.}
+We now turn to outlining the first stage of this bottom-up hardware construction project, one gate at a time. Our implementation guidelines are intentionally partial, since we want you to discover the actual gate architectures yourself. We reiterate that each gate can be implemented in more than one way; the simpler the implementation, the better.
 
 ◊ul{
   ◊li{◊strong{Not:} The implementation of a unary Not gate from a binary Nand gate is simple. Tip: Think positive.}
